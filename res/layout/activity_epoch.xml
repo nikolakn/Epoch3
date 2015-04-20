@@ -7,14 +7,13 @@
     tools:context="nk.code.epoch.EpochActivity" >
 
     <nk.code.epoch.ScalaView
-		android:layout_width="0dp"
+		android:layout_width="40dp"
         android:layout_height="fill_parent"
-        android:layout_weight="0.10"
         android:layout_gravity="start" />
 
     <nk.code.epoch.EpochView
-        android:layout_width="0dp"
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="0.90" />
+         />
 
 </LinearLayout>
