@@ -1,13 +1,20 @@
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:layout_weight="1"
     tools:context="nk.code.epoch.EpochActivity" >
 
+    <nk.code.epoch.ScalaView
+		android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.10"
+        android:layout_gravity="start" />
+
     <nk.code.epoch.EpochView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.90" />
 
-
-
-</LinearLayout >
+</LinearLayout>
