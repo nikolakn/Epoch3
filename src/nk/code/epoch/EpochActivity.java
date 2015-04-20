@@ -1,31 +1,22 @@
 package nk.code.epoch;
 
 import android.support.v7.app.ActionBarActivity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 
-public class MainActivity extends ActionBarActivity {
+public class EpochActivity extends ActionBarActivity {
 
-	ListView list;
-    public final static String EXTRA_MESSAGE = "nk.code.epoch.START";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		
-		Intent intent = new Intent(this, EpochActivity.class);
-	    String message = "";
-	    intent.putExtra(EXTRA_MESSAGE, message);
-	    startActivity(intent);
+		setContentView(R.layout.activity_epoch);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.epoch, menu);
 		return true;
 	}
 
