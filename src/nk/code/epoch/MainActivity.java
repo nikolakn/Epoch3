@@ -10,16 +10,17 @@ import android.widget.ListView;
 public class MainActivity extends ActionBarActivity {
 
 	ListView list;
-    public final static String EXTRA_MESSAGE = "nk.code.epoch.START";
+	public final static String EXTRA_MESSAGE = "nk.code.epoch.START";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		Intent intent = new Intent(this, EpochActivity.class);
-	    String message = "";
-	    intent.putExtra(EXTRA_MESSAGE, message);
-	    startActivity(intent);
+		String message = "";
+		intent.putExtra(EXTRA_MESSAGE, message);
+		startActivity(intent);
 	}
 
 	@Override
@@ -28,6 +29,7 @@ public class MainActivity extends ActionBarActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
