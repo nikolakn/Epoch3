@@ -1,5 +1,6 @@
 package nk.code.epoch;
 
+import nk.code.doc.NkSkala;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -10,7 +11,6 @@ import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.graphics.Shader;
 import android.graphics.Typeface;
-import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -20,7 +20,7 @@ import android.view.View;
 public class ScalaView extends View {
 
     private Paint mPaint;
-    private TextPaint textPaint;
+    private NkSkala skala;
     private Paint gradPaint;
     private final int g1 = Color.rgb(60, 60, 230);
     private final int g2 = Color.rgb(50, 230, 50);;
@@ -39,10 +39,7 @@ public class ScalaView extends View {
         mPaint.setStyle(Style.FILL); 
         mPaint.setTypeface(Typeface.SERIF);
         
-        textPaint = new TextPaint();
-        textPaint.setColor(Color.BLACK);
-        textPaint.setTextAlign(Paint.Align.CENTER);
-        textPaint.setTextSize(14);
+        skala = new NkSkala();
         gradPaint = new Paint();
         setGrad();
     }
@@ -90,28 +87,15 @@ public class ScalaView extends View {
 
 		return true;
 	}
-    @Override
+    @SuppressLint("DrawAllocation")
+	@Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-        //canvas.drawPaint(mPaint); 
-        
         canvas.drawPaint(gradPaint);
-        //adjustTextSize("2015");
         canvas.save();
-        //int scale = getWidth();
-        //int scale2 = getHeight();  
-        //canvas.scale(scale, scale2);
-        //Log.d("nk scale",Integer.toString(scale2));
-        //canvas.rotate(mRotation, 0.5f, 0.5f);
-        //canvas.drawLines(mPoints, mPaint);
-        float textHeight = textPaint.descent() - textPaint.ascent();
-        //float textOffset = (textHeight / 2) - textPaint.descent();
-
-        //RectF bounds = new RectF(0, 0, getWidth(), getHeight());
         
-        //canvas.drawText("2015", 0, scale2/2, mPaint);
-        canvas.drawText("2015",textPaint.getTextSize()+10, textHeight,textPaint);
+        skala.draw(canvas,getWidth(),getHeight());
+        
         canvas.restore();
     }
     void adjustTextSize(String mText) {

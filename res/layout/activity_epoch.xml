@@ -8,8 +8,7 @@
 
     <nk.code.epoch.ScalaView
 		android:layout_width="40dp"
-        android:layout_height="fill_parent"
-        android:layout_gravity="start" />
+        android:layout_height="fill_parent" />
 
     <nk.code.epoch.EpochView
         android:layout_width="fill_parent"
