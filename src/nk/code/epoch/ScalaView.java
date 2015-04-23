@@ -11,6 +11,7 @@ import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.graphics.Shader;
 import android.graphics.Typeface;
+import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -19,7 +20,8 @@ import android.view.View;
 
 public class ScalaView extends View {
 
-    private Paint mPaint;
+    private static final int INVALID_POINTER_ID = -1;
+	private Paint mPaint;
     private NkSkala skala;
     private Paint gradPaint;
     private final int g1 = Color.rgb(60, 60, 230);
@@ -29,6 +31,11 @@ public class ScalaView extends View {
     float[] mPoints = {
             0.5f, 0f, 0.5f, 1f,
             0f, 0.5f, 1f, 0.5f};
+	private float mLastTouchX;
+	private float mLastTouchY;
+	private float mPosX;
+	private float mPosY;
+	private int mActivePointerId = INVALID_POINTER_ID;
 
     public ScalaView(Context context, AttributeSet attrs) {
         super(context);
@@ -71,21 +78,76 @@ public class ScalaView extends View {
     
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		//int pointerCount = event.getPointerCount();
-		int actionIndex = event.getActionIndex();
-		int action = event.getActionMasked();
-		//int id = event.getPointerId(actionIndex);
-		// Check if we received a down or up action for a finger
-		Log.d("nk","clik");
-		if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_POINTER_DOWN) {
-			Log.d("nk", Integer.toString((int)event.getX(actionIndex)));
-			Log.d("nk", Integer.toString((int)event.getY(actionIndex)));
-			
-		} else if (action == MotionEvent.ACTION_POINTER_UP || action == MotionEvent.ACTION_UP) {
-		}
+	public boolean onTouchEvent(MotionEvent ev) {
+		 // Let the ScaleGestureDetector inspect all events.
+	             
+	    final int action = MotionEventCompat.getActionMasked(ev); 
+	        
+	    switch (action) { 
+	    case MotionEvent.ACTION_DOWN: {
+	        final int pointerIndex = MotionEventCompat.getActionIndex(ev); 
+	        final float x = MotionEventCompat.getX(ev, pointerIndex); 
+	        final float y = MotionEventCompat.getY(ev, pointerIndex); 
+	            
+	        // Remember where we started (for dragging)
+	        mLastTouchX = x;
+	        mLastTouchY = y;
+	        // Save the ID of this pointer (for dragging)
+	        mActivePointerId = MotionEventCompat.getPointerId(ev, 0);
+	        break;
+	    }
+	            
+	    case MotionEvent.ACTION_MOVE: {
+	        // Find the index of the active pointer and fetch its position
+	        final int pointerIndex = 
+	                MotionEventCompat.findPointerIndex(ev, mActivePointerId);  
+	            
+	        final float x = MotionEventCompat.getX(ev, pointerIndex);
+	        final float y = MotionEventCompat.getY(ev, pointerIndex);
+	            
+	        // Calculate the distance moved
+	        final float dx = x - mLastTouchX;
+	        final float dy = y - mLastTouchY;
 
-		return true;
+	        mPosX += dx;
+	        mPosY += dy;
+	        skala.posmak(dy);
+	        invalidate();
+
+	        // Remember this touch position for the next move event
+	        mLastTouchX = x;
+	        mLastTouchY = y;
+
+	        break;
+	    }
+	            
+	    case MotionEvent.ACTION_UP: {
+	        mActivePointerId = INVALID_POINTER_ID;
+	        break;
+	    }
+	            
+	    case MotionEvent.ACTION_CANCEL: {
+	        mActivePointerId = INVALID_POINTER_ID;
+	        break;
+	    }
+	        
+	    case MotionEvent.ACTION_POINTER_UP: {
+	            
+	        final int pointerIndex = MotionEventCompat.getActionIndex(ev); 
+	        final int pointerId = MotionEventCompat.getPointerId(ev, pointerIndex); 
+
+	        if (pointerId == mActivePointerId) {
+	            // This was our active pointer going up. Choose a new
+	            // active pointer and adjust accordingly.
+	            final int newPointerIndex = pointerIndex == 0 ? 1 : 0;
+	            mLastTouchX = MotionEventCompat.getX(ev, newPointerIndex); 
+	            mLastTouchY = MotionEventCompat.getY(ev, newPointerIndex); 
+	            mActivePointerId = MotionEventCompat.getPointerId(ev, newPointerIndex);
+	        }
+	        break;
+	    }
+	    }       
+	    return true;
 	}
     @SuppressLint("DrawAllocation")
 	@Override
