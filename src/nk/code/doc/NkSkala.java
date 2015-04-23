@@ -7,7 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.TextPaint;
-import android.util.Log;
+//import android.util.Log;
 
 public class NkSkala {
 
@@ -30,7 +30,7 @@ public class NkSkala {
 		for(float y=textHeight-dy; y<=h; y+=len ){
 			String ss = Integer.toString(dt.getYear());
 			canvas.drawText(ss,textPaint.getTextSize()+15, y,textPaint);
-			dt = dt.plusYears(period);
+			dt = dt.minusYears(period);
 		}
 	}
 	public void posmak(float dy) {
@@ -41,20 +41,20 @@ public class NkSkala {
 			float dlen = Math.abs(dy) - ostatak;
 			
 			DateTime dt =  new DateTime(DateTimeUtils.fromJulianDay(startDate));
-			Log.d("nk dy",Float.toString(dy));
-			Log.d("nk",Integer.toString(pomakuvremenu));
+			//Log.d("nk dy",Float.toString(dy));
+			//Log.d("nk",Integer.toString(pomakuvremenu));
 			if(dy > 0){
 				dt = dt.plusYears(pomakuvremenu);
 				this.dy-=dlen;
 				if(pomakuvremenu ==0 && Math.abs(this.dy)>len)
-					dt = dt.plusYears(1);
+					dt = dt.plusYears( Math.abs((int)this.dy/len));
 				this.dy=this.dy%len;
 			}
 			else{
 				dt = dt.minusYears(pomakuvremenu);
 				this.dy+=dlen;
 				if(pomakuvremenu ==0 && Math.abs(this.dy)>len)
-					dt = dt.minusYears(1);
+					dt = dt.minusYears(Math.abs((int)this.dy/len));
 				this.dy=this.dy%len;
 			}
 			startDate = DateTimeUtils.toJulianDay(dt.getMillis());

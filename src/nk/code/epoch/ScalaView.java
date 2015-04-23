@@ -13,7 +13,6 @@ import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -33,8 +32,8 @@ public class ScalaView extends View {
             0f, 0.5f, 1f, 0.5f};
 	private float mLastTouchX;
 	private float mLastTouchY;
-	private float mPosX;
-	private float mPosY;
+	//private float mPosX;
+	//private float mPosY;
 	private int mActivePointerId = INVALID_POINTER_ID;
 
     public ScalaView(Context context, AttributeSet attrs) {
@@ -106,11 +105,11 @@ public class ScalaView extends View {
 	        final float y = MotionEventCompat.getY(ev, pointerIndex);
 	            
 	        // Calculate the distance moved
-	        final float dx = x - mLastTouchX;
+	        //final float dx = x - mLastTouchX;
 	        final float dy = y - mLastTouchY;
 
-	        mPosX += dx;
-	        mPosY += dy;
+	        //mPosX += dx;
+	        //mPosY += dy;
 	        skala.posmak(dy);
 	        invalidate();
 
