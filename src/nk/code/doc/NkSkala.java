@@ -61,7 +61,11 @@ public class NkSkala {
 		}
 	}
 	public void zoom(int sc, float y) {
-		len = 50+sc;
+		len = sc;    //50+sc;
+		
+	}
+	public void SetZoom(float scale) {
+		len = (int)scale; 
 		
 	}
 

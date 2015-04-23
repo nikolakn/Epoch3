@@ -35,7 +35,7 @@ public class ScalaView extends View {
 	// private float mPosX;
 	// private float mPosY;
 	private int mActivePointerId = INVALID_POINTER_ID;
-	float scale = 0;
+	float scale = 50;
 	private static final String TAG = "Touch";
 
 	// These matrices will be used to move and zoom image
@@ -61,12 +61,14 @@ public class ScalaView extends View {
 
 	public ScalaView(Context context, AttributeSet attrs) {
 		super(context);
+		
 		mPaint = new Paint();
 		mPaint.setAntiAlias(true);
 		mPaint.setColor(Color.BLACK);
 		mPaint.setStyle(Style.FILL);
 
 		skala = new NkSkala();
+		skala.SetZoom(scale);
 		gradPaint = new Paint();
 		setGrad();
 
@@ -134,16 +136,16 @@ public class ScalaView extends View {
 					matrix.getValues(matrixValues);
 					//float currentScale = matrixValues[Matrix.MSCALE_X];
 					// limit zoom
-					if (newDist >= oldDist) {
-						if(scale<80)
+					if (newDist > oldDist) {
+						if(scale<150)
 							scale +=1f;
-						Log.w("nk",Float.toString(scale));
+						//Log.w("nk",Float.toString(scale));
 						skala.zoom((int)scale, mid.y);
 						invalidate();
-					} else  {
-						if(scale>1)
+					} else if (newDist < oldDist) {
+						if(scale>40)
 							scale -=1f;
-						Log.w("nk",Float.toString(scale));
+						//Log.w("nk",Float.toString(scale));
 						skala.zoom((int)scale, mid.y);
 						invalidate();
 					}
