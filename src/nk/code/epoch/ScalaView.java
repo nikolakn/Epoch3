@@ -10,7 +10,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.graphics.Shader;
-import android.graphics.Typeface;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -30,7 +29,7 @@ public class ScalaView extends View {
     float[] mPoints = {
             0.5f, 0f, 0.5f, 1f,
             0f, 0.5f, 1f, 0.5f};
-	private float mLastTouchX;
+	//private float mLastTouchX;
 	private float mLastTouchY;
 	//private float mPosX;
 	//private float mPosY;
@@ -41,9 +40,8 @@ public class ScalaView extends View {
         
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-        mPaint.setColor(Color.DKGRAY);
+        mPaint.setColor(Color.BLACK);
         mPaint.setStyle(Style.FILL); 
-        mPaint.setTypeface(Typeface.SERIF);
         
         skala = new NkSkala();
         gradPaint = new Paint();
@@ -85,11 +83,11 @@ public class ScalaView extends View {
 	    switch (action) { 
 	    case MotionEvent.ACTION_DOWN: {
 	        final int pointerIndex = MotionEventCompat.getActionIndex(ev); 
-	        final float x = MotionEventCompat.getX(ev, pointerIndex); 
+	        //final float x = MotionEventCompat.getX(ev, pointerIndex); 
 	        final float y = MotionEventCompat.getY(ev, pointerIndex); 
 	            
 	        // Remember where we started (for dragging)
-	        mLastTouchX = x;
+	        //mLastTouchX = x;
 	        mLastTouchY = y;
 	        // Save the ID of this pointer (for dragging)
 	        mActivePointerId = MotionEventCompat.getPointerId(ev, 0);
@@ -101,7 +99,7 @@ public class ScalaView extends View {
 	        final int pointerIndex = 
 	                MotionEventCompat.findPointerIndex(ev, mActivePointerId);  
 	            
-	        final float x = MotionEventCompat.getX(ev, pointerIndex);
+	        //final float x = MotionEventCompat.getX(ev, pointerIndex);
 	        final float y = MotionEventCompat.getY(ev, pointerIndex);
 	            
 	        // Calculate the distance moved
@@ -112,9 +110,7 @@ public class ScalaView extends View {
 	        //mPosY += dy;
 	        skala.posmak(dy);
 	        invalidate();
-
-	        // Remember this touch position for the next move event
-	        mLastTouchX = x;
+	        //mLastTouchX = x;
 	        mLastTouchY = y;
 
 	        break;
@@ -139,7 +135,7 @@ public class ScalaView extends View {
 	            // This was our active pointer going up. Choose a new
 	            // active pointer and adjust accordingly.
 	            final int newPointerIndex = pointerIndex == 0 ? 1 : 0;
-	            mLastTouchX = MotionEventCompat.getX(ev, newPointerIndex); 
+	            //mLastTouchX = MotionEventCompat.getX(ev, newPointerIndex); 
 	            mLastTouchY = MotionEventCompat.getY(ev, newPointerIndex); 
 	            mActivePointerId = MotionEventCompat.getPointerId(ev, newPointerIndex);
 	        }
@@ -154,8 +150,14 @@ public class ScalaView extends View {
         super.onDraw(canvas);
         canvas.drawPaint(gradPaint);
         canvas.save();
-        
         skala.draw(canvas,getWidth(),getHeight());
+        //side line
+        canvas.drawLine(getWidth(), 0, getWidth(), getHeight(), mPaint);
+        mPaint.setColor(Color.DKGRAY);
+        canvas.drawLine(getWidth()-1, 0, getWidth()-1, getHeight(), mPaint);
+        mPaint.setColor(Color.GRAY);
+        canvas.drawLine(getWidth()-2, 0, getWidth()-2, getHeight(), mPaint);
+        
         
         canvas.restore();
     }
