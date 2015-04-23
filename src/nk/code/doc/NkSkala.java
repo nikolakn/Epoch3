@@ -60,4 +60,9 @@ public class NkSkala {
 			startDate = DateTimeUtils.toJulianDay(dt.getMillis());
 		}
 	}
+	public void zoom(int sc, float y) {
+		len = 50+sc;
+		
+	}
+
 }
