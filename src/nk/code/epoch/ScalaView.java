@@ -129,7 +129,7 @@ public class ScalaView extends View {
 
 			if (mode == ZOOM) {
 				float newDist = spacing(ev);
-				Log.d(TAG, "newDist=" + newDist);
+				//Log.d(TAG, "newDist=" + newDist);
 				if (newDist > 10f) {
 					matrix.set(savedMatrix);
 					//float scale = newDist / oldDist;
