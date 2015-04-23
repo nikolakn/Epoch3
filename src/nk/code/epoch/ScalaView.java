@@ -14,7 +14,6 @@ import android.graphics.Rect;
 import android.graphics.Shader;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -36,7 +35,7 @@ public class ScalaView extends View {
 	// private float mPosY;
 	private int mActivePointerId = INVALID_POINTER_ID;
 	float scale = 50;
-	private static final String TAG = "Touch";
+	//private static final String TAG = "Touch";
 
 	// These matrices will be used to move and zoom image
 	Matrix matrix = new Matrix();

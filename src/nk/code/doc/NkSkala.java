@@ -24,6 +24,8 @@ public class NkSkala {
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setTextSize(12);
         textHeight = textPaint.descent() - textPaint.ascent();
+        DateTime now = new DateTime();
+        startDate = DateTimeUtils.toJulianDay(now.getMillis());
 	}
 	public void draw(Canvas canvas,int w, int h) {
 		DateTime dt =  new DateTime(DateTimeUtils.fromJulianDay(startDate));
