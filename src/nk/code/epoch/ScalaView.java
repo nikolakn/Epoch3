@@ -96,6 +96,7 @@ public class ScalaView extends View {
 		// TODO Auto-generated method stub
 		super.onWindowFocusChanged(hasFocus);
 		setGrad();
+		skala.Init(getHeight());
 	}
 
 	private void setGrad() {

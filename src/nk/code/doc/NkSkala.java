@@ -10,13 +10,18 @@ import android.text.TextPaint;
 //import android.util.Log;
 
 public class NkSkala {
-
+	
+	public static final int ABOVE = -3;
+	public static final int BELOW = -2;
+	public static final int INVALID = -1;
+	
 	private double startDate = 2456293;
 	private int len = 50;
 	private int period=1;
 	private TextPaint textPaint;
 	float textHeight;
 	float dy = 0;
+	private int scalaHeith;
 	
 	public NkSkala(){
 		textPaint = new TextPaint();
@@ -26,6 +31,9 @@ public class NkSkala {
         textHeight = textPaint.descent() - textPaint.ascent();
         DateTime now = new DateTime();
         startDate = DateTimeUtils.toJulianDay(now.getMillis());
+	}
+	public void Init(int sh){
+		scalaHeith = sh;
 	}
 	public void draw(Canvas canvas,int w, int h) {
 		DateTime dt =  new DateTime(DateTimeUtils.fromJulianDay(startDate));
@@ -69,6 +77,17 @@ public class NkSkala {
 	public void SetZoom(float scale) {
 		len = (int)scale; 
 		
+	}
+	public float getPos(double date){
+		if(date < startDate)
+			return ABOVE;
+		double podeoka = scalaHeith/len;
+		double per = podeoka * period;
+		per += startDate;
+		if(date > per)
+			return BELOW;
+		
+		return INVALID;
 	}
 
 }
