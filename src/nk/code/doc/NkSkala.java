@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.TextPaint;
+import android.util.Log;
 //import android.util.Log;
 
 public class NkSkala {
@@ -79,15 +80,25 @@ public class NkSkala {
 		
 	}
 	public float getPos(double date){
-		if(date < startDate)
+		Log.d("nk-ulaz",Double.toString(date));
+		Log.d("nk-startDate",Double.toString(startDate));
+		Log.d("nk-scalaHeith",Double.toString(scalaHeith));
+		if(date > startDate)
 			return ABOVE;
-		double podeoka = scalaHeith/len;
+		double podeoka = (float)len/scalaHeith;
 		double per = podeoka * period;
 		per += startDate;
+		Log.d("nk-podeoka",Double.toString(podeoka));
+		Log.d("nk-per",Double.toString(per));
 		if(date > per)
 			return BELOW;
-		
-		return INVALID;
+		//racunanje gde se nalazi datim u periodu datuma
+		double pomeren = startDate-date;
+		double odnos  = pomeren/per;
+		double gde = scalaHeith * odnos;
+		Log.d("nk-pomeren",Double.toString(pomeren));
+		Log.d("nk-odnos",Double.toString(odnos));
+		return (float)gde;
 	}
 
 }

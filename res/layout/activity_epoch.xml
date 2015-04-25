@@ -7,10 +7,12 @@
     tools:context="nk.code.epoch.EpochActivity" >
 
     <nk.code.epoch.ScalaView
+        android:id="@+id/skala"
 		android:layout_width="40dp"
         android:layout_height="fill_parent" />
 
     <nk.code.epoch.EpochView
+        android:id="@+id/epoch"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
          />

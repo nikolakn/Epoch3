@@ -1,5 +1,8 @@
 package nk.code.epoch;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeUtils;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -12,19 +15,20 @@ import android.view.View;
 
 public class EpochView extends View {
 
+	private ScalaView skala;
     private Paint mPaint;
     float mRotation = 0f;
     float[] mPoints = {
             0.5f, 0f, 0.5f, 1f,
             0f, 0.5f, 1f, 0.5f};
-
+    DateTime now = new DateTime();
     public EpochView(Context context, AttributeSet attrs) {
-        super(context);
+        super(context, attrs);
         
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setColor(0xFFF00000);
-        
+        now =  now.minusYears(2);
         int color = 0xFF00FF00;
         float rotation = 0.0f;
         // Remember to call this when finished
@@ -71,13 +75,24 @@ public class EpochView extends View {
         super.onDraw(canvas);
         canvas.save();
         
-        int scale = getWidth();
-        int scale2 = getHeight();
-        canvas.scale(scale, scale2);
+        //int scale = getWidth();
+        //int scale2 = getHeight();
+        //canvas.scale(scale, scale2);
         
         //canvas.rotate(mRotation, 0.5f, 0.5f);
         canvas.drawLines(mPoints, mPaint);
 
+        
+        if(skala != null){
+	        double startDate = DateTimeUtils.toJulianDay(now.getMillis());
+	        float y = skala.getPos(startDate);
+	        Log.d("nk", Float.toString(y));
+	        canvas.drawRect(getWidth()/2, y, getWidth()/2+50, y+50, mPaint);
+        }
         canvas.restore();
     }
+
+	public void init(ScalaView s) {
+		skala = s;
+	}
 }

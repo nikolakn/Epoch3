@@ -20,8 +20,7 @@ import android.view.View;
 public class ScalaView extends View {
 
 	private static final int INVALID_POINTER_ID = -1;
-	//private ScaleGestureDetector mScaleDetector;
-	//private float mScaleFactor = 1.f;
+	private EpochView epochv;
 	private Paint mPaint;
 	private NkSkala skala;
 	private Paint gradPaint;
@@ -59,7 +58,7 @@ public class ScalaView extends View {
 	//private float minZoom;
 
 	public ScalaView(Context context, AttributeSet attrs) {
-		super(context);
+		super(context, attrs);
 		
 		mPaint = new Paint();
 		mPaint.setAntiAlias(true);
@@ -148,6 +147,7 @@ public class ScalaView extends View {
 						//Log.w("nk",Float.toString(scale));
 						skala.zoom((int)scale, mid.y);
 						invalidate();
+						epochv.invalidate();
 					}
 					matrix.postScale(scale, scale, mid.x, mid.y);
 				}
@@ -169,6 +169,7 @@ public class ScalaView extends View {
 				// mPosY += dy;
 				skala.posmak(dy);
 				invalidate();
+				epochv.invalidate();
 				// mLastTouchX = x;
 				mLastTouchY = y;
 
@@ -269,6 +270,14 @@ public class ScalaView extends View {
 		float x = event.getX(0) + event.getX(1);
 		float y = event.getY(0) + event.getY(1);
 		point.set(x / 2, y / 2);
+	}
+
+	public float getPos(double d) {
+		return skala.getPos(d);
+	}
+
+	public void init(EpochView ev) {
+		epochv = ev;
 	}
 
 }

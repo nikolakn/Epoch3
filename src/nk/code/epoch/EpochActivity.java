@@ -7,10 +7,19 @@ import android.view.MenuItem;
 
 public class EpochActivity extends ActionBarActivity {
 
+	private ScalaView skala;
+	private EpochView epochv;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_epoch);
+		
+		skala = (ScalaView) findViewById(R.id.skala);
+		epochv = (EpochView) findViewById(R.id.epoch);
+		
+		epochv.init(skala);
+		skala.init(epochv);
+		
 	}
 
 	@Override

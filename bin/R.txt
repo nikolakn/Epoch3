@@ -358,7 +358,7 @@ int id action_menu_presenter 0x7f090006
 int id action_mode_bar 0x7f09002e
 int id action_mode_bar_stub 0x7f09002d
 int id action_mode_close_button 0x7f090020
-int id action_settings 0x7f09003f
+int id action_settings 0x7f090041
 int id activity_chooser_view_content 0x7f090021
 int id always 0x7f090014
 int id beginning 0x7f09001b
@@ -371,6 +371,7 @@ int id disableHome 0x7f09000d
 int id dropdown 0x7f09001a
 int id edit_query 0x7f090033
 int id end 0x7f09001c
+int id epoch 0x7f090040
 int id expand_activities_button 0x7f090022
 int id expanded_menu 0x7f090028
 int id home 0x7f090000
@@ -401,6 +402,7 @@ int id shortcut 0x7f09002a
 int id showCustom 0x7f090010
 int id showHome 0x7f090011
 int id showTitle 0x7f090012
+int id skala 0x7f09003f
 int id split_action_bar 0x7f090004
 int id submit_area 0x7f09003c
 int id tabMode 0x7f09000c
