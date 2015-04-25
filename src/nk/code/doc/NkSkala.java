@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.TextPaint;
 //import android.util.Log;
+import android.util.Log;
 
 public class NkSkala {
 	
@@ -81,10 +82,11 @@ public class NkSkala {
 		
 	}
 	public float getPos(double date){
-		//Log.d("nk-ulaz",Double.toString(date));
-		//Log.d("nk-startDate",Double.toString(startDate));
+	    Log.d("nk-ulaz",Double.toString(date));
+		Log.d("nk-startDate",Double.toString(startDate));
 		//Log.d("nk-scalaHeith",Double.toString(scalaHeith));
-		if(date > startDate)
+		//Log.d("nk-odnos","ulaz");
+		if(date > (startDate+scale))
 			return ABOVE;
 		double podeoka = (float)scalaHeith/(float)len;
 		double per = podeoka * period;
@@ -102,6 +104,7 @@ public class NkSkala {
 		double gde = (double)scalaHeith * odnos;
 		//Log.d("nk-pomeren",Double.toString(pomeren));
 		//Log.d("nk-odnos",Double.toString(odnos));
+		
 		return (float)gde-dy+textHeight/2.0f;
 	}
 

@@ -56,14 +56,14 @@ public class EpochView extends View {
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		//int pointerCount = event.getPointerCount();
-		int actionIndex = event.getActionIndex();
+		//int actionIndex = event.getActionIndex();
 		int action = event.getActionMasked();
 		//int id = event.getPointerId(actionIndex);
 		// Check if we received a down or up action for a finger
 		Log.d("nk","clik");
 		if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_POINTER_DOWN) {
-			Log.d("nk", Integer.toString((int)event.getX(actionIndex)));
-			Log.d("nk", Integer.toString((int)event.getY(actionIndex)));
+			//Log.d("nk", Integer.toString((int)event.getX(actionIndex)));
+			//Log.d("nk", Integer.toString((int)event.getY(actionIndex)));
 			
 		} else if (action == MotionEvent.ACTION_POINTER_UP || action == MotionEvent.ACTION_UP) {
 		}
