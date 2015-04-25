@@ -141,6 +141,7 @@ public class ScalaView extends View {
 						//Log.w("nk",Float.toString(scale));
 						skala.zoom((int)scale, mid.y);
 						invalidate();
+						epochv.invalidate();
 					} else if (newDist < oldDist) {
 						if(scale>40)
 							scale -=1f;
