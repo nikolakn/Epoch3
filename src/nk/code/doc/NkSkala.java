@@ -85,16 +85,19 @@ public class NkSkala {
 		Log.d("nk-scalaHeith",Double.toString(scalaHeith));
 		if(date > startDate)
 			return ABOVE;
-		double podeoka = (float)len/scalaHeith;
+		double podeoka = (float)scalaHeith/(float)len;
 		double per = podeoka * period;
-		per += startDate;
+		DateTime ed =  new DateTime(DateTimeUtils.fromJulianDay(startDate));
+		ed = ed.minusYears((int)per);
+		double enddate = DateTimeUtils.toJulianDay(ed.getMillis());
 		Log.d("nk-podeoka",Double.toString(podeoka));
 		Log.d("nk-per",Double.toString(per));
-		if(date > per)
+		Log.d("nk-enddate",Double.toString(enddate));
+		if(date < enddate)
 			return BELOW;
 		//racunanje gde se nalazi datim u periodu datuma
 		double pomeren = startDate-date;
-		double odnos  = pomeren/per;
+		double odnos  = pomeren/(startDate-enddate);
 		double gde = scalaHeith * odnos;
 		Log.d("nk-pomeren",Double.toString(pomeren));
 		Log.d("nk-odnos",Double.toString(odnos));
