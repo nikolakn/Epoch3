@@ -80,14 +80,16 @@ public class EpochView extends View {
         //canvas.scale(scale, scale2);
         
         //canvas.rotate(mRotation, 0.5f, 0.5f);
-        canvas.drawLines(mPoints, mPaint);
+        //canvas.drawLines(mPoints, mPaint);
 
         
         if(skala != null){
 	        double startDate = DateTimeUtils.toJulianDay(now.getMillis());
 	        float y = skala.getPos(startDate);
-	        Log.d("nk", Float.toString(y));
-	        canvas.drawRect(getWidth()/2, y, getWidth()/2+50, y+50, mPaint);
+	        if(y>0){
+		        //Log.d("nk", Float.toString(y));
+		        canvas.drawRect(getWidth()/2, y, getWidth()/2+50, y+50, mPaint);
+	        }
         }
         canvas.restore();
     }

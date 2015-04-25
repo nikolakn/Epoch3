@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -9,12 +9,16 @@
     <nk.code.epoch.ScalaView
         android:id="@+id/skala"
 		android:layout_width="40dp"
+		android:layout_alignParentRight="true"
         android:layout_height="fill_parent" />
 
     <nk.code.epoch.EpochView
         android:id="@+id/epoch"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/skala"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        
          />
 
-</LinearLayout>
+</RelativeLayout>

@@ -236,6 +236,13 @@ public class ScalaView extends View {
 		mPaint.setColor(Color.GRAY);
 		canvas.drawLine(getWidth() - 2, 0, getWidth() - 2, getHeight(), mPaint);
 
+		// side line 2
+		mPaint.setColor(Color.BLACK);
+		canvas.drawLine(0, 0, 0, getHeight(), mPaint);
+		mPaint.setColor(Color.DKGRAY);
+		canvas.drawLine(1, 0, 1, getHeight(), mPaint);
+		mPaint.setColor(Color.GRAY);
+		canvas.drawLine(2, 0, 2, getHeight(), mPaint);
 		canvas.restore();
 	}
 
