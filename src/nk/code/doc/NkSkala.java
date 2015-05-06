@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.TextPaint;
 //import android.util.Log;
-import android.util.Log;
 
 public class NkSkala {
 	
@@ -74,38 +73,59 @@ public class NkSkala {
 		}
 	}
 	public void zoom(int sc, float y) {
-		len = sc;    //50+sc;
+		//koji datum se trenutno nalazi na y poziciji
+		double d = getDate(y);
+		//uvelicati
+		len = sc;
+		//pomeriti skalu da se taj datum vrati na istu poziciju y
+		float pos = getPos(d);
+		float duzina = y-pos;
+		double vreme = (len/scale)* duzina;
+		
+		startDate += vreme-dy;
+		//pomocna funkcija: 
+		//1 vraca datum za prosledjenu poziciju
+		//2 postavlja zadati datum na zadati polozaj
+		
 		
 	}
+	public double getDate(float y){
+		if(y<0)
+			return ABOVE;
+		if(y> scalaHeith)
+			return BELOW;
+		double podeoka = (float)y/(float)len;
+		double malih = dy/y;
+		double per = podeoka * period;
+		double per2 = malih * period;
+		double date = startDate-per*scale-per2*scale;
+		return date;
+	}
+	
+	
 	public void SetZoom(float scale) {
 		len = (int)scale; 
 		
 	}
 	public float getPos(double date){
-	    Log.d("nk-ulaz",Double.toString(date));
-		Log.d("nk-startDate",Double.toString(startDate));
-		//Log.d("nk-scalaHeith",Double.toString(scalaHeith));
 		//Log.d("nk-odnos","ulaz");
 		if(date > (startDate+scale))
 			return ABOVE;
-		double podeoka = (float)scalaHeith/(float)len;
-		double per = podeoka * period;
-		//DateTime ed =  new DateTime(DateTimeUtils.fromJulianDay(startDate));
-		//ed = ed.minusYears((int)per);
-		double enddate = startDate-per*scale;
-		//Log.d("nk-podeoka",Double.toString(podeoka));
-		//Log.d("nk-per",Double.toString(per));
-		//Log.d("nk-enddate",Double.toString(enddate));
+		double enddate = getEndDate();
 		if(date < enddate)
 			return BELOW;
 		//racunanje gde se nalazi datim u periodu datuma
 		double pomeren = startDate-date;
 		double odnos  = pomeren/(startDate-enddate);
-		double gde = (double)scalaHeith * odnos;
-		//Log.d("nk-pomeren",Double.toString(pomeren));
-		//Log.d("nk-odnos",Double.toString(odnos));
-		
+		double gde = (double)scalaHeith * odnos;	
 		return (float)gde-dy+textHeight/2.0f;
+	}
+	
+	double getEndDate(){
+		double podeoka = (float)scalaHeith/(float)len;
+		double per = podeoka * period;	
+		double enddate = startDate-per*scale;
+		return enddate;
 	}
 
 }

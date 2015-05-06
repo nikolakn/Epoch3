@@ -1,5 +1,8 @@
 package nk.code.epoch;
 
+//import org.joda.time.DateTime;
+//import org.joda.time.DateTimeUtils;
+
 import nk.code.doc.NkSkala;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,6 +17,7 @@ import android.graphics.Rect;
 import android.graphics.Shader;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
+//import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -96,6 +100,14 @@ public class ScalaView extends View {
 		super.onWindowFocusChanged(hasFocus);
 		setGrad();
 		skala.Init(getHeight());
+		
+		//DateTime dt =  new DateTime(DateTimeUtils.fromJulianDay(skala.getDate(getHeight()/2)));
+		//Log.d("nk",dt.toString());
+		//float pos = skala.getPos( DateTimeUtils.toJulianDay(dt.getMillis()));
+		//DateTime dt2 =  new DateTime(DateTimeUtils.fromJulianDay(skala.getDate(getHeight()/4)));
+		//Log.d("nk",dt2.toString());
+		////Log.d("nk",Float.toString(getHeight()/2));
+		//Log.d("nk",Float.toString(pos));
 	}
 
 	private void setGrad() {

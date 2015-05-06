@@ -73,15 +73,10 @@ public class EpochView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.save();
-        
-        //int scale = getWidth();
-        //int scale2 = getHeight();
-        //canvas.scale(scale, scale2);
-        
+        canvas.save(); 
+  
         //canvas.rotate(mRotation, 0.5f, 0.5f);
         //canvas.drawLines(mPoints, mPaint);
-
         
         if(skala != null){
 	        double startDate = DateTimeUtils.toJulianDay(now.getMillis());
