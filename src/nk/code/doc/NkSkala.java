@@ -11,7 +11,7 @@ import android.text.TextPaint;
 
 public class NkSkala {
 	
-	public static final int ABOVE = -3;
+	public static final int ABOVE = -3; 
 	public static final int BELOW = -2;
 	public static final int INVALID = -1;
 	
@@ -45,7 +45,7 @@ public class NkSkala {
 			dt = dt.minusYears(period);
 		}
 	}
-	
+	//move scale by dy
 	public void posmak(float dy) {
 		// koliko duzina se preskace a dodaje vremena
 		if(dy != 0){
