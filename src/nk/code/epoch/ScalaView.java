@@ -37,7 +37,6 @@ public class ScalaView extends View {
 	private final int g2 = Color.rgb(50, 230, 50);;
 	float mRotation = 0f;
 	float[] mPoints = { 0.5f, 0f, 0.5f, 1f, 0f, 0.5f, 1f, 0.5f };
-	// private float mLastTouchX;
 	private float mLastTouchY;
 	// private float mPosX;
 	// private float mPosY;
