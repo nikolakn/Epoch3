@@ -73,7 +73,9 @@ public class NkSkala {
 			startDate = DateTimeUtils.toJulianDay(dt.getMillis());
 		}
 	}
+	
 	public void zoom(int sc, float y) {
+		/*
 		//koji datum se trenutno nalazi na y poziciji
 		double d = getDate(y);
 		//uvelicati
@@ -88,8 +90,9 @@ public class NkSkala {
 		//1 vraca datum za prosledjenu poziciju
 		//2 postavlja zadati datum na zadati polozaj
 		
-		
+		*/
 	}
+	
 	
 	//get date for given position on scale
 	public double getDate(float y){
