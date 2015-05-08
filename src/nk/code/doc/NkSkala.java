@@ -45,6 +45,7 @@ public class NkSkala {
 			dt = dt.minusYears(period);
 		}
 	}
+	
 	public void posmak(float dy) {
 		// koliko duzina se preskace a dodaje vremena
 		if(dy != 0){
@@ -107,6 +108,7 @@ public class NkSkala {
 		len = (int)scale; 
 		
 	}
+	//return position on scale for given date
 	public float getPos(double date){
 		//Log.d("nk-odnos","ulaz");
 		if(date > (startDate+scale))
