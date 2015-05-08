@@ -8,7 +8,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.TextPaint;
 //import android.util.Log;
-
+/**
+ * 
+ * @author Nikola
+ * 
+ */
 public class NkSkala {
 	
 	public static final int ABOVE = -3;  //top 
