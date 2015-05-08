@@ -18,7 +18,7 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		//TextView tt=  (TextView) findViewById(R.id.tt1);
-		
+		//show epoch activity
 		Intent intent = new Intent(this, EpochActivity.class);
 		String message = "";
 		intent.putExtra(EXTRA_MESSAGE, message);
