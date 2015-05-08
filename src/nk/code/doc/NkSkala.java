@@ -120,7 +120,7 @@ public class NkSkala {
 		double gde = (double)scalaHeith * odnos;	
 		return (float)gde-dy+textHeight/2.0f;
 	}
-	
+	//date on other side
 	double getEndDate(){
 		double podeoka = (float)scalaHeith/(float)len;
 		double per = podeoka * period;	
