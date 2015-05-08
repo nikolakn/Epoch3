@@ -11,8 +11,8 @@ import android.text.TextPaint;
 
 public class NkSkala {
 	
-	public static final int ABOVE = -3; 
-	public static final int BELOW = -2;
+	public static final int ABOVE = -3;  //top 
+	public static final int BELOW = -2;  //down
 	public static final int INVALID = -1;
 	
 	private double startDate = 2456293;
