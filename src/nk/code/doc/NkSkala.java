@@ -90,6 +90,8 @@ public class NkSkala {
 		
 		
 	}
+	
+	//get date for given position on scale
 	public double getDate(float y){
 		if(y<0)
 			return ABOVE;
