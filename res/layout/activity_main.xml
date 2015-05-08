@@ -9,7 +9,8 @@
     tools:context="nk.code.epoch.MainActivity" >
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tt1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
 

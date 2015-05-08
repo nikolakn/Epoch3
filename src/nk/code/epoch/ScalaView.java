@@ -21,6 +21,11 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+/**
+ * 
+ * @author Nikola
+ * Scale view 
+ */
 public class ScalaView extends View {
 
 	private static final int INVALID_POINTER_ID = -1;
@@ -301,3 +306,4 @@ public class ScalaView extends View {
 	}
 
 }
+

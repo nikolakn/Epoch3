@@ -1,6 +1,7 @@
 package nk.code.epoch;
 
 import android.support.v7.app.ActionBarActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,10 +17,12 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		//TextView tt=  (TextView) findViewById(R.id.tt1);
+		
 		Intent intent = new Intent(this, EpochActivity.class);
 		String message = "";
 		intent.putExtra(EXTRA_MESSAGE, message);
+
 		startActivity(intent);
 	}
 
