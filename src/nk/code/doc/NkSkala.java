@@ -28,6 +28,12 @@ public class NkSkala {
 	float dy = 0;
 	private int scalaHeith;
 	
+	public int getLen() {
+		return len;
+	}
+	public void setLen(int len) {
+		this.len = len;
+	}
 	public NkSkala(){
 		textPaint = new TextPaint();
         textPaint.setColor(Color.BLACK);
@@ -42,7 +48,7 @@ public class NkSkala {
 	}
 	public void draw(Canvas canvas,int w, int h) {
 		DateTime dt =  new DateTime(DateTimeUtils.fromJulianDay(startDate));
-		for(float y=textHeight-dy; y<=h; y+=len ){
+		for(float y=textHeight-dy; y<=h; y+=getLen() ){
 			String ss = Integer.toString(dt.getYear());
 			canvas.drawText(ss,textPaint.getTextSize()+15, y,textPaint);
 			//canvas.drawLine(3, y-textHeight/2, 15, y-textHeight/2, textPaint);
@@ -53,8 +59,8 @@ public class NkSkala {
 	public void posmak(float dy) {
 		// koliko duzina se preskace a dodaje vremena
 		if(dy != 0){
-			int pomakuvremenu= Math.abs((int)(dy/len)); 
-			int ostatak = pomakuvremenu*len;
+			int pomakuvremenu= Math.abs((int)(dy/getLen())); 
+			int ostatak = pomakuvremenu*getLen();
 			float dlen = Math.abs(dy) - ostatak;
 			
 			DateTime dt =  new DateTime(DateTimeUtils.fromJulianDay(startDate));
@@ -63,16 +69,16 @@ public class NkSkala {
 			if(dy > 0){
 				dt = dt.plusYears(pomakuvremenu);
 				this.dy-=dlen;
-				if(pomakuvremenu ==0 && Math.abs(this.dy)>len)
-					dt = dt.plusYears( Math.abs((int)this.dy/len));
-				this.dy=this.dy%len;
+				if(pomakuvremenu ==0 && Math.abs(this.dy)>getLen())
+					dt = dt.plusYears( Math.abs((int)this.dy/getLen()));
+				this.dy=this.dy%getLen();
 			}
 			else{
 				dt = dt.minusYears(pomakuvremenu);
 				this.dy+=dlen;
-				if(pomakuvremenu ==0 && Math.abs(this.dy)>len)
-					dt = dt.minusYears(Math.abs((int)this.dy/len));
-				this.dy=this.dy%len;
+				if(pomakuvremenu ==0 && Math.abs(this.dy)>getLen())
+					dt = dt.minusYears(Math.abs((int)this.dy/getLen()));
+				this.dy=this.dy%getLen();
 			}
 			startDate = DateTimeUtils.toJulianDay(dt.getMillis());
 		}
@@ -104,7 +110,7 @@ public class NkSkala {
 			return ABOVE;
 		if(y> scalaHeith)
 			return BELOW;
-		double podeoka = (float)y/(float)len;
+		double podeoka = (float)y/(float)getLen();
 		double malih = dy/y;
 		double per = podeoka * period;
 		double per2 = malih * period;
@@ -114,7 +120,7 @@ public class NkSkala {
 	
 	
 	public void SetZoom(float scale) {
-		len = (int)scale; 
+		setLen((int)scale); 
 		
 	}
 	//return position on scale for given date
@@ -133,7 +139,7 @@ public class NkSkala {
 	}
 	//date on other side
 	double getEndDate(){
-		double podeoka = (float)scalaHeith/(float)len;
+		double podeoka = (float)scalaHeith/(float)getLen();
 		double per = podeoka * period;	
 		double enddate = startDate-per*scale;
 		return enddate;
