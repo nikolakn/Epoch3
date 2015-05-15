@@ -41,13 +41,13 @@ public class NkSkala {
         textPaint.setTextSize(12);
         textHeight = textPaint.descent() - textPaint.ascent();
         DateTime now = new DateTime();
-        startDate = DateTimeUtils.toJulianDay(now.getMillis());
+        setStartDate(DateTimeUtils.toJulianDay(now.getMillis()));
 	}
 	public void Init(int sh){
 		scalaHeith = sh;
 	}
 	public void draw(Canvas canvas,int w, int h) {
-		DateTime dt =  new DateTime(DateTimeUtils.fromJulianDay(startDate));
+		DateTime dt =  new DateTime(DateTimeUtils.fromJulianDay(getStartDate()));
 		for(float y=textHeight-dy; y<=h; y+=getLen() ){
 			String ss = Integer.toString(dt.getYear());
 			canvas.drawText(ss,textPaint.getTextSize()+15, y,textPaint);
@@ -63,7 +63,7 @@ public class NkSkala {
 			int ostatak = pomakuvremenu*getLen();
 			float dlen = Math.abs(dy) - ostatak;
 			
-			DateTime dt =  new DateTime(DateTimeUtils.fromJulianDay(startDate));
+			DateTime dt =  new DateTime(DateTimeUtils.fromJulianDay(getStartDate()));
 			//Log.d("nk dy",Float.toString(dy));
 			//Log.d("nk",Integer.toString(pomakuvremenu));
 			if(dy > 0){
@@ -80,7 +80,7 @@ public class NkSkala {
 					dt = dt.minusYears(Math.abs((int)this.dy/getLen()));
 				this.dy=this.dy%getLen();
 			}
-			startDate = DateTimeUtils.toJulianDay(dt.getMillis());
+			setStartDate(DateTimeUtils.toJulianDay(dt.getMillis()));
 		}
 	}
 	
@@ -114,7 +114,7 @@ public class NkSkala {
 		double malih = dy/y;
 		double per = podeoka * period;
 		double per2 = malih * period;
-		double date = startDate-per*scale-per2*scale;
+		double date = getStartDate()-per*scale-per2*scale;
 		return date;
 	}
 	
@@ -126,14 +126,14 @@ public class NkSkala {
 	//return position on scale for given date
 	public float getPos(double date){
 		//Log.d("nk-odnos","ulaz");
-		if(date > (startDate+scale))
+		if(date > (getStartDate()+scale))
 			return ABOVE;
 		double enddate = getEndDate();
 		if(date < enddate)
 			return BELOW;
 		//racunanje gde se nalazi datim u periodu datuma
-		double pomeren = startDate-date;
-		double odnos  = pomeren/(startDate-enddate);
+		double pomeren = getStartDate()-date;
+		double odnos  = pomeren/(getStartDate()-enddate);
 		double gde = (double)scalaHeith * odnos;	
 		return (float)gde-dy+textHeight/2.0f;
 	}
@@ -141,8 +141,14 @@ public class NkSkala {
 	double getEndDate(){
 		double podeoka = (float)scalaHeith/(float)getLen();
 		double per = podeoka * period;	
-		double enddate = startDate-per*scale;
+		double enddate = getStartDate()-per*scale;
 		return enddate;
+	}
+	public double getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(double startDate) {
+		this.startDate = startDate;
 	}
 
 }
