@@ -18,7 +18,9 @@ import android.graphics.Shader;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
 //import android.util.Log;
+//import android.util.Log;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 
 /**
@@ -61,13 +63,15 @@ public class ScalaView extends View {
 	float oldDist = 1f;
 
 	// Limit zoomable/pannable image
-	private float[] matrixValues = new float[9];
-	//private float maxZoom;
-	//private float minZoom;
+	//private float[] matrixValues = new float[9];
 
+	
+	private ScaleGestureDetector mScaleDetector;
+	private float mScaleFactor = 1.f;
+	
 	public ScalaView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		
+		mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
 		mPaint = new Paint();
 		mPaint.setAntiAlias(true);
 		mPaint.setColor(Color.BLACK);
@@ -125,7 +129,7 @@ public class ScalaView extends View {
 		// Let the ScaleGestureDetector inspect all events.
 
 		final int action = MotionEventCompat.getActionMasked(ev);
-
+		mScaleDetector.onTouchEvent(ev);
 		switch (action) {
 		case MotionEvent.ACTION_DOWN: {
 			final int pointerIndex = MotionEventCompat.getActionIndex(ev);
@@ -141,8 +145,9 @@ public class ScalaView extends View {
 		}
 
 		case MotionEvent.ACTION_MOVE: {
-
+			
 			if (mode == ZOOM) {
+				/*
 				float newDist = spacing(ev);
 				//Log.d(TAG, "newDist=" + newDist);
 				if (newDist > 10f) {
@@ -151,6 +156,7 @@ public class ScalaView extends View {
 					matrix.getValues(matrixValues);
 					//float currentScale = matrixValues[Matrix.MSCALE_X];
 					// limit zoom
+					
 					if (newDist > oldDist) {
 						if(scale<150)
 							scale +=1f;
@@ -167,7 +173,9 @@ public class ScalaView extends View {
 						epochv.invalidate();
 					}
 					matrix.postScale(scale, scale, mid.x, mid.y);
+					
 				}
+				*/
 
 			} else {
 
@@ -303,6 +311,33 @@ public class ScalaView extends View {
 	public void init(EpochView ev) {
 		epochv = ev;
 	}
-
+	private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
+	    @Override
+	    public boolean onScale(ScaleGestureDetector detector) {
+	        mScaleFactor *= detector.getScaleFactor();
+	        
+	        // Don't let the object get too small or too large.
+	        mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 5.0f));
+	       
+	        //Log.d("nk",Float.toString(mScaleFactor));
+	        skala.zoom(mScaleFactor,  detector.getFocusY());
+	        invalidate();
+	        return true;
+	    }
+	    /*
+	    @Override
+	    public void onScaleEnd(ScaleGestureDetector detector){
+	        mScaleFactor *= detector.getScaleFactor();
+	        
+	        // Don't let the object get too small or too large.
+	        mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 5.0f));
+	       
+	        Log.d("nk",Float.toString(mScaleFactor));
+	        skala.zoom(mScaleFactor,  detector.getFocusY());
+	        invalidate();	    	
+	    }
+	    */
+	}
 }
+
 

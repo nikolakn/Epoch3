@@ -19,8 +19,10 @@ public class NkSkala {
 	public static final int BELOW = -2;  //down
 	public static final int INVALID = -1;
 	
+	public static final int LENDEF = 50;
+	
 	private double startDate = 2456293;
-	private int len = 50;
+	private int len = LENDEF;
 	private int period=1;
 	private float scale = 365;
 	private TextPaint textPaint;
@@ -84,23 +86,23 @@ public class NkSkala {
 		}
 	}
 	
-	public void zoom(int sc, float y) {
-		/*
+	public void zoom(float sc, float y) {
+		
 		//koji datum se trenutno nalazi na y poziciji
 		double d = getDate(y);
 		//uvelicati
-		len = sc;
+		len = (int)(LENDEF*sc);
 		//pomeriti skalu da se taj datum vrati na istu poziciju y
 		float pos = getPos(d);
 		float duzina = y-pos;
 		double vreme = (len/scale)* duzina;
 		
-		startDate += vreme-dy;
+		startDate += vreme;
 		//pomocna funkcija: 
 		//1 vraca datum za prosledjenu poziciju
 		//2 postavlja zadati datum na zadati polozaj
 		
-		*/
+		
 	}
 	
 	
