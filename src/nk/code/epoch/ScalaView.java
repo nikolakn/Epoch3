@@ -25,8 +25,7 @@ import android.view.View;
 
 /**
  * 
- * @author Nikola
- * Scale view 
+ * @author Nikola Scale view
  */
 public class ScalaView extends View {
 
@@ -44,7 +43,7 @@ public class ScalaView extends View {
 	// private float mPosY;
 	private int mActivePointerId = INVALID_POINTER_ID;
 	float scale = 50;
-	//private static final String TAG = "Touch";
+	// private static final String TAG = "Touch";
 
 	// These matrices will be used to move and zoom image
 	Matrix matrix = new Matrix();
@@ -63,12 +62,11 @@ public class ScalaView extends View {
 	float oldDist = 1f;
 
 	// Limit zoomable/pannable image
-	//private float[] matrixValues = new float[9];
+	// private float[] matrixValues = new float[9];
 
-	
 	private ScaleGestureDetector mScaleDetector;
 	private float mScaleFactor = 1.f;
-	
+
 	public ScalaView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
@@ -81,9 +79,6 @@ public class ScalaView extends View {
 		skala.SetZoom(scale);
 		gradPaint = new Paint();
 		setGrad();
-
-		//maxZoom = 4;
-		//minZoom = 0.25f;
 
 	}
 
@@ -108,14 +103,7 @@ public class ScalaView extends View {
 		super.onWindowFocusChanged(hasFocus);
 		setGrad();
 		skala.Init(getHeight());
-		
-		//DateTime dt =  new DateTime(DateTimeUtils.fromJulianDay(skala.getDate(getHeight()/2)));
-		//Log.d("nk",dt.toString());
-		//float pos = skala.getPos( DateTimeUtils.toJulianDay(dt.getMillis()));
-		//DateTime dt2 =  new DateTime(DateTimeUtils.fromJulianDay(skala.getDate(getHeight()/4)));
-		//Log.d("nk",dt2.toString());
-		////Log.d("nk",Float.toString(getHeight()/2));
-		//Log.d("nk",Float.toString(pos));
+
 	}
 
 	private void setGrad() {
@@ -145,37 +133,8 @@ public class ScalaView extends View {
 		}
 
 		case MotionEvent.ACTION_MOVE: {
-			
+
 			if (mode == ZOOM) {
-				/*
-				float newDist = spacing(ev);
-				//Log.d(TAG, "newDist=" + newDist);
-				if (newDist > 10f) {
-					matrix.set(savedMatrix);
-					//float scale = newDist / oldDist;
-					matrix.getValues(matrixValues);
-					//float currentScale = matrixValues[Matrix.MSCALE_X];
-					// limit zoom
-					
-					if (newDist > oldDist) {
-						if(scale<150)
-							scale +=1f;
-						//Log.w("nk",Float.toString(scale));
-						skala.zoom((int)scale, mid.y);
-						invalidate();
-						epochv.invalidate();
-					} else if (newDist < oldDist) {
-						if(scale>40)
-							scale -=1f;
-						//Log.w("nk",Float.toString(scale));
-						skala.zoom((int)scale, mid.y);
-						invalidate();
-						epochv.invalidate();
-					}
-					matrix.postScale(scale, scale, mid.x, mid.y);
-					
-				}
-				*/
 
 			} else {
 
@@ -311,33 +270,30 @@ public class ScalaView extends View {
 	public void init(EpochView ev) {
 		epochv = ev;
 	}
-	private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
-	    @Override
-	    public boolean onScale(ScaleGestureDetector detector) {
-	        mScaleFactor *= detector.getScaleFactor();
-	        
-	        // Don't let the object get too small or too large.
-	        mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 5.0f));
-	       
-	        //Log.d("nk",Float.toString(mScaleFactor));
-	        skala.zoom(mScaleFactor,  detector.getFocusY());
-	        invalidate();
-	        return true;
-	    }
-	    /*
-	    @Override
-	    public void onScaleEnd(ScaleGestureDetector detector){
-	        mScaleFactor *= detector.getScaleFactor();
-	        
-	        // Don't let the object get too small or too large.
-	        mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 5.0f));
-	       
-	        Log.d("nk",Float.toString(mScaleFactor));
-	        skala.zoom(mScaleFactor,  detector.getFocusY());
-	        invalidate();	    	
-	    }
-	    */
+
+	private class ScaleListener extends
+			ScaleGestureDetector.SimpleOnScaleGestureListener {
+		@Override
+		public boolean onScale(ScaleGestureDetector detector) {
+			mScaleFactor *= detector.getScaleFactor();
+
+			// Don't let the object get too small or too large.
+			mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 5.0f));
+
+			// Log.d("nk",Float.toString(mScaleFactor));
+			skala.zoom(mScaleFactor, detector.getFocusY());
+			invalidate();
+			return true;
+		}
+		/*
+		 * @Override public void onScaleEnd(ScaleGestureDetector detector){
+		 * mScaleFactor *= detector.getScaleFactor();
+		 * 
+		 * // Don't let the object get too small or too large. mScaleFactor =
+		 * Math.max(0.1f, Math.min(mScaleFactor, 5.0f));
+		 * 
+		 * Log.d("nk",Float.toString(mScaleFactor)); skala.zoom(mScaleFactor,
+		 * detector.getFocusY()); invalidate(); }
+		 */
 	}
 }
-
-
