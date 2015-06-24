@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.TextPaint;
+import android.util.Log;
 //import android.util.Log;
 /**
  * 
@@ -88,23 +89,23 @@ public class NkSkala {
 	
 	public void zoom(float sc, float y) {
 		
+		//zapamtiti datum koji se trenutno nalazi na y
+		//uraditi skaliranje a zatim datum poji se nalazio na y koordinata
+		//postaviti ga ponovo na y
 		//koji datum se trenutno nalazi na y poziciji
 		double d = getDate(y);
 		//uvelicati
 		len = (int)(LENDEF*sc);
 		//pomeriti skalu da se taj datum vrati na istu poziciju y
-		float pos = getPos(d);
-		float duzina = y-pos;
-		double vreme = (len/scale)* duzina;
-		
-		startDate += vreme;
-		//pomocna funkcija: 
-		//1 vraca datum za prosledjenu poziciju
-		//2 postavlja zadati datum na zadati polozaj
-		
+		setDateOnPos(d,y);
+	}
+	public void setDateOnPos(double date,float y){
+		double s = startDate;
+		double d = getDate(y);
+		double raz = d-s;
+		startDate = date-raz;
 		
 	}
-	
 	
 	//get date for given position on scale
 	public double getDate(float y){
@@ -112,6 +113,8 @@ public class NkSkala {
 			return ABOVE;
 		if(y> scalaHeith)
 			return BELOW;
+		if(y == 0)
+			return getStartDate();
 		double podeoka = (float)y/(float)getLen();
 		double malih = dy/y;
 		double per = podeoka * period;

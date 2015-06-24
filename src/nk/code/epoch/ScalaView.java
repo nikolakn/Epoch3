@@ -17,8 +17,6 @@ import android.graphics.Rect;
 import android.graphics.Shader;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
-//import android.util.Log;
-//import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
@@ -60,9 +58,6 @@ public class ScalaView extends View {
 	PointF start = new PointF();
 	PointF mid = new PointF();
 	float oldDist = 1f;
-
-	// Limit zoomable/pannable image
-	// private float[] matrixValues = new float[9];
 
 	private ScaleGestureDetector mScaleDetector;
 	private float mScaleFactor = 1.f;
@@ -148,9 +143,6 @@ public class ScalaView extends View {
 				// Calculate the distance moved
 				// final float dx = x - mLastTouchX;
 				final float dy = y - mLastTouchY;
-
-				// mPosX += dx;
-				// mPosY += dy;
 				skala.posmak(dy);
 				invalidate();
 				epochv.invalidate();
