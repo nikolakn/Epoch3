@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.TextPaint;
-import android.util.Log;
 //import android.util.Log;
 /**
  * 
@@ -99,6 +98,8 @@ public class NkSkala {
 		//pomeriti skalu da se taj datum vrati na istu poziciju y
 		setDateOnPos(d,y);
 	}
+	
+	//postavlja datun na poziciji y na skali
 	public void setDateOnPos(double date,float y){
 		double s = startDate;
 		double d = getDate(y);
