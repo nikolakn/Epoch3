@@ -95,6 +95,8 @@ public class NkSkala {
 	public void posmak(float y) {
 		// koliko duzina se preskace a dodaje vremena
 		dy-=y;
+		if(dy < 0)
+			dy = 0;
 	}
 	
 	public void zoom(float sc, float y) {
@@ -143,7 +145,9 @@ public class NkSkala {
 		double d = getDate(y);
 		double raz = d-date;
 		dy += (int)((raz/365)*((double)len/(double)period));	
-		
+		if(dy < 0)
+			dy = 0;
+
 	}
 	
 	public double getDate(float y){
