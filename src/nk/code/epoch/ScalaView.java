@@ -3,6 +3,9 @@ package nk.code.epoch;
 //import org.joda.time.DateTime;
 //import org.joda.time.DateTimeUtils;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeUtils;
+
 import nk.code.doc.NkSkala;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -258,7 +261,10 @@ public class ScalaView extends View {
 	public float getPos(double d) {
 		return skala.getPos(d);
 	}
-
+	public String getDate(float d) {
+		
+		return (new DateTime(DateTimeUtils.fromJulianDay(skala.getDate(d)))).toString();
+	}
 	public void init(EpochView ev) {
 		epochv = ev;
 	}
@@ -274,7 +280,9 @@ public class ScalaView extends View {
 
 			// Log.d("nk",Float.toString(mScaleFactor));
 			skala.zoom(mScaleFactor, detector.getFocusY());
+			
 			invalidate();
+			epochv.invalidate();
 			return true;
 		}
 		/*

@@ -14,7 +14,11 @@ import android.view.View;
 
 
 public class EpochView extends View {
-
+	
+	double startDate = DateTimeUtils.toJulianDay(new DateTime(2015,1,1,0,0).getMillis());
+	
+    double startDate2 = DateTimeUtils.toJulianDay(new DateTime(2012,1,1,0,0).getMillis());
+    double startDate3 = DateTimeUtils.toJulianDay(new DateTime(2000,1,1,0,0).getMillis());
 	private ScalaView skala;
     private Paint mPaint;
     float mRotation = 0f;
@@ -24,7 +28,7 @@ public class EpochView extends View {
     DateTime now = new DateTime();
     public EpochView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        
+        Log.d("view startDate", Double.toString(startDate));
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setColor(0xFFF00000);
@@ -76,14 +80,26 @@ public class EpochView extends View {
         canvas.save(); 
   
         //canvas.rotate(mRotation, 0.5f, 0.5f);
-        //canvas.drawLines(mPoints, mPaint);
-        
+        //canvas.drawLines(mPoints, mPaint);  
         if(skala != null){
-	        double startDate = DateTimeUtils.toJulianDay(now.getMillis());
+	        //canvas.drawLine(0, 600, 500,600, mPaint);
 	        float y = skala.getPos(startDate);
+	        Log.d("nk d1", skala.getDate(y));
+	        Log.d("nk d yy1", Float.toString(y));
+	        if(y>0){
+		        canvas.drawRect(getWidth()/2, y-50, getWidth()/2+50, y, mPaint);
+		        canvas.drawLine(0, y, 500, y, mPaint);
+	        }
+	        
+	        y = skala.getPos(startDate2);
+	        if(y>0){
+		        
+		        canvas.drawRect(10, y-50, 70, y, mPaint);
+	        }
+	         y = skala.getPos(startDate3);
 	        if(y>0){
 		        //Log.d("nk", Float.toString(y));
-		        canvas.drawRect(getWidth()/2, y, getWidth()/2+50, y+50, mPaint);
+		        canvas.drawRect(80, y-50, 130, y, mPaint);
 	        }
         }
         canvas.restore();
