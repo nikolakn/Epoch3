@@ -102,17 +102,21 @@ public class NkSkala {
 			canvas.drawText(ss, textPaint.getTextSize() + 15, y + textHeight
 					/ 2, textPaint);
 			// canvas.drawLine(0, y, 10, y, textPaint);
+			int d = 0;
 			if (zoomlen > 340) {
-				float n = (float) (y + getLen() / 12.0);
-				for (int i = 11; i > 0; i--) {
+				float n = (float) (y);
+				
+				for (int i = 11; i >= 0; i--) {
+					if(d != 0){
 					canvas.drawText(meseci[i], textPaint.getTextSize() + 15, n,
 							mesecPaint);
-					
+					}
+					d = 1;
 					if (zoomlen > 3500) {
 						int dm = daysOfMonth(dt.getYear()-period,i+1);
 						float l = (float) (n + getLen() / (12.0*dm));
 						for (int k = dm; k > 0; k--) {
-							canvas.drawText(Integer.toString(k), textPaint.getTextSize() + 15, l,mesecPaint);
+							canvas.drawText(Integer.toString(k), 10, l,mesecPaint);
 							l = l + (float) (getLen() / (12.0*dm));
 						}
 					}
