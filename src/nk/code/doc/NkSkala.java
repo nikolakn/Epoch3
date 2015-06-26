@@ -39,12 +39,33 @@ public class NkSkala {
 	private String[] meseci = { "Jan", "Feb", "Mar", "Apr", "May", "Jun",
 			"Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
 
+	
+	public double getDy(){
+		return dy;
+	}
+	public int getZoomLen(){
+		return zoomlen;
+	}
+	public int getPeriod(){
+		return period;
+	}
+	
 	public double getLen() {
 		return len;
 	}
 
-	public void setLen(int len) {
+	public void setLen(double len) {
 		this.len = len;
+	}
+	
+	public void setDy(double y){
+		dy = y;
+	}
+	public void setZoomLen(int y){
+		zoomlen = y;
+	}
+	public void setPeriod(int y){
+		period = y;
 	}
 
 	public NkSkala() {

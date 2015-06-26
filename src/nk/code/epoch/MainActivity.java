@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 public class MainActivity extends ActionBarActivity {
+	
+	//private SharedPreferences mPrefs;
 
 	ListView list;
 	public final static String EXTRA_MESSAGE = "nk.code.epoch.START";
@@ -32,7 +34,14 @@ public class MainActivity extends ActionBarActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	@Override
+	protected void onPause() {
+        super.onPause();
 
+        //SharedPreferences.Editor ed = mPrefs.edit();
+        //ed.putInt("view_mode", mCurViewMode);
+        //ed.commit();
+    }
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

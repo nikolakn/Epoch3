@@ -43,7 +43,7 @@ public class ScalaView extends View {
 	// private float mPosX;
 	// private float mPosY;
 	private int mActivePointerId = INVALID_POINTER_ID;
-	float scale = 50;
+	private float scale = 50;
 	// private static final String TAG = "Touch";
 
 	// These matrices will be used to move and zoom image
@@ -74,10 +74,23 @@ public class ScalaView extends View {
 		mPaint.setStyle(Style.FILL);
 
 		skala = new NkSkala();
-		skala.SetZoom(scale);
+		skala.SetZoom(getScale());
 		gradPaint = new Paint();
 		setGrad();
 
+	}
+	public double getDy(){
+		return skala.getDy();
+	}
+	public int getZoomLen(){
+		return skala.getZoomLen();
+	}
+	public int getPeriod(){
+		return skala.getPeriod();
+	}
+	
+	public double getLen() {
+		return skala.getLen();
 	}
 
 	public void setColor(int color) {
@@ -285,15 +298,32 @@ public class ScalaView extends View {
 			epochv.invalidate();
 			return true;
 		}
-		/*
-		 * @Override public void onScaleEnd(ScaleGestureDetector detector){
-		 * mScaleFactor *= detector.getScaleFactor();
-		 * 
-		 * // Don't let the object get too small or too large. mScaleFactor =
-		 * Math.max(0.1f, Math.min(mScaleFactor, 5.0f));
-		 * 
-		 * Log.d("nk",Float.toString(mScaleFactor)); skala.zoom(mScaleFactor,
-		 * detector.getFocusY()); invalidate(); }
-		 */
+
+	}
+
+	public void setLen(double l) {
+		skala.setLen(l);
+	}
+	public void setDy(Double y) {
+		skala.setDy(y);	
+	}
+	public void setZoomLen(int i) {
+		skala.setZoomLen(i);
+		
+	}
+	public void setPeriod(int i) {
+		skala.setPeriod(i);	
+	}
+	public float getScaleFactor() {
+		return mScaleFactor;
+	}
+	public void setScaleFactor(float scale) {
+		this.mScaleFactor = scale;
+	}
+	public float getScale() {
+		return scale;
+	}
+	public void setScale(float scale) {
+		this.scale = scale;
 	}
 }
