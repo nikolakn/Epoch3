@@ -108,7 +108,7 @@ public class NkSkala {
 				
 				for (int i = 11; i >= 0; i--) {
 					if(d != 0){
-					canvas.drawText(meseci[i], textPaint.getTextSize() + 15, n,
+					canvas.drawText(meseci[i+1], textPaint.getTextSize() + 15, n,
 							mesecPaint);
 					}
 					d = 1;
