@@ -85,7 +85,11 @@ public class NkSkala {
 	public void Init(int sh) {
 		scalaHeith = sh;
 	}
-
+	private static int daysOfMonth(int year, int month) {
+		  DateTime dateTime = new DateTime(year, month, 14, 12, 0, 0, 000);
+		  return dateTime.dayOfMonth().getMaximumValue();
+	}
+	
 	public void draw(Canvas canvas, int w, int h) {
 		int r = (int) (dy / len);
 		DateTime dt = new DateTime(DateTimeUtils.fromJulianDay(getStartDate()));
@@ -103,7 +107,20 @@ public class NkSkala {
 				for (int i = 11; i > 0; i--) {
 					canvas.drawText(meseci[i], textPaint.getTextSize() + 15, n,
 							mesecPaint);
+					
+					if (zoomlen > 800) {
+						int dm = daysOfMonth(dt.getYear(),i+1);
+						float l = (float) (n + getLen() / (12.0*dm));
+						for (int k = dm; k > 0; k--) {
+							canvas.drawText(Integer.toString(k), textPaint.getTextSize() + 15, l,mesecPaint);
+							l = l + (float) (getLen() / (12.0*dm));
+						}
+					}
+					
+					
+					
 					n = n + (float) (getLen() / 12.0);
+					
 				}
 			}
 			if (zoomlen > 100) {
@@ -111,6 +128,7 @@ public class NkSkala {
 				canvas.drawLine(0, n - mesecPaint.getTextSize() / 2, 10, n
 						- mesecPaint.getTextSize() / 2, textPaint);
 			}
+
 			dt = dt.minusYears(period);
 		}
 	}
