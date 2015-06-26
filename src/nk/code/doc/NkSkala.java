@@ -25,6 +25,7 @@ public class NkSkala {
 	private  double startDate = 3000000;
 	private double len = LENDEF;
 	private TextPaint textPaint;
+	private TextPaint mesecPaint;
 	float textHeight;
 	double dy = 75000;
 	private int period=1;
@@ -44,31 +45,17 @@ public class NkSkala {
         textPaint.setColor(Color.BLACK);
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setTextSize(12);
-        textHeight = textPaint.descent() - textPaint.ascent();
+        textHeight = textPaint.getTextSize();
+       
         startDate = DateTimeUtils.toJulianDay(new DateTime(3520,1,1,0,0).getMillis());
         //Log.d("nk startDate",Double.toString(startDate));
+        mesecPaint = new TextPaint();
+        mesecPaint.setColor(Color.argb(255, 50, 50, 50));
+        mesecPaint.setTextAlign(Paint.Align.CENTER);
+        mesecPaint.setTextSize(10);
 	}
 	public void Init(int sh){
 		scalaHeith = sh;
-		/*
-		DateTime dt2 =  new DateTime(DateTimeUtils.fromJulianDay(getDate(0)));
-		Log.d("nk start",dt2.toString());
-		DateTime dt3 =  new DateTime(DateTimeUtils.fromJulianDay(getDate(scalaHeith/2)));
-		Log.d("nk sr",dt3.toString());
-		DateTime dt =  new DateTime(DateTimeUtils.fromJulianDay(getEndDate()));
-		Log.d("nk e",dt.toString());
-
-
-		Log.d("nk dy","--------------");
-		Log.d("nk dy",Float.toString(scalaHeith));
-		Log.d("nk dy","--------------");
-		
-		Log.d("nk start",Float.toString(getPos(DateTimeUtils.toJulianDay(dt2.getMillis()))));
-		Log.d("nk sred",Float.toString(getPos(DateTimeUtils.toJulianDay(dt3.getMillis()))));
-		
-		Log.d("nk end",Float.toString(getPos(DateTimeUtils.toJulianDay(dt.getMillis()))));
-		
-		*/
 	}
 	public void draw(Canvas canvas,int w, int h) {
 		int r = (int)(dy / len);
@@ -83,16 +70,21 @@ public class NkSkala {
 		for(float y=-raz; y<=h; y+=getLen() ){
 			//DateTime dt2 =  new DateTime(DateTimeUtils.fromJulianDay(date));
 			String ss = Integer.toString(dt.getYear());
-			canvas.drawText(ss,textPaint.getTextSize()+15, y,textPaint);
-			if(zoomlen > 400){
+			canvas.drawText(ss,textPaint.getTextSize()+15, y+textHeight/2,textPaint);
+			canvas.drawLine(0, y, 10, y, textPaint);
+			if(zoomlen > 340){
 				float n=(float) (y+getLen()/12.0);
 				for(int i=11 ; i > 0 ; i-- ){			
-					canvas.drawText(meseci[i],textPaint.getTextSize()+15,n,textPaint);
+					canvas.drawText(meseci[i],textPaint.getTextSize()+15,n,mesecPaint);
 					n=n+(float)(getLen()/12.0);
 				}
 			}
-			
-			
+			if(zoomlen > 100){
+				float n=(float) (y+getLen()/2);
+				canvas.drawLine(0, n-mesecPaint.getTextSize()/2, 10, n-mesecPaint.getTextSize()/2, textPaint);
+
+			}
+					
 			dt = dt.minusYears(period);
 			//date -= (period*365);
 		}

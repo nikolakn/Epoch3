@@ -17,7 +17,7 @@ public class EpochView extends View {
 	
 	double startDate = DateTimeUtils.toJulianDay(new DateTime(2015,1,1,0,0).getMillis());
     double startDate2 = DateTimeUtils.toJulianDay(new DateTime(2012,1,1,0,0).getMillis());
-    double startDate3 = DateTimeUtils.toJulianDay(new DateTime(2015,6,1,0,0).getMillis());
+    double startDate3 = DateTimeUtils.toJulianDay(new DateTime(2015,7,1,0,0).getMillis());
 	private ScalaView skala;
     private Paint mPaint;
     float mRotation = 0f;
