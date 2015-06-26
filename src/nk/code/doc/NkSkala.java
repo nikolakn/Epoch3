@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.TextPaint;
-import android.util.Log;
 //import android.util.Log;
 /**
  * 
@@ -32,9 +31,6 @@ public class NkSkala {
 	
 	private int scalaHeith;
 	private int zoomlen=LENDEF;
-	
-	private double timePerPix = period/len;
-	
 
 	public double getLen() {
 		return len;
@@ -48,12 +44,12 @@ public class NkSkala {
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setTextSize(12);
         textHeight = textPaint.descent() - textPaint.ascent();
-        //DateTime now = new DateTime();
         startDate = DateTimeUtils.toJulianDay(new DateTime(3520,1,1,0,0).getMillis());
-        Log.d("nk startDate",Double.toString(startDate));
+        //Log.d("nk startDate",Double.toString(startDate));
 	}
 	public void Init(int sh){
 		scalaHeith = sh;
+		/*
 		DateTime dt2 =  new DateTime(DateTimeUtils.fromJulianDay(getDate(0)));
 		Log.d("nk start",dt2.toString());
 		DateTime dt3 =  new DateTime(DateTimeUtils.fromJulianDay(getDate(scalaHeith/2)));
@@ -71,7 +67,7 @@ public class NkSkala {
 		
 		Log.d("nk end",Float.toString(getPos(DateTimeUtils.toJulianDay(dt.getMillis()))));
 		
-		
+		*/
 	}
 	public void draw(Canvas canvas,int w, int h) {
 		int r = (int)(dy / len);
@@ -140,14 +136,12 @@ public class NkSkala {
 	}
 	
 	//postavlja datun na poziciji y na skali
-	public void setDateOnPos(double date,float y){
-		
+	public void setDateOnPos(double date,float y){	
 		double d = getDate(y);
 		double raz = d-date;
 		dy += (int)((raz/365)*((double)len/(double)period));	
 		if(dy < 0)
 			dy = 0;
-
 	}
 	
 	public double getDate(float y){

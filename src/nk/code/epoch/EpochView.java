@@ -8,7 +8,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
+//import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -16,7 +16,6 @@ import android.view.View;
 public class EpochView extends View {
 	
 	double startDate = DateTimeUtils.toJulianDay(new DateTime(2015,1,1,0,0).getMillis());
-	
     double startDate2 = DateTimeUtils.toJulianDay(new DateTime(2012,1,1,0,0).getMillis());
     double startDate3 = DateTimeUtils.toJulianDay(new DateTime(2000,1,1,0,0).getMillis());
 	private ScalaView skala;
@@ -28,7 +27,7 @@ public class EpochView extends View {
     DateTime now = new DateTime();
     public EpochView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        Log.d("view startDate", Double.toString(startDate));
+        //Log.d("view startDate", Double.toString(startDate));
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setColor(0xFFF00000);
@@ -64,7 +63,7 @@ public class EpochView extends View {
 		int action = event.getActionMasked();
 		//int id = event.getPointerId(actionIndex);
 		// Check if we received a down or up action for a finger
-		Log.d("nk","clik");
+		//Log.d("nk","clik");
 		if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_POINTER_DOWN) {
 			//Log.d("nk", Integer.toString((int)event.getX(actionIndex)));
 			//Log.d("nk", Integer.toString((int)event.getY(actionIndex)));
@@ -84,8 +83,8 @@ public class EpochView extends View {
         if(skala != null){
 	        //canvas.drawLine(0, 600, 500,600, mPaint);
 	        float y = skala.getPos(startDate);
-	        Log.d("nk d1", skala.getDate(y));
-	        Log.d("nk d yy1", Float.toString(y));
+	       // Log.d("nk d1", skala.getDate(y));
+	       // Log.d("nk d yy1", Float.toString(y));
 	        if(y>0){
 		        canvas.drawRect(getWidth()/2, y-50, getWidth()/2+50, y, mPaint);
 		        canvas.drawLine(0, y, 500, y, mPaint);
