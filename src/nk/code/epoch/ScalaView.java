@@ -289,7 +289,7 @@ public class ScalaView extends View {
 			mScaleFactor *= detector.getScaleFactor();
 
 			// Don't let the object get too small or too large.
-			mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 12.0f));
+			mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 20.0f));
 
 			// Log.d("nk",Float.toString(mScaleFactor));
 			skala.zoom(mScaleFactor, detector.getFocusY());
