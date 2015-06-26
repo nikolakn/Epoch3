@@ -32,6 +32,7 @@ public class NkSkala {
 	private int scalaHeith;
 	private int zoomlen=LENDEF;
 
+	private String[] meseci={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
 	public double getLen() {
 		return len;
 	}
@@ -83,6 +84,15 @@ public class NkSkala {
 			//DateTime dt2 =  new DateTime(DateTimeUtils.fromJulianDay(date));
 			String ss = Integer.toString(dt.getYear());
 			canvas.drawText(ss,textPaint.getTextSize()+15, y,textPaint);
+			if(zoomlen > 400){
+				float n=(float) (y+getLen()/12.0);
+				for(int i=11 ; i > 0 ; i-- ){			
+					canvas.drawText(meseci[i],textPaint.getTextSize()+15,n,textPaint);
+					n=n+(float)(getLen()/12.0);
+				}
+			}
+			
+			
 			dt = dt.minusYears(period);
 			//date -= (period*365);
 		}
@@ -113,7 +123,7 @@ public class NkSkala {
 			len = LENDEF;
 			period = 5;
 		}
-		else if (zoomlen >=30){
+		else if (zoomlen >=35){
 			len = LENDEF;
 			period = 10;
 			
@@ -122,11 +132,11 @@ public class NkSkala {
 			len = LENDEF;
 			period = 50;
 		}
-		else if (zoomlen >=20){
+		else if (zoomlen >=25){
 			len = LENDEF;
 			period = 100;
 		}
-	    else if (zoomlen <20) {
+	    else if (zoomlen <25) {
 	    	zoomlen = 20;
 			period = 500;
 		}
@@ -164,24 +174,11 @@ public class NkSkala {
 		double enddate = getEndDate();
 		if(date < enddate)
 			return BELOW;
-		//racunanje gde se nalazi datim u periodu datuma
-		
-		//int r = (int)(dy / len);
-		//double y=-(float)(dy-(r*len));
-		//DateTime dt =  new DateTime(DateTimeUtils.fromJulianDay(getStartDate()));
-		//dt =dt.minusYears(r*period);
-		//double pomerensec = Math.abs(startDate-date);
-	
-		//double odnos  = pomeren/(getDate(0)-enddate);
-		//double gde = (double)((float)scalaHeith) * odnos;	
-
-		//return (float)((pomerensec /  (((double)period/(double)len)*365))-dy);
 		double per = getStartDate() - date;
 		double podeoka = per/ (period*365);
 		double y = (podeoka * (double)getLen()) - dy;
 		
 		return (float)y;
-
 	}
 
 	public void SetZoom(float scale) {
