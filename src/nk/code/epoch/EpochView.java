@@ -16,7 +16,7 @@ import android.view.View;
 public class EpochView extends View {
 	
 	double startDate = DateTimeUtils.toJulianDay(new DateTime(-1,1,1,0,0).getMillis());
-    double startDate2 = DateTimeUtils.toJulianDay(new DateTime(-0,1,12,0,0).getMillis());
+    double startDate2 = DateTimeUtils.toJulianDay(new DateTime(0,1,1,0,0).getMillis());
     double startDate3 = DateTimeUtils.toJulianDay(new DateTime(1,1,1,1,0,0).getMillis());
 	private ScalaView skala;
     private Paint mPaint;

@@ -21,7 +21,7 @@ public class NkSkala {
 	public static final int INVALID = -1;
 
 	public static final int LENDEF = 100; //standardna duzina intervala u pixelima
-	public static final int GODINA = 365; //standardna godina
+	public static final double GODINA =  365.2424; //standardna godina
 
 	private double startDate = 3000000; //pocetak skale u JD
 	private double len = LENDEF;  //duzina intervala u pixelima
@@ -31,7 +31,7 @@ public class NkSkala {
 	
 	double dy = 75000;  		  //pocetak skale po u osi ovde se na pocetku
 								  //nalazi startdate 
-	
+	double dypocetna = 75000;
 	private int period = 1; //koliko godina ima u intervalu len
 	private int scalaHeith; 		//visina widgeta
 	private int zoomlen = LENDEF;   //zoom
@@ -96,11 +96,14 @@ public class NkSkala {
 		float raz = (float) (dy % len);
 		// double date =startDate-(r*period*365);
 		dt = dt.minusYears(r * period);
-		dt = dt.plusYears(period);
+		//dt = dt.plusYears(period);
 		for (float y = -raz; y <= h; y += getLen()) {
+			//if(dt.getYear() == 0){
+			//	dt = dt.minusYears(period);	
+			//	y -= getLen();
+			//} else {
 			String ss = Integer.toString(dt.getYear());
-			canvas.drawText(ss, textPaint.getTextSize() + 15, y + textHeight
-					/ 2, textPaint);
+			canvas.drawText(ss, textPaint.getTextSize() + 15, y + textHeight/ 2, textPaint);
 			// canvas.drawLine(0, y, 10, y, textPaint);
 			int d = 0;
 			if (zoomlen > 340) {
@@ -130,17 +133,31 @@ public class NkSkala {
 				canvas.drawLine(0, n - mesecPaint.getTextSize() / 2, 10, n
 						- mesecPaint.getTextSize() / 2, textPaint);
 			}
-
+			
 			dt = dt.minusYears(period);
 		}
+		
 	}
 
 	// move scale by dy
 	public void posmak(float y) {
 		// koliko duzina se preskace a dodaje vremena
 		dy -= y;
+		/*
+		double raz = dy-dypocetna;
+		if(raz>=len && dy>dypocetna){
+			int ceo = (int)(raz/len);
+			DateTime dt = new DateTime(DateTimeUtils.fromJulianDay(getStartDate()));
+			dt.minusYears(ceo*period);
+			dy-= ceo*len;
+			startDate = DateTimeUtils.toJulianDay(dt.getMillis());
+		}
+		*/
+		
 		if (dy < 0)
 			dy = 0;
+		
+		
 	}
 
 	public void zoom(float sc, float y) {
@@ -207,6 +224,8 @@ public class NkSkala {
 		double enddate = getEndDate();
 		if (date < enddate)
 			return BELOW;
+		
+		
 		double per = getStartDate() - date;
 		double podeoka = per / (period * GODINA);
 		double y = (podeoka * (double) getLen()) - dy;
