@@ -26,9 +26,9 @@ public class EpochView extends View {
     public EpochView(Context context, AttributeSet attrs) {
         super(context, attrs);
         doc = new Document();
-        doc.addEvent(19, 10, 1982, "Nikola");
-        doc.addEvent(1, 1, 1990, "90");
-        doc.addEvent(31, 12, 1980, "80");
+        doc.addEvent(19, 10, 1982,50, "Nikola");
+        doc.addEvent(1, 1, 1990,100, "90");
+        doc.addEvent(31, 12, 1980,120, "80");
         
        
         now =  now.minusYears(2);
