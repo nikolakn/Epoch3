@@ -3,7 +3,6 @@ package nk.code.data;
 import nk.code.doc.NkSkala;
 import nk.code.epoch.ScalaView;
 import android.graphics.Canvas;
-import android.graphics.Rect;
 
 public class Epoch extends Event {
 
