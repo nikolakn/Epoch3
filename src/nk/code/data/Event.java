@@ -13,7 +13,7 @@ public class Event {
 	public int look = 1;	
 	public int x = 50;
 	
-	private Paint mPaint;
+	protected Paint mPaint;
 	
 	public static int zelena = 0xFF00FF00;
 	public static int crna = 0xFF000000;

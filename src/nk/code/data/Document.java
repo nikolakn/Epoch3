@@ -26,7 +26,15 @@ public class Document {
 		double startDate = DateTimeUtils.toJulianDay(new DateTime(godina,mesec,dan,0,0).getMillis());
 		Event e = new Event(startDate,x, name);
 		list.add(e);
-	}		
+	}	
+	
+	public void addEpoch(int sdan,int smesec, int sgodina,int x, String name,int edan,int emesec, int egodina){
+		double startDate = DateTimeUtils.toJulianDay(new DateTime(sgodina,smesec,sdan,0,0).getMillis());
+		double endDate = DateTimeUtils.toJulianDay(new DateTime(egodina,emesec,edan,0,0).getMillis());
+		Epoch e = new Epoch(startDate,x, name);
+		e.end = endDate;
+		list.add(e);		
+	}
 	
 	public void draw(Canvas canvas, ScalaView skala){
         for(Event e : list){

@@ -326,4 +326,5 @@ public class ScalaView extends View {
 	public void setScale(float scale) {
 		this.scale = scale;
 	}
+
 }

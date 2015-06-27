@@ -17,22 +17,26 @@ public class Epoch extends Event {
 	public void draw(Canvas canvas, ScalaView skala) {
         float y = skala.getPos(start);
         float y2 = skala.getPos(end);
+        mPaint.setColor(zelena);
         if(y==NkSkala.ABOVE){
         	if(y2==NkSkala.BELOW){
         	//prolazi kroz ceo prozor
-        		
+    	        canvas.drawLine(x, 0, x, skala.getHeight(), mPaint);
         	}
         	if(y2 >= 0 && y2 != NkSkala.BELOW) {
         	//donji kraj se savrsava u prozoru	
+        		canvas.drawLine(x, 0, x, y2, mPaint);
         	}
         }        		
         if(y != NkSkala.BELOW && y != NkSkala.ABOVE ) {
         	if(y2==NkSkala.BELOW){
         	//gornji kraj pocenje u prozoru
+        		canvas.drawLine(x, y, x, skala.getHeight(), mPaint);
         		
         	}
         	if(y2 >= 0 && y2 != NkSkala.BELOW) {
         	//cela je u prozoru	
+        		canvas.drawLine(x, y, x, y2, mPaint);
         	}	
         }		
 	}
