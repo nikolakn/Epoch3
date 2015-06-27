@@ -1,12 +1,12 @@
 package nk.code.epoch;
 
+import nk.code.data.Document;
+
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeUtils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.util.AttributeSet;
 //import android.util.Log;
 import android.view.MotionEvent;
@@ -15,11 +15,9 @@ import android.view.View;
 
 public class EpochView extends View {
 	
-	double startDate = DateTimeUtils.toJulianDay(new DateTime(3000,1,1,0,0).getMillis());
-    double startDate2 = DateTimeUtils.toJulianDay(new DateTime(1,1,1,0,0).getMillis());
-    double startDate3 = DateTimeUtils.toJulianDay(new DateTime(-3000,1,1,1,0,0).getMillis());
+	private Document doc;
 	private ScalaView skala;
-    private Paint mPaint;
+    
     float mRotation = 0f;
     float[] mPoints = {
             0.5f, 0f, 0.5f, 1f,
@@ -27,22 +25,20 @@ public class EpochView extends View {
     DateTime now = new DateTime();
     public EpochView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        //Log.d("view startDate", Double.toString(startDate));
-        mPaint = new Paint();
-        mPaint.setAntiAlias(true);
-        mPaint.setColor(0xFFF00000);
+        doc = new Document();
+        doc.addEvent(19, 10, 1982, "Nikola");
+        doc.addEvent(1, 1, 1990, "90");
+        doc.addEvent(31, 12, 1980, "80");
+        
+       
         now =  now.minusYears(2);
-        int color = 0xFF00FF00;
+        
         float rotation = 0.0f;
         // Remember to call this when finished
-        
-        setColor(color);
+     
         setRotation(rotation);
     }
-
-    public void setColor(int color) {
-        mPaint.setColor(color);
-    }
+ 
     
     public void setRotation(float degrees) {
         mRotation = degrees;
@@ -81,25 +77,7 @@ public class EpochView extends View {
         //canvas.rotate(mRotation, 0.5f, 0.5f);
         //canvas.drawLines(mPoints, mPaint);  
         if(skala != null){
-	        //canvas.drawLine(0, 600, 500,600, mPaint);
-	        float y = skala.getPos(startDate);
-	       // Log.d("nk d1", skala.getDate(y));
-	       // Log.d("nk d yy1", Float.toString(y));
-	        if(y>0){
-		        canvas.drawRect(getWidth()/2, y-50, getWidth()/2+50, y, mPaint);
-		        canvas.drawLine(0, y, 500, y, mPaint);
-	        }
-	        
-	        y = skala.getPos(startDate2);
-	        if(y>0){
-		        
-		        canvas.drawRect(10, y-50, 70, y, mPaint);
-	        }
-	         y = skala.getPos(startDate3);
-	        if(y>0){
-		        //Log.d("nk", Float.toString(y));
-		        canvas.drawRect(80, y-50, 130, y, mPaint);
-	        }
+        	doc.draw(canvas, skala);
         }
         canvas.restore();
     }
