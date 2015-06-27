@@ -19,7 +19,6 @@ public class NkSkala {
 	public static final int ABOVE = -3; // top
 	public static final int BELOW = -2; // down
 	public static final int INVALID = -1;
-
 	public static final int LENDEF = 100; //standardna duzina intervala u pixelima
 	public static final double GODINA =  365.2424; //standardna godina
 
