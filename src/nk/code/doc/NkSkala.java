@@ -142,7 +142,13 @@ public class NkSkala {
 	// move scale by dy
 	public void posmak(float y) {
 		// koliko duzina se preskace a dodaje vremena
+		double po = (dy/len)*period;
+		
 		dy -= y;
+		if(po > 50000){
+			dy = (50000/period)*len;
+		}
+		
 		/*
 		double raz = dy-dypocetna;
 		if(raz>=len && dy>dypocetna){
@@ -156,7 +162,7 @@ public class NkSkala {
 		
 		if (dy < 0)
 			dy = 0;
-		
+
 		
 	}
 
