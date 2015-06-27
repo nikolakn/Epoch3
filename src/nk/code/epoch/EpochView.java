@@ -29,7 +29,7 @@ public class EpochView extends View {
         doc.addEvent(19, 10, 1982,50, "Nikola");
         doc.addEvent(1, 1, 1990,100, "90");
         doc.addEvent(31, 12, 1980,120, "80");
-        
+       
         doc.addEpoch(1, 1, 2015, 20, "epoha", 1, 1, 1950);
         now =  now.minusYears(2);
         
