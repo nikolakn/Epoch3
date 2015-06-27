@@ -16,6 +16,7 @@ public class Event {
 	public int colorLine = Boja.zelena;
 	public int colorText = Boja.crna;
 	protected Paint mPaint;
+	public int style = 2;
 
 	public Event(double s, int x, String n) {
 		name = n;
@@ -32,7 +33,10 @@ public class Event {
 		float y = skala.getPos(start);
 		if (y >= 0) {
 			mPaint.setColor(colorLine);
-			canvas.drawRect(x, y - size / 2, x + size, y + size / 2, mPaint);
+			if(style == 1)
+				canvas.drawRect(x- size / 2, y - size / 2, x + size/2, y + size / 2, mPaint);
+			else
+				canvas.drawCircle(x, y, size / 2, mPaint);
 			mPaint.setColor(colorText);
 			Rect bounds = new Rect();
 			mPaint.getTextBounds(name, 0, name.length(), bounds);
