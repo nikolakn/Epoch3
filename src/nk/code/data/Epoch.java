@@ -22,6 +22,12 @@ public class Epoch extends Event {
         	if(y2==NkSkala.BELOW){
         	//prolazi kroz ceo prozor
     	        canvas.drawLine(x, 0, x, skala.getHeight(), mPaint);
+    	        canvas.save();
+    	        canvas.rotate(-90);
+    	        mPaint.setColor(crna);
+    	      
+    	        canvas.drawText(name,-skala.getHeight()/2, x-4 , mPaint);
+    	        canvas.restore();
         	}
         	if(y2 >= 0 && y2 != NkSkala.BELOW) {
         	//donji kraj se savrsava u prozoru	
