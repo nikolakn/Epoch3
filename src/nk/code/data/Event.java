@@ -28,19 +28,20 @@ public class Event {
 		mPaint.setColor(colorLine);
 	}
 
-	public void draw(Canvas canvas, ScalaView skala) {
+	public void draw(Canvas canvas, ScalaView skala, float dx) {
 		// TODO Auto-generated method stub
 		float y = skala.getPos(start);
+		float xx = x + dx;
 		if (y >= 0) {
 			mPaint.setColor(colorLine);
 			if(style == 1)
-				canvas.drawRect(x- size / 2, y - size / 2, x + size/2, y + size / 2, mPaint);
+				canvas.drawRect(xx- size / 2, y - size / 2, xx + size/2, y + size / 2, mPaint);
 			else
-				canvas.drawCircle(x, y, size / 2, mPaint);
+				canvas.drawCircle(xx, y, size / 2, mPaint);
 			mPaint.setColor(colorText);
 			Rect bounds = new Rect();
 			mPaint.getTextBounds(name, 0, name.length(), bounds);
-			canvas.drawText(name, x + size + 5, y + bounds.height() / 2, mPaint);
+			canvas.drawText(name, xx + size + 5, y + bounds.height() / 2, mPaint);
 		}
 	}
 }

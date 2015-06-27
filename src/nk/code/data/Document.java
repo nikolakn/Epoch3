@@ -36,9 +36,9 @@ public class Document {
 		list.add(e);		
 	}
 	
-	public void draw(Canvas canvas, ScalaView skala){
+	public void draw(Canvas canvas, ScalaView skala, float dx){
         for(Event e : list){
-        	e.draw(canvas, skala);    	
+        	e.draw(canvas, skala, dx);    	
         }
 	}
 	

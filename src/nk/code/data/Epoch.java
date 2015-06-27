@@ -15,33 +15,34 @@ public class Epoch extends Event {
 	public double end;
 
 	@Override
-	public void draw(Canvas canvas, ScalaView skala) {
+	public void draw(Canvas canvas, ScalaView skala, float dx) {
 		float y = skala.getPos(start);
 		float y2 = skala.getPos(end);
+		float xx = x + dx;
 		mPaint.setColor(colorLine);
 		if (y == NkSkala.ABOVE) {
 			if (y2 == NkSkala.BELOW) {
 				// prolazi kroz ceo prozor
 				if(style == 1)
-					canvas.drawLine(x, 0, x, skala.getHeight(), mPaint);
+					canvas.drawLine(xx, 0, xx, skala.getHeight(), mPaint);
 				else
-					canvas.drawRect(x-size, 0, x, skala.getHeight(), mPaint);
+					canvas.drawRect(xx-size, 0, xx, skala.getHeight(), mPaint);
 				canvas.save();
 				canvas.rotate(-90);
 				mPaint.setColor(colorText);
-				canvas.drawText(name, -skala.getHeight() / 2, x - 4, mPaint);
+				canvas.drawText(name, -skala.getHeight() / 2, xx - 4, mPaint);
 				canvas.restore();
 			}
 			if (y2 >= 0 && y2 != NkSkala.BELOW) {
 				// donji kraj se savrsava u prozoru
 				if(style == 1)
-					canvas.drawLine(x, 0, x, y2, mPaint);
+					canvas.drawLine(xx, 0, xx, y2, mPaint);
 				else
-					canvas.drawRect(x-size, 0, x, y2, mPaint);				
+					canvas.drawRect(xx-size, 0, xx, y2, mPaint);				
 				canvas.save();
 				canvas.rotate(-90);
 				mPaint.setColor(colorText);
-				canvas.drawText(name, -y2, x - 4, mPaint);
+				canvas.drawText(name, -y2, xx - 4, mPaint);
 				canvas.restore();
 			}
 		}
@@ -49,28 +50,28 @@ public class Epoch extends Event {
 			if (y2 == NkSkala.BELOW) {
 				// gornji kraj pocenje u prozoru
 				if(style == 1)
-					canvas.drawLine(x, y, x, skala.getHeight(), mPaint);
+					canvas.drawLine(xx, y, xx, skala.getHeight(), mPaint);
 				else
-					canvas.drawRect(x-size, y, x, skala.getHeight(), mPaint);	
+					canvas.drawRect(xx-size, y, xx, skala.getHeight(), mPaint);	
 				canvas.save();
 				canvas.rotate(-90);
 				mPaint.setColor(colorText);
 				mPaint.setTextAlign(Align.RIGHT);
-				canvas.drawText(name, -y, x - 4, mPaint);
+				canvas.drawText(name, -y, xx - 4, mPaint);
 				mPaint.setTextAlign(Align.LEFT);
 				canvas.restore();
 			}
 			if (y2 >= 0 && y2 != NkSkala.BELOW) {
 				// cela je u prozoru
 				if(style == 1)
-					canvas.drawLine(x, y, x, y2, mPaint);
+					canvas.drawLine(xx, y, xx, y2, mPaint);
 				else
-					canvas.drawRect(x-size, y, x, y2, mPaint);
+					canvas.drawRect(xx-size, y, xx, y2, mPaint);
 				canvas.save();
 				canvas.rotate(-90);
 				mPaint.setColor(colorText);
 				mPaint.setTextAlign(Align.CENTER);
-				canvas.drawText(name, -(y + (y2 - y) / 2), x - 4, mPaint);
+				canvas.drawText(name, -(y + (y2 - y) / 2), xx - 4, mPaint);
 				mPaint.setTextAlign(Align.LEFT);
 				canvas.restore();
 			}
