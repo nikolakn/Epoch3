@@ -11,6 +11,7 @@ import org.joda.time.DateTimeUtils;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 
 public class Document {
 
@@ -43,9 +44,8 @@ public class Document {
 	
 	public void draw(Canvas canvas, ScalaView skala){
         for(Event e : list){
-        //Event
-        
-        	if(e.getClass().isInstance(Event.class)){
+        //Event    
+        	if(e instanceof Event){
 		        float y = skala.getPos(e.start);
 		        if(y>=0){
 		        	mPaint.setColor(zelena);
@@ -57,7 +57,7 @@ public class Document {
 		        }
         	}
         	//Epoch
-        	if(e.getClass().isInstance(Epoch.class)){
+        	if(e instanceof Epoch){
         		Epoch ep = (Epoch)e;
 		        float y = skala.getPos(ep.start);
 		        float y2 = skala.getPos(ep.end);
