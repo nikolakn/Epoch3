@@ -11,6 +11,8 @@ import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 //import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnLongClickListener;
@@ -37,6 +39,26 @@ public class EpochView extends View {
     DateTime now = new DateTime();
 	private float mLastTouchX;
 	private float dx;
+	
+	private View.OnLongClickListener vLong = new View.OnLongClickListener() {
+	    public boolean onLongClick(View view) {
+	        showContextMenu();
+	             return true;   
+	    }
+	 };  
+	 private View.OnCreateContextMenuListener vC = new View.OnCreateContextMenuListener() {
+
+	    @Override
+	    public void onCreateContextMenu(ContextMenu arg0, View arg1,
+	            ContextMenuInfo arg2) {
+	        // TODO Auto-generated method stub
+	        arg0.add(0, 0, 0, "Call");
+	        arg0.add(0, 1, 0, "Map");
+	        arg0.add(0, 2, 0, "Market");
+
+	    }
+	};
+	
     public EpochView(Context context, AttributeSet attrs) {
         super(context, attrs);
         doc = new Document();
@@ -50,20 +72,10 @@ public class EpochView extends View {
         // Remember to call this when finished
      
         setRotation(rotation);
-         OnLongClickListener vLong = new OnLongClickListener() {
 
-            @Override
-            public boolean onLongClick(View view) {
-                //showContextMenu();
-                //lb1on = !lb1on;
-                
-                Log.d("nk","long click");
-                return true;
-            }
-        };
-        
-        this.setOnLongClickListener(vLong);
         this.setLongClickable(true);
+        this.setOnLongClickListener(vLong);
+        this.setOnCreateContextMenuListener(vC);
     }
  
     
