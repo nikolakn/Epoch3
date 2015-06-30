@@ -22,7 +22,7 @@ public class EpochView extends View {
 	private ScalaView skala;
 	private int mActivePointerId = -1;
     float mRotation = 0f;
-	private OnLongClickListener vLong;
+	
 
 	// We can be in one of these 3 states
 	static final int NONE = 0;
@@ -50,18 +50,20 @@ public class EpochView extends View {
         // Remember to call this when finished
      
         setRotation(rotation);
-        vLong = new OnLongClickListener() {
+         OnLongClickListener vLong = new OnLongClickListener() {
 
             @Override
             public boolean onLongClick(View view) {
-                showContextMenu();
+                //showContextMenu();
                 //lb1on = !lb1on;
                 
                 Log.d("nk","long click");
                 return true;
             }
         };
+        
         this.setOnLongClickListener(vLong);
+        this.setLongClickable(true);
     }
  
     
