@@ -8,9 +8,12 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.GestureDetector;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -41,19 +44,33 @@ public class EpochView extends View {
 
 	
 	 private View.OnCreateContextMenuListener vC = new View.OnCreateContextMenuListener() {
-
 	    @Override
 	    public void onCreateContextMenu(ContextMenu arg0, View arg1,
 	            ContextMenuInfo arg2) {
 	        // TODO Auto-generated method stub
-	        arg0.add(0, 0, 0, "Call");
-	        arg0.add(0, 1, 0, "Map");
-	        arg0.add(0, 2, 0, "Market");
-
+	        arg0.add(0, 0, 0, "add event").setOnMenuItemClickListener(mMenuItemClickListener);
+	        arg0.add(0, 1, 0, "add epoch").setOnMenuItemClickListener(mMenuItemClickListener);
+	        arg0.add(0, 2, 0, "add people").setOnMenuItemClickListener(mMenuItemClickListener);
 	    }
 	};
-	
-	
+		
+	private OnMenuItemClickListener mMenuItemClickListener = new OnMenuItemClickListener() {
+		@Override
+		public boolean onMenuItemClick(MenuItem item) {
+			switch (item.getItemId()) {
+			case 0:
+				Log.i("nk","event");
+				return true;
+			case 1:
+				Log.i("nk","epoch");
+				return true;
+			case 2:
+				Log.i("nk","people");
+				return true;
+			}
+			return false;
+		}
+	};
     public EpochView(Context context, AttributeSet attrs) {
         super(context, attrs);
         doc = new Document();
