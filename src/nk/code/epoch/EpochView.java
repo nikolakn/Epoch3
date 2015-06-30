@@ -8,8 +8,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
-import android.util.Log;
-//import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.GestureDetector;
@@ -41,7 +39,7 @@ public class EpochView extends View {
 	
 	private GestureDetector gestureDetector;
 
-	/*
+	
 	 private View.OnCreateContextMenuListener vC = new View.OnCreateContextMenuListener() {
 
 	    @Override
@@ -54,7 +52,7 @@ public class EpochView extends View {
 
 	    }
 	};
-	*/
+	
 	
     public EpochView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -69,15 +67,16 @@ public class EpochView extends View {
         // Remember to call this when finished
      
         setRotation(rotation);
+        this.setOnCreateContextMenuListener(vC);
         gestureDetector = new GestureDetector(context, new LongListener());
 
 
     }
- 
+    
 	private class LongListener extends GestureDetector.SimpleOnGestureListener {
 	@Override
     public void onLongPress(MotionEvent e) {
-        Log.e("", "Longpress detected");
+        showContextMenu();
 	}
 	
 	}
