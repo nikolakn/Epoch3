@@ -1,7 +1,6 @@
 package nk.code.epoch;
 
 import nk.code.data.Document;
-
 import org.joda.time.DateTime;
 
 import android.annotation.SuppressLint;
@@ -13,9 +12,9 @@ import android.util.Log;
 //import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 
 
 public class EpochView extends View {
@@ -40,12 +39,9 @@ public class EpochView extends View {
 	private float mLastTouchX;
 	private float dx;
 	
-	private View.OnLongClickListener vLong = new View.OnLongClickListener() {
-	    public boolean onLongClick(View view) {
-	        showContextMenu();
-	             return true;   
-	    }
-	 };  
+	private GestureDetector gestureDetector;
+
+	/*
 	 private View.OnCreateContextMenuListener vC = new View.OnCreateContextMenuListener() {
 
 	    @Override
@@ -58,6 +54,7 @@ public class EpochView extends View {
 
 	    }
 	};
+	*/
 	
     public EpochView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -72,12 +69,18 @@ public class EpochView extends View {
         // Remember to call this when finished
      
         setRotation(rotation);
+        gestureDetector = new GestureDetector(context, new LongListener());
 
-        this.setLongClickable(true);
-        this.setOnLongClickListener(vLong);
-        this.setOnCreateContextMenuListener(vC);
+
     }
  
+	private class LongListener extends GestureDetector.SimpleOnGestureListener {
+	@Override
+    public void onLongPress(MotionEvent e) {
+        Log.e("", "Longpress detected");
+	}
+	
+	}
     
     public void setRotation(float degrees) {
         mRotation = degrees;
@@ -88,11 +91,13 @@ public class EpochView extends View {
 	    super.onLayout(changed, left, top, right, bottom);
 
 
-    }   
+    }  
+    
     
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
+		gestureDetector.onTouchEvent(ev);
 		final int action = MotionEventCompat.getActionMasked(ev);
 		switch (action) {
 		case MotionEvent.ACTION_DOWN: {
@@ -128,7 +133,7 @@ public class EpochView extends View {
 			mActivePointerId = -1;
 			break;
 		}
-
+	
 		case MotionEvent.ACTION_CANCEL: {
 			mActivePointerId = -1;
 			break;
