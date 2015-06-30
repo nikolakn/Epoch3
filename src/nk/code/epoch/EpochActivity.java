@@ -3,8 +3,12 @@ package nk.code.epoch;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View; 
+
 
 public class EpochActivity extends ActionBarActivity {
 	private ScalaView skala;
@@ -30,6 +34,7 @@ public class EpochActivity extends ActionBarActivity {
 	    } 
 		
 		skala.invalidate();
+
 	}
 	
 	@Override
@@ -67,4 +72,14 @@ public class EpochActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
+	super.onCreateContextMenu(menu, v, menuInfo);
+		menu.setHeaderTitle("Context Menu");
+		menu.add(0, v.getId(), 0, "Action 1");
+		menu.add(0, v.getId(), 0, "Action 2");
+	}
+    
+
 }

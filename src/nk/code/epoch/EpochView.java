@@ -9,9 +9,11 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 //import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 
 
 public class EpochView extends View {
@@ -20,7 +22,8 @@ public class EpochView extends View {
 	private ScalaView skala;
 	private int mActivePointerId = -1;
     float mRotation = 0f;
-    
+	private OnLongClickListener vLong;
+
 	// We can be in one of these 3 states
 	static final int NONE = 0;
 	static final int DRAG = 1;
@@ -47,6 +50,18 @@ public class EpochView extends View {
         // Remember to call this when finished
      
         setRotation(rotation);
+        vLong = new OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View view) {
+                showContextMenu();
+                //lb1on = !lb1on;
+                
+                Log.d("nk","long click");
+                return true;
+            }
+        };
+        this.setOnLongClickListener(vLong);
     }
  
     
