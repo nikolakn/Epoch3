@@ -10,7 +10,7 @@ import android.graphics.Rect;
 public class Event {
 	public double start = 0;
 	public String name = "";
-	public int size = 20;
+	public int size = 25;
 	public boolean hasimage = false;
 	public int look = 1;
 	public int x = 50;
@@ -58,7 +58,7 @@ public class Event {
 	public boolean isOnPosition(float xx, float yy, ScalaView skala) {
 		float y=skala.getPos(start);
 		if(xx>=x-size/2 && xx<=x+size/2){
-			if(yy>=y-size/2 && yy<=y-size/2)
+			if(yy>=y-size/2 && yy<=y+size/2)
 				return true;
 		}
 		return false;
