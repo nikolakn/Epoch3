@@ -54,4 +54,9 @@ public class Event {
 	public void setImage(Bitmap image) {
 		this.image = image;
 	}
+
+	public boolean isOnPosition(int x2, int y, ScalaView skala) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

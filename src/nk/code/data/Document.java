@@ -48,5 +48,16 @@ public class Document {
 		list.add(e);
 	}
 	
+	Event getEventFromPos(int x, int y, ScalaView skala){
+		Event ret = null;
+		skala.getDateDouble(y);
+        for(Event e : list){
+        	if(e.isOnPosition(x,y,skala)){
+        		return e;
+        	}
+        }
+		return ret;
+	}
+	
 
 }
