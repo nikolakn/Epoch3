@@ -212,8 +212,8 @@ public class EpochView extends View {
 		this.dx = dx;
 	}
 
-	public void addEpoch(String name) {
-	     doc.addEvent(skala.getDateDouble(yposLong),(int)xposLong, "Nikola");
+	public void addEpoch(String name, DateTime dateTime) {
+	     doc.addEvent(dateTime.getDayOfMonth(),dateTime.getMonthOfYear(),dateTime.getYear(),dateTime.getHourOfDay(),dateTime.getMinuteOfHour() ,(int)xposLong, name);
 	}
 	
 	

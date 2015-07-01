@@ -41,6 +41,12 @@ public class Document {
         	e.draw(canvas, skala, dx);    	
         }
 	}
+
+	public void addEvent(int dan, int mesec, int godina,int sat, int minut, int x, String name) {
+		double startDate = DateTimeUtils.toJulianDay(new DateTime(godina,mesec,dan,sat,minut).getMillis());
+		Event e = new Event(startDate,x, name);
+		list.add(e);
+	}
 	
 
 }

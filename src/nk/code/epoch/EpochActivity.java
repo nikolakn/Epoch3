@@ -1,5 +1,9 @@
 package nk.code.epoch;
 
+
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -89,7 +93,19 @@ public class EpochActivity extends ActionBarActivity {
 	    if (requestCode == 1) {
 	        if(resultCode == RESULT_OK){
 	        	 String name=data.getStringExtra("name");
-	        	 epochv.addEpoch(name);
+	        	 String date=data.getStringExtra("date");
+	        	 String time=data.getStringExtra("time");
+	        	 
+	        	 try{
+	        	 String pattern = "dd.MM.yyyy HH:mm";
+	             DateTime dateTime  = DateTime.parse(date+" "+time, DateTimeFormat.forPattern(pattern));
+	             //Log.i("nk", dateTime.toString("dd.MM.yyyy HH:mm"));
+	             epochv.addEpoch(name,dateTime);
+	        	 } catch(Exception e){
+	        		 
+	        	 }
+	        	 
+	        	 
 	        }
 	        if (resultCode == RESULT_CANCELED) {
 	            //Write your code if there's no result
