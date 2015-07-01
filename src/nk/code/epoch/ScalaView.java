@@ -278,6 +278,12 @@ public class ScalaView extends View {
 		
 		return (new DateTime(DateTimeUtils.fromJulianDay(skala.getDate(d)))).toString();
 	}
+	
+	public double getDateDouble(float d) {
+		
+		return skala.getDate(d);
+	}
+	
 	public void init(EpochView ev) {
 		epochv = ev;
 	}

@@ -1,6 +1,8 @@
 package nk.code.epoch;
 
 
+import nk.code.data.Epoch;
+import nk.code.data.Event;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.content.Intent;
@@ -93,7 +95,8 @@ public class EpochActivity extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	    if (requestCode == 1) {
 	        if(resultCode == RESULT_OK){
-	            //String result=data.getStringExtra("result");
+	        	 String name=data.getStringExtra("name");
+	        	 epochv.addEpoch(name);
 	        }
 	        if (resultCode == RESULT_CANCELED) {
 	            //Write your code if there's no result

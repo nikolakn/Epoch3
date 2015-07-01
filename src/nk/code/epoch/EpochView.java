@@ -213,6 +213,11 @@ public class EpochView extends View {
 	public void setDx(float dx) {
 		this.dx = dx;
 	}
+
+	public void addEpoch(String name) {
+	     doc.addEvent(skala.getDateDouble(yposLong),(int)xposLong, "Nikola");
+	}
+	
 	
 	
 }

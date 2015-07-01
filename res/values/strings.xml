@@ -6,5 +6,8 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_epoch">Epoch</string>
     <string name="title_activity_add_event">AddEventActivity</string>
+    <string name="delete">Delete</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
