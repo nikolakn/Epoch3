@@ -9,5 +9,8 @@
     <string name="delete">Delete</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="dateformat1">day.month.year</string>
+    <string name="timeformat">hours:minute</string>
+    <string name="Name">Name</string>
 
 </resources>

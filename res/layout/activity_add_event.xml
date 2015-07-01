@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
     
-
 <LinearLayout 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,10 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Name"
+        android:hint="@string/Name"
         android:inputType="text"
         android:singleLine="true" >
-
         <requestFocus />
     </EditText>
 
@@ -27,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Date"
+        android:hint="@string/dateformat1"
         android:inputType="date" />
 
     <EditText
@@ -35,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Time"
+        android:hint="@string/timeformat"
         android:inputType="time" />
 
 </LinearLayout>

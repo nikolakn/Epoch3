@@ -5,9 +5,7 @@ import org.joda.time.DateTime;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Canvas;
-import android.provider.ContactsContract.Contacts;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
 import android.util.Log;

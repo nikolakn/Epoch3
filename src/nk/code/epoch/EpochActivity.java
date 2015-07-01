@@ -1,14 +1,8 @@
 package nk.code.epoch;
 
-
-import nk.code.data.Epoch;
-import nk.code.data.Event;
 import android.support.v7.app.ActionBarActivity;
-import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.ContactsContract.Contacts;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -17,7 +11,6 @@ import android.view.View;
 
 
 public class EpochActivity extends ActionBarActivity {
-	private static final int ADD_EVENT_REQUEST = 1;
 	private ScalaView skala;
 	private EpochView epochv;
 	@Override

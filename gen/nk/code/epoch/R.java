@@ -1788,6 +1788,7 @@ containing a value of this type.
         public static final int main=0x7f0c0001;
     }
     public static final class string {
+        public static final int Name=0x7f0a001a;
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
          */
         public static final int abc_action_bar_home_description=0x7f0a0001;
@@ -1847,9 +1848,11 @@ containing a value of this type.
         public static final int action_settings=0x7f0a0012;
         public static final int app_name=0x7f0a0010;
         public static final int cancel=0x7f0a0017;
+        public static final int dateformat1=0x7f0a0018;
         public static final int delete=0x7f0a0015;
         public static final int hello_world=0x7f0a0011;
         public static final int save=0x7f0a0016;
+        public static final int timeformat=0x7f0a0019;
         public static final int title_activity_add_event=0x7f0a0014;
         public static final int title_activity_epoch=0x7f0a0013;
     }
