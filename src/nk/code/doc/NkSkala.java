@@ -158,10 +158,8 @@ public class NkSkala {
 			startDate = DateTimeUtils.toJulianDay(dt.getMillis());
 		}
 		*/
-		
 		if (dy < 0)
 			dy = 0;
-
 		
 	}
 

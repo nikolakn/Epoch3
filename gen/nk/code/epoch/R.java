@@ -1556,6 +1556,10 @@ containing a value of this type.
          */
         public static final int activity_horizontal_margin=0x7f070030;
         public static final int activity_vertical_margin=0x7f070031;
+        public static final int color_swatch_large=0x7f070032;
+        public static final int color_swatch_margins_large=0x7f070034;
+        public static final int color_swatch_margins_small=0x7f070035;
+        public static final int color_swatch_small=0x7f070033;
         /**  The platform's desired fixed height for a dialog along the major axis
          (the screen is in portrait). This may be either a fraction or a dimension.
  The platform's desired fixed height for a dialog along the major axis
@@ -1647,7 +1651,9 @@ containing a value of this type.
         public static final int abc_textfield_search_activated_mtrl_alpha=0x7f020034;
         public static final int abc_textfield_search_default_mtrl_alpha=0x7f020035;
         public static final int abc_textfield_search_material=0x7f020036;
-        public static final int ic_launcher=0x7f020037;
+        public static final int color_picker_swatch=0x7f020037;
+        public static final int ic_colorpicker_swatch_selected=0x7f020038;
+        public static final int ic_launcher=0x7f020039;
     }
     public static final class id {
         public static final int LinearLayout2=0x7f09003f;
@@ -1664,13 +1670,16 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f09002e;
         public static final int action_mode_bar_stub=0x7f09002d;
         public static final int action_mode_close_button=0x7f090020;
-        public static final int action_settings=0x7f09004a;
+        public static final int action_settings=0x7f09004d;
         public static final int activity_chooser_view_content=0x7f090021;
         public static final int always=0x7f090014;
         public static final int beginning=0x7f09001b;
         public static final int cancelButton=0x7f090046;
         public static final int checkbox=0x7f090029;
         public static final int collapseActionView=0x7f090015;
+        public static final int color_picker=0x7f09004a;
+        public static final int color_picker_checkmark=0x7f09004c;
+        public static final int color_picker_swatch=0x7f09004b;
         public static final int decor_content_parent=0x7f09002f;
         public static final int default_activity_button=0x7f090024;
         public static final int deleteButton=0x7f090044;
@@ -1781,7 +1790,10 @@ containing a value of this type.
         public static final int activity_add_event=0x7f030016;
         public static final int activity_epoch=0x7f030017;
         public static final int activity_main=0x7f030018;
-        public static final int support_simple_spinner_dropdown_item=0x7f030019;
+        public static final int color_picker_dialog=0x7f030019;
+        public static final int color_picker_swatch=0x7f03001a;
+        public static final int colors=0x7f03001b;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001c;
     }
     public static final class menu {
         public static final int epoch=0x7f0c0000;
@@ -1848,6 +1860,15 @@ containing a value of this type.
         public static final int action_settings=0x7f0a0012;
         public static final int app_name=0x7f0a0010;
         public static final int cancel=0x7f0a0017;
+        /**  Default title for color picker dialog [CHAR LIMIT=30] 
+         */
+        public static final int color_picker_default_title=0x7f0a001b;
+        /**  Content description for a color square. 
+         */
+        public static final int color_swatch_description=0x7f0a001c;
+        /**  Content description for a selected color square. 
+         */
+        public static final int color_swatch_description_selected=0x7f0a001d;
         public static final int dateformat1=0x7f0a0018;
         public static final int delete=0x7f0a0015;
         public static final int hello_world=0x7f0a0011;
