@@ -2,7 +2,11 @@ package nk.code.epoch;
 
 
 import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.ContactsContract.Contacts;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -11,6 +15,7 @@ import android.view.View;
 
 
 public class EpochActivity extends ActionBarActivity {
+	private static final int ADD_EVENT_REQUEST = 1;
 	private ScalaView skala;
 	private EpochView epochv;
 	@Override
@@ -80,6 +85,20 @@ public class EpochActivity extends ActionBarActivity {
 		menu.add(0, v.getId(), 0, "Action 1");
 		menu.add(0, v.getId(), 0, "Action 2");
 	}
-    
+    public void StartAddEventActivity(){
+    	Intent i = new Intent(this, AddEventActivity.class);
+    	startActivityForResult(i, 1);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    if (requestCode == 1) {
+	        if(resultCode == RESULT_OK){
+	            //String result=data.getStringExtra("result");
+	        }
+	        if (resultCode == RESULT_CANCELED) {
+	            //Write your code if there's no result
+	        }
+	    }
+    }    
 
 }

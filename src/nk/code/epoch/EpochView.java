@@ -5,7 +5,9 @@ import org.joda.time.DateTime;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
+import android.provider.ContactsContract.Contacts;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -39,7 +41,8 @@ public class EpochView extends View {
     DateTime now = new DateTime();
 	private float mLastTouchX;
 	private float dx;
-	
+	private float xposLong;
+	private float yposLong;
 	private GestureDetector gestureDetector;
 
 	
@@ -59,20 +62,22 @@ public class EpochView extends View {
 		public boolean onMenuItemClick(MenuItem item) {
 			switch (item.getItemId()) {
 			case 0:
-				Log.i("nk","event");
+				addEpoch();
 				return true;
 			case 1:
-				Log.i("nk","epoch");
+				Log.i("nk", "epoch" + Float.toString(xposLong));
 				return true;
 			case 2:
-				Log.i("nk","people");
+				Log.i("nk", "people" + Float.toString(xposLong));
 				return true;
 			}
 			return false;
 		}
 	};
+	public Context context;
     public EpochView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
         doc = new Document();
         doc.addEvent(19, 10, 1982,100, "Nikola");
         doc.addEvent(1, 1, 1990,200, "90");
@@ -90,9 +95,17 @@ public class EpochView extends View {
 
     }
     
+	protected void addEpoch() {
+		// TODO Auto-generated method stub
+		((EpochActivity)context).StartAddEventActivity();
+	}
+
 	private class LongListener extends GestureDetector.SimpleOnGestureListener {
 	@Override
     public void onLongPress(MotionEvent e) {
+		final int pointerIndex = MotionEventCompat.getActionIndex(e);
+		xposLong = MotionEventCompat.getX(e, pointerIndex);
+		yposLong = MotionEventCompat.getY(e, pointerIndex);
         showContextMenu();
 	}
 	
@@ -105,8 +118,6 @@ public class EpochView extends View {
     @Override
     protected void onLayout(boolean changed, int left, int top,int right, int bottom) {
 	    super.onLayout(changed, left, top, right, bottom);
-
-
     }  
     
     
@@ -202,4 +213,6 @@ public class EpochView extends View {
 	public void setDx(float dx) {
 		this.dx = dx;
 	}
+	
+	
 }

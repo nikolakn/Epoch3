@@ -26,6 +26,10 @@
             android:name=".EpochActivity"
             android:label="@string/title_activity_epoch" >
         </activity>
+        <activity
+            android:name=".AddEventActivity"
+            android:label="@string/title_activity_add_event" >
+        </activity>
     </application>
 
 </manifest>
