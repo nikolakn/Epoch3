@@ -56,7 +56,7 @@ public class EpochView extends View {
 		        arg0.add(0, 2, 0, "add people").setOnMenuItemClickListener(mMenuItemClickListener);
 	        } else {
 		        arg0.add(0, 0, 0, "edit").setOnMenuItemClickListener(mMenuItemClickListener2);
-		        arg0.add(0, 0, 0, "delete").setOnMenuItemClickListener(mMenuItemClickListener2);
+		        arg0.add(0, 1, 0, "delete").setOnMenuItemClickListener(mMenuItemClickListener2);
 	        }
 	    }
 	};
@@ -69,7 +69,10 @@ public class EpochView extends View {
 				addEpoch();
 				return true;
 			case 1:
-				doc.deleteEpoch(ev);
+				Log.i("nk", "epoch" + Float.toString(xposLong));
+				return true;
+			case 2:
+				Log.i("nk", "people" + Float.toString(xposLong));
 				return true;
 			}
 			return false;
@@ -83,7 +86,10 @@ public class EpochView extends View {
 				addEpoch();
 				return true;
 			case 1:
-				Log.i("nk", "epoch" + Float.toString(xposLong));
+				Log.i("nk", "delete");
+				doc.deleteEpoch(ev);
+				skala.invalidate();
+				invalidate();
 				return true;
 			case 2:
 				Log.i("nk", "people" + Float.toString(xposLong));

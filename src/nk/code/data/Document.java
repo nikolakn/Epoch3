@@ -61,6 +61,7 @@ public class Document {
 	public void deleteEpoch(Event ev) {
 		list.remove(ev);
 		
+		
 	}
 	
 
