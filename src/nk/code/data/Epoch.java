@@ -81,6 +81,10 @@ public class Epoch extends Event {
 	public boolean isOnPosition(float xx, float yy, ScalaView skala) {
 		float y=skala.getPos(start);
 		float y2=skala.getPos(end);
+		if(y2 == NkSkala.ABOVE)
+			return false;
+		if(y2 == NkSkala.BELOW)
+			y2 =  skala.getHeight();
 		float ss = (size+10)/2;
 		if(xx>=x-ss && xx<=x+ss){
 			if(yy>=y-10 && yy<=y2+10)
