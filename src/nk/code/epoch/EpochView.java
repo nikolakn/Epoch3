@@ -103,7 +103,7 @@ public class EpochView extends View {
     public void onLongPress(MotionEvent e) {
 		final int pointerIndex = MotionEventCompat.getActionIndex(e);
 		xposLong = MotionEventCompat.getX(e, pointerIndex);
-		yposLong = MotionEventCompat.getY(e, pointerIndex);
+		setYposLong(MotionEventCompat.getY(e, pointerIndex));
         showContextMenu();
 	}
 	
@@ -215,7 +215,13 @@ public class EpochView extends View {
 	public void addEpoch(String name, DateTime dateTime) {
 	     doc.addEvent(dateTime.getDayOfMonth(),dateTime.getMonthOfYear(),dateTime.getYear(),dateTime.getHourOfDay(),dateTime.getMinuteOfHour() ,(int)xposLong, name);
 	}
-	
-	
+
+	public float getYposLong() {
+		return yposLong;
+	}
+
+	public void setYposLong(float yposLong) {
+		this.yposLong = yposLong;
+	}	
 	
 }
