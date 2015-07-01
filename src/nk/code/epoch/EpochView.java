@@ -45,15 +45,20 @@ public class EpochView extends View {
 	private float yposLong;
 	private GestureDetector gestureDetector;
 
+	private boolean isEventLongClick = false; 
 	
 	 private View.OnCreateContextMenuListener vC = new View.OnCreateContextMenuListener() {
 	    @Override
 	    public void onCreateContextMenu(ContextMenu arg0, View arg1,
 	            ContextMenuInfo arg2) {
-	        // TODO Auto-generated method stub
-	        arg0.add(0, 0, 0, "add event").setOnMenuItemClickListener(mMenuItemClickListener);
-	        arg0.add(0, 1, 0, "add epoch").setOnMenuItemClickListener(mMenuItemClickListener);
-	        arg0.add(0, 2, 0, "add people").setOnMenuItemClickListener(mMenuItemClickListener);
+	        if(!isEventLongClick){
+		        arg0.add(0, 0, 0, "add event").setOnMenuItemClickListener(mMenuItemClickListener);
+		        arg0.add(0, 1, 0, "add epoch").setOnMenuItemClickListener(mMenuItemClickListener);
+		        arg0.add(0, 2, 0, "add people").setOnMenuItemClickListener(mMenuItemClickListener);
+	        } else {
+		        arg0.add(0, 0, 0, "edit");
+		        arg0.add(0, 0, 0, "delete");
+	        }
 	    }
 	};
 		
@@ -108,6 +113,9 @@ public class EpochView extends View {
 		setYposLong(MotionEventCompat.getY(e, pointerIndex));
 		Event ev=doc.getEventFromPos(xposLong-dx,yposLong,skala);
 		if(ev==null)
+			isEventLongClick = false;
+		else 
+			isEventLongClick = true;
         showContextMenu();
 	}
 	
