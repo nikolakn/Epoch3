@@ -104,6 +104,8 @@ public class EpochView extends View {
 		final int pointerIndex = MotionEventCompat.getActionIndex(e);
 		xposLong = MotionEventCompat.getX(e, pointerIndex);
 		setYposLong(MotionEventCompat.getY(e, pointerIndex));
+		Event e=doc.getEventFromPos(xposLong,yposLong,skala);
+		if(e==null)
         showContextMenu();
 	}
 	

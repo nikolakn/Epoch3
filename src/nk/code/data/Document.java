@@ -48,7 +48,7 @@ public class Document {
 		list.add(e);
 	}
 	
-	Event getEventFromPos(int x, int y, ScalaView skala){
+	public Event getEventFromPos(float x, float y, ScalaView skala){
 		Event ret = null;
         for(Event e : list){
         	if(e.isOnPosition(x,y,skala)){

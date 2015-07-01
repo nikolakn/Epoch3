@@ -55,7 +55,7 @@ public class Event {
 		this.image = image;
 	}
 
-	public boolean isOnPosition(int xx, int yy, ScalaView skala) {
+	public boolean isOnPosition(float xx, float yy, ScalaView skala) {
 		float y=skala.getPos(start);
 		if(xx>=x-size/2 && xx<=x+size/2){
 			if(yy>=y-size/2 && yy<=y-size/2)
