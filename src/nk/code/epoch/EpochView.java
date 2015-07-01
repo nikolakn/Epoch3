@@ -1,6 +1,8 @@
 package nk.code.epoch;
 
 import nk.code.data.Document;
+import nk.code.data.Event;
+
 import org.joda.time.DateTime;
 
 import android.annotation.SuppressLint;
@@ -104,8 +106,8 @@ public class EpochView extends View {
 		final int pointerIndex = MotionEventCompat.getActionIndex(e);
 		xposLong = MotionEventCompat.getX(e, pointerIndex);
 		setYposLong(MotionEventCompat.getY(e, pointerIndex));
-		Event e=doc.getEventFromPos(xposLong,yposLong,skala);
-		if(e==null)
+		Event ev=doc.getEventFromPos(xposLong,yposLong,skala);
+		if(ev==null)
         showContextMenu();
 	}
 	
