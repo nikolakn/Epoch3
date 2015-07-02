@@ -17,6 +17,7 @@
 package com.android.colorpicker;
 
 import nk.code.epoch.R;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -33,6 +34,7 @@ import com.android.colorpicker.ColorPickerSwatch.OnColorSelectedListener;
  * A dialog which takes in as input an array of colors and creates a palette allowing the user to
  * select a specific color swatch, which invokes a listener.
  */
+@SuppressLint("InflateParams")
 public class ColorPickerDialog extends DialogFragment implements OnColorSelectedListener {
 
     public static final int SIZE_LARGE = 1;

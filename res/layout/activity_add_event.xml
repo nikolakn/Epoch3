@@ -35,7 +35,11 @@
         android:ems="10"
         android:hint="@string/timeformat"
         android:inputType="time" />
-
+    
+    <Button android:id="@+id/colorButton" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/set_color" />
 </LinearLayout>
 
 
