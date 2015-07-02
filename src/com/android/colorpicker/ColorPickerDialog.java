@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -198,5 +199,13 @@ public class ColorPickerDialog extends DialogFragment implements OnColorSelected
         super.onSaveInstanceState(outState);
         outState.putIntArray(KEY_COLORS, mColors);
         outState.putSerializable(KEY_SELECTED_COLOR, mSelectedColor);
+    }
+    @Override
+    public void onDismiss(final DialogInterface dialog) {
+        super.onDismiss(dialog);
+        final Activity activity = getActivity();
+        if (activity instanceof DialogInterface.OnDismissListener) {
+            ((DialogInterface.OnDismissListener) activity).onDismiss(dialog);
+        }
     }
 }
