@@ -11,10 +11,15 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
+//Activity for Event data input,edit and validation
 public class AddEventActivity extends Activity implements
 		DialogInterface.OnDismissListener {
 
@@ -31,7 +36,47 @@ public class AddEventActivity extends Activity implements
 		name = (EditText) findViewById(R.id.editText1);
 		date = (EditText) findViewById(R.id.editText2);
 		time = (EditText) findViewById(R.id.editText3);
-
+		
+		//validate input for name 
+		name.setOnEditorActionListener(new OnEditorActionListener() {
+			@Override
+			public boolean onEditorAction(TextView v, int actionId,
+					KeyEvent event) {
+	            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+					//name input validation
+					if( name.getText().toString().length() == 0 ){
+					    name.setError( "Name is required!" );
+					    return true;
+					} else {
+						name.setError(null);
+					}
+	            }
+				return false;
+			}
+	    });
+		
+		//validate input for date 
+		date.setOnEditorActionListener(new OnEditorActionListener() {
+			@Override
+			public boolean onEditorAction(TextView v, int actionId,
+					KeyEvent event) {
+	            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+					//date input validation
+					try {
+						String pattern = "dd.MM.yyyy";
+						DateTime.parse(date.getText().toString(),
+								DateTimeFormat.forPattern(pattern));
+						date.setError(null);
+					} catch (Exception e) {
+						date.setError("Format day.month.year e.g.: 19.2.2015");
+						return false;
+					}
+	            }
+				return false;
+			}
+	    });
+	    
+		//Colours for colour picker dialog
 		String color_array[] = { "#33b5e5", "#aa66cc", "#99cc00", "#ffbb33",
 				"#ff4444", "#0099cc", "#9933cc", "#669900", "#ff8800",
 				"#cc0000", "#ffffff", "#eeeeee", "#cccccc", "#888888" };
@@ -39,9 +84,12 @@ public class AddEventActivity extends Activity implements
 		for (int i = 0; i < color_array.length; i++) {
 			mColor[i] = Color.parseColor(color_array[i]);
 		}
+		
 		colorcalendar = ColorPickerDialog.newInstance(
 				R.string.color_picker_default_title, mColor, 0, 5,
 				ColorPickerDialog.SIZE_SMALL);
+		
+		//save button
 		Button save = (Button) findViewById(R.id.saveButton);
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -88,7 +136,7 @@ public class AddEventActivity extends Activity implements
 			}
 		});
 	}
-
+	//called when colour picker dialog is dismissed 
 	@Override
 	public void onDismiss(final DialogInterface dialog) {
 
@@ -97,4 +145,5 @@ public class AddEventActivity extends Activity implements
 		Log.d("nk", Integer.toString(col));
 		Log.d("nk", "dismis");
 	}
+
 }
