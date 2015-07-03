@@ -54,7 +54,14 @@ public class AddEventActivity extends Activity implements
 					date.setError("Format day.month.year e.g.: 19.2.2015");
 					return;
 				}
-
+				try {
+					String pattern = "HH.mm";
+					DateTime.parse(time.getText().toString(),
+							DateTimeFormat.forPattern(pattern));
+				} catch (Exception e) {
+					date.setError("Format hours:minute e.g.: 19:15");
+					return;
+				}
 				Intent returnIntent = new Intent();
 				returnIntent.putExtra("name", name.getText().toString());
 				returnIntent.putExtra("date", date.getText().toString());
