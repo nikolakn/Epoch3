@@ -60,6 +60,7 @@ public class AddEventActivity extends Activity implements
 					date.setError("Format day.month.year e.g.: 19.2.2015");
 					return;
 				}
+				
 				//time input validation
 				try {
 					String pattern = "HH:mm";
