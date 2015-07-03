@@ -46,6 +46,11 @@ public class AddEventActivity extends Activity implements
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				//name input validation
+				if( name.getText().toString().length() == 0 ){
+				    name.setError( "Name is required!" );
+				    return;
+				}
 				//date input validation
 				try {
 					String pattern = "dd.MM.yyyy";
@@ -57,17 +62,14 @@ public class AddEventActivity extends Activity implements
 				}
 				//time input validation
 				try {
-					String pattern = "HH.mm";
+					String pattern = "HH:mm";
 					DateTime.parse(time.getText().toString(),
 							DateTimeFormat.forPattern(pattern));
 				} catch (Exception e) {
-					date.setError("Format hours:minute e.g.: 19:15");
+					time.setError("Format hours:minute e.g.: 19:15");
 					return;
 				}
-				//name input validation
-				if( name.getText().toString().length() == 0 ){
-				    name.setError( "Name is required!" );
-				}
+
 				
 				Intent returnIntent = new Intent();
 				returnIntent.putExtra("name", name.getText().toString());
