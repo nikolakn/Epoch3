@@ -42,7 +42,7 @@ public class AddEventActivity extends Activity implements
 			@Override
 			public boolean onEditorAction(TextView v, int actionId,
 					KeyEvent event) {
-	            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+	            if (actionId == EditorInfo.IME_ACTION_DONE) {
 					//name input validation
 					if( name.getText().toString().length() == 0 ){
 					    name.setError( "Name is required!" );
@@ -60,7 +60,7 @@ public class AddEventActivity extends Activity implements
 			@Override
 			public boolean onEditorAction(TextView v, int actionId,
 					KeyEvent event) {
-	            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+	            if (actionId == EditorInfo.IME_ACTION_DONE) {
 					//date input validation
 					try {
 						String pattern = "dd.MM.yyyy";
@@ -76,6 +76,27 @@ public class AddEventActivity extends Activity implements
 			}
 	    });
 	    
+		//validate input for time 
+		time.setOnEditorActionListener(new OnEditorActionListener() {
+			@Override
+			public boolean onEditorAction(TextView v, int actionId,
+					KeyEvent event) {
+	            if (actionId == EditorInfo.IME_ACTION_DONE) {
+					//date input validation
+					//time input validation
+					try {
+						String pattern = "HH:mm";
+						DateTime.parse(time.getText().toString(),
+								DateTimeFormat.forPattern(pattern));
+						time.setError(null);
+					} catch (Exception e) {
+						time.setError("Format hours:minute e.g.: 19:15");
+						return false;
+					}
+	            }
+				return false;
+			}
+	    });
 		//Colours for colour picker dialog
 		String color_array[] = { "#33b5e5", "#aa66cc", "#99cc00", "#ffbb33",
 				"#ff4444", "#0099cc", "#9933cc", "#669900", "#ff8800",
