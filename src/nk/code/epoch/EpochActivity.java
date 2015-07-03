@@ -93,7 +93,7 @@ public class EpochActivity extends ActionBarActivity {
     	i.putExtra("size", size);
     	i.putExtra("style", style);
     	
-    	startActivityForResult(i, 1);
+    	startActivityForResult(i, 2);
     }
     public void StartAddEventActivity(){
     	Intent i = new Intent(this, AddEventActivity.class);
@@ -117,6 +117,28 @@ public class EpochActivity extends ActionBarActivity {
 	        	 }
 	        	     	 
 	        }
+
+	        if (resultCode == RESULT_CANCELED) {
+	            //Write your code if there's no result
+	        }
+	    }
+	    
+	    if (requestCode == 2) {
+	        if(resultCode == RESULT_OK){
+	        	 String name=data.getStringExtra("name");
+	        	 String date=data.getStringExtra("date");
+	        	 String time=data.getStringExtra("time");
+	        	 
+	        	 try{
+	        	 String pattern = "dd.MM.yyyy HH:mm";
+	             DateTime dateTime  = DateTime.parse(date+" "+time, DateTimeFormat.forPattern(pattern));
+	             epochv.EditEpoch(name,dateTime);
+	        	 } catch(Exception e){
+	        		 
+	        	 }
+	        	     	 
+	        }
+
 	        if (resultCode == RESULT_CANCELED) {
 	            //Write your code if there's no result
 	        }
