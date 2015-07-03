@@ -4,12 +4,11 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
 import com.android.colorpicker.ColorPickerDialog;
-
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -20,7 +19,7 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 //Activity for Event data input,edit and validation
-public class AddEventActivity extends Activity implements
+public class AddEventActivity extends ActionBarActivity implements
 		DialogInterface.OnDismissListener {
 
 	private EditText name;
