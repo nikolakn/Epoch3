@@ -8,16 +8,19 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 
 public class Event {
+	public static int DEFEVENTCOLOR=Boja.zelena;
+	public static int DEFEVENTSIZE=30;
+	public static int DEFEVENTSTYLE=2;
 	public double start = 0;
 	public String name = "";
-	public int size = 30;
+	public int size = DEFEVENTSIZE;
 	public boolean hasimage = false;
 	public int look = 1;
 	public int x = 50;
-	public int colorLine = Boja.zelena;
+	public int colorLine = DEFEVENTCOLOR;
 	public int colorText = Boja.crna;
 	protected Paint mPaint;
-	public int style = 2;
+	public int style = DEFEVENTSTYLE;
 	private Bitmap image = null;
 
 	public Event(double s, int x, String n) {
@@ -43,7 +46,7 @@ public class Event {
 			mPaint.setColor(colorText);
 			Rect bounds = new Rect();
 			mPaint.getTextBounds(name, 0, name.length(), bounds);
-			canvas.drawText(name, xx + size + 5, y + bounds.height() / 2, mPaint);
+			canvas.drawText(name, xx + size/2 + 5, y + bounds.height() / 2, mPaint);
 		}
 	}
 

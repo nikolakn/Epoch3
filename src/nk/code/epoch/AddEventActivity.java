@@ -1,5 +1,7 @@
 package nk.code.epoch;
 
+import nk.code.data.Event;
+
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
@@ -27,7 +30,8 @@ public class AddEventActivity extends ActionBarActivity implements
 	private EditText time;
 	private Button colorb;
 	ColorPickerDialog colorcalendar;
-
+	private RadioGroup radiog1;
+	private RadioGroup radiog2;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,7 +39,25 @@ public class AddEventActivity extends ActionBarActivity implements
 		name = (EditText) findViewById(R.id.editText1);
 		date = (EditText) findViewById(R.id.editText2);
 		time = (EditText) findViewById(R.id.editText3);
+		colorb = (Button) findViewById(R.id.colorButton);
+		radiog1 = (RadioGroup) findViewById(R.id.radio_group1);
+		radiog2 = (RadioGroup) findViewById(R.id.radio_group2);
 		
+		String argname=getIntent().getStringExtra("name");
+		String argdate=getIntent().getStringExtra("date");
+		String argtime=getIntent().getStringExtra("time");
+		int argcolor=getIntent().getIntExtra("color",Event.DEFEVENTCOLOR);
+		int argsize=getIntent().getIntExtra("size",Event.DEFEVENTSIZE);
+		int argstyle=getIntent().getIntExtra("style",Event.DEFEVENTSTYLE);
+		if(name != null)
+			name.setText(argname);
+		if(date != null)
+			date.setText(argdate);
+		if(time != null)
+			time.setText(argtime);
+		colorb.setBackgroundColor(argcolor);
+		radiog1.check(argsize);
+		radiog2.check(argstyle);
 		//validate input for name 
 		name.setOnEditorActionListener(new OnEditorActionListener() {
 			@Override
@@ -148,7 +170,7 @@ public class AddEventActivity extends ActionBarActivity implements
 				finish();
 			}
 		});
-		colorb = (Button) findViewById(R.id.colorButton);
+		
 		colorb.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

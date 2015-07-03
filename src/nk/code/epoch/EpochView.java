@@ -4,6 +4,7 @@ import nk.code.data.Document;
 import nk.code.data.Event;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeUtils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -121,7 +122,15 @@ public class EpochView extends View {
     
 	protected void addEpoch() {
 		// TODO Auto-generated method stub
-		((EpochActivity)context).StartAddEventActivity();
+		if(ev!=null){
+			DateTime dt = new DateTime(DateTimeUtils.fromJulianDay(ev.start));
+			String date = dt.toString("dd.MM.yyyy");
+			String time = dt.toString("HH:mm");
+			
+			((EpochActivity)context).StartAddEventActivity(ev.name,date,time,ev.colorLine,ev.size,ev.style);
+		} else {
+			((EpochActivity)context).StartAddEventActivity();		
+		}
 	}
 
 	private class LongListener extends GestureDetector.SimpleOnGestureListener {

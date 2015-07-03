@@ -84,6 +84,17 @@ public class EpochActivity extends ActionBarActivity {
 		menu.add(0, v.getId(), 0, "Action 1");
 		menu.add(0, v.getId(), 0, "Action 2");
 	}
+    public void StartAddEventActivity(String name,String date,String time,int color,int size,int style){
+    	Intent i = new Intent(this, AddEventActivity.class);
+    	i.putExtra("name", name);
+    	i.putExtra("date", date);
+    	i.putExtra("time", time);
+    	i.putExtra("color", color);
+    	i.putExtra("size", size);
+    	i.putExtra("style", style);
+    	
+    	startActivityForResult(i, 1);
+    }
     public void StartAddEventActivity(){
     	Intent i = new Intent(this, AddEventActivity.class);
     	startActivityForResult(i, 1);
@@ -104,8 +115,7 @@ public class EpochActivity extends ActionBarActivity {
 	        	 } catch(Exception e){
 	        		 
 	        	 }
-	        	 
-	        	 
+	        	     	 
 	        }
 	        if (resultCode == RESULT_CANCELED) {
 	            //Write your code if there's no result
