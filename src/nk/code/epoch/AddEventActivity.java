@@ -32,6 +32,7 @@ public class AddEventActivity extends ActionBarActivity implements
 	ColorPickerDialog colorcalendar;
 	private RadioGroup radiog1;
 	private RadioGroup radiog2;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,6 +44,8 @@ public class AddEventActivity extends ActionBarActivity implements
 		radiog1 = (RadioGroup) findViewById(R.id.radio_group1);
 		radiog2 = (RadioGroup) findViewById(R.id.radio_group2);
 		
+
+
 		String argname=getIntent().getStringExtra("name");
 		String argdate=getIntent().getStringExtra("date");
 		String argtime=getIntent().getStringExtra("time");
@@ -56,8 +59,39 @@ public class AddEventActivity extends ActionBarActivity implements
 		if(time != null)
 			time.setText(argtime);
 		colorb.setBackgroundColor(argcolor);
-		radiog1.check(argsize);
-		radiog2.check(argstyle);
+		
+		switch(argsize){
+		case 1:
+			radiog1.check(R.id.radio1);
+			break;
+		case 2:
+			radiog1.check(R.id.radio2);
+			break;
+		case 3:
+			radiog1.check(R.id.radio3);
+			break;
+		case 4:
+			radiog1.check(R.id.radio4);
+			break;
+		case 5:
+			radiog1.check(R.id.radio5);
+			break;
+		}
+		switch(argstyle){
+		case 1:
+			radiog2.check(R.id.sradio1);
+			break;
+		case 2:
+			radiog2.check(R.id.sradio2);
+			break;
+		case 3:
+			radiog2.check(R.id.sradio3);
+			break;
+		case 4:
+			radiog2.check(R.id.sradio4);
+			break;
+
+		}
 		//validate input for name 
 		name.setOnEditorActionListener(new OnEditorActionListener() {
 			@Override
