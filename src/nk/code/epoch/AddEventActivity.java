@@ -60,33 +60,33 @@ public class AddEventActivity extends ActionBarActivity implements
 		colorb.setBackgroundColor(argcolor);
 		boja = argcolor;
 		switch(argsize){
-		case 1:
+		case 0:
 			radiog1.check(R.id.radio1);
 			break;
-		case 2:
+		case 1:
 			radiog1.check(R.id.radio2);
 			break;
-		case 3:
+		case 2:
 			radiog1.check(R.id.radio3);
 			break;
-		case 4:
+		case 3:
 			radiog1.check(R.id.radio4);
 			break;
-		case 5:
+		case 4:
 			radiog1.check(R.id.radio5);
 			break;
 		}
 		switch(argstyle){
-		case 1:
+		case 0:
 			radiog2.check(R.id.sradio1);
 			break;
-		case 2:
+		case 1:
 			radiog2.check(R.id.sradio2);
 			break;
-		case 3:
+		case 2:
 			radiog2.check(R.id.sradio3);
 			break;
-		case 4:
+		case 3:
 			radiog2.check(R.id.sradio4);
 			break;
 

@@ -1,12 +1,15 @@
 package nk.code.epoch;
 
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import nk.code.data.Event;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +23,7 @@ import android.view.View;
 public class EpochActivity extends ActionBarActivity {
 	private ScalaView skala;
 	private EpochView epochv;
+	public static String fileName = "nktemp.ser";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,6 +44,13 @@ public class EpochActivity extends ActionBarActivity {
 			skala.setScaleFactor(savedInstanceState.getFloat("skala_mScaleFactor"));
 	    } 
 		
+		try {
+			FileInputStream fis =  getApplicationContext().openFileInput(fileName);
+		    epochv.getDoc().deSerialize(fis);
+		    fis.close();
+		} catch (Exception e) {
+			Log.e("nk",e.toString());
+		}
 		skala.invalidate();
 
 	}
@@ -67,7 +78,19 @@ public class EpochActivity extends ActionBarActivity {
         super.onPause();   
 
     }
-	
+	@Override
+	protected void onStop() {
+	    super.onStop();  // Always call the superclass method first
+	    FileOutputStream fos;
+		try {
+			fos = getApplicationContext().openFileOutput(fileName, Context.MODE_PRIVATE);
+		    epochv.getDoc().serialize(fos);
+		    fos.close();
+		} catch (Exception e) {
+			Log.e("nk",e.toString());
+		}   
+	}	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will

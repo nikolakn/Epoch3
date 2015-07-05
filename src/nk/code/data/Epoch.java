@@ -1,12 +1,19 @@
 package nk.code.data;
 
+
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 import nk.code.doc.NkSkala;
 import nk.code.epoch.ScalaView;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Paint.Align;
 
-public class Epoch extends Event {
 
+public class Epoch extends Event implements Serializable {
+	private static final long serialVersionUID = 1420672609912364061L;
 	public Epoch(double s, int x, String n) {
 		super(s, x, n);
 		// TODO Auto-generated constructor stub
@@ -19,6 +26,10 @@ public class Epoch extends Event {
 		float y = skala.getPos(start);
 		float y2 = skala.getPos(end);
 		float xx = x + dx;
+		Paint mPaint = new Paint();
+		mPaint.setAntiAlias(true);
+		mPaint.setTextSize(16);
+		mPaint.setColor(colorLine);
 		mPaint.setColor(colorLine);
 		if (y == NkSkala.ABOVE) {
 			if (y2 == NkSkala.BELOW) {
@@ -92,4 +103,9 @@ public class Epoch extends Event {
 		}
 		return false;
 	}
+	public void serialize(ObjectOutputStream os) throws IOException {
+		os.writeInt(1);
+		os.writeObject(this);
+	}
+
 }

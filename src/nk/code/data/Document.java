@@ -1,5 +1,10 @@
 package nk.code.data;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import nk.code.epoch.ScalaView;
 import org.joda.time.DateTime;
@@ -71,5 +76,29 @@ public class Document {
 			list.remove(ev);	
 	}
 	
-
+	public void serialize(FileOutputStream fos) throws IOException{
+		ObjectOutputStream os = new ObjectOutputStream(fos);
+		os.writeInt(list.size());
+        for(Event e : list){
+        	e.serialize(os);   
+        }
+        os.close();
+	}
+	public void deSerialize(FileInputStream fis) throws IOException, ClassNotFoundException{
+		ObjectInputStream is = new ObjectInputStream(fis);
+		list.clear();
+		int s=is.readInt();
+		for(int i=0; i<s ;i++){
+			int o=is.readInt();
+			if(o == 0){
+				Event e = (Event) is.readObject();
+				list.add(e);
+			}
+			if(o == 1){
+				Event  e = (Epoch) is.readObject();
+				list.add(e);
+			}
+		}
+		is.close();      
+	}
 }

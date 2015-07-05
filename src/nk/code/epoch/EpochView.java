@@ -288,4 +288,9 @@ public class EpochView extends View {
 		}
 	}
 
+	public Document getDoc() {
+		return doc;
+		
+	}
+
 }
