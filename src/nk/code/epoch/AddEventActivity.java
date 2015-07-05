@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -51,6 +52,18 @@ public class AddEventActivity extends ActionBarActivity implements
 		int argcolor=getIntent().getIntExtra("color",Event.DEFEVENTCOLOR);
 		int argsize=getIntent().getIntExtra("size",Event.DEFEVENTSIZE);
 		int argstyle=getIntent().getIntExtra("style",Event.DEFEVENTSTYLE);
+		
+		if (savedInstanceState != null) {
+	        // Restore value of members from saved state
+			argname=savedInstanceState.getString("name");
+			argdate=savedInstanceState.getString("date");
+			argtime=savedInstanceState.getString("time");
+			argcolor=savedInstanceState.getInt("boja");
+			argsize=savedInstanceState.getInt("size");
+			argsize=savedInstanceState.getInt("style");
+	    }
+		
+		
 		if(name != null)
 			name.setText(argname);
 		if(date != null)
@@ -91,6 +104,19 @@ public class AddEventActivity extends ActionBarActivity implements
 			break;
 
 		}
+		
+		String color_array[] = { "#33b5e5", "#aa66cc", "#99cc00", "#ffbb33",
+				"#ff4444", "#0099cc", "#9933cc", "#669900", "#ff8800",
+				"#cc0000", "#ffffff", "#eeeeee", "#cccccc", "#888888" };
+		int[] mColor = new int[color_array.length];
+		for (int i = 0; i < color_array.length; i++) {
+			mColor[i] = Color.parseColor(color_array[i]);
+		}
+		colorcalendar = ColorPickerDialog.newInstance(
+				R.string.color_picker_default_title, mColor, 0, 5,
+				ColorPickerDialog.SIZE_SMALL);
+
+		
 		//validate input for name 
 		name.setOnEditorActionListener(new OnEditorActionListener() {
 			@Override
@@ -151,18 +177,7 @@ public class AddEventActivity extends ActionBarActivity implements
 				return false;
 			}
 	    });
-		//Colours for colour picker dialog
-		String color_array[] = { "#33b5e5", "#aa66cc", "#99cc00", "#ffbb33",
-				"#ff4444", "#0099cc", "#9933cc", "#669900", "#ff8800",
-				"#cc0000", "#ffffff", "#eeeeee", "#cccccc", "#888888" };
-		int[] mColor = new int[color_array.length];
-		for (int i = 0; i < color_array.length; i++) {
-			mColor[i] = Color.parseColor(color_array[i]);
-		}
-		
-		colorcalendar = ColorPickerDialog.newInstance(
-				R.string.color_picker_default_title, mColor, 0, 5,
-				ColorPickerDialog.SIZE_SMALL);
+
 		
 		//save button
 		Button save = (Button) findViewById(R.id.saveButton);
@@ -193,7 +208,6 @@ public class AddEventActivity extends ActionBarActivity implements
 					time.setError("Format hours:minute e.g.: 19:15");
 					return;
 				}
-
 				
 				Intent returnIntent = new Intent();
 				
@@ -219,6 +233,7 @@ public class AddEventActivity extends ActionBarActivity implements
 		colorb.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				//Colours for colour picker dialog
 				colorcalendar.show(getFragmentManager(), "cal");
 			}
 		});
@@ -230,6 +245,28 @@ public class AddEventActivity extends ActionBarActivity implements
 		int col = colorcalendar.getSelectedColor();
 		colorb.setBackgroundColor(col);
 		boja = col;
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+	    // Always call the superclass so it can save the view hierarchy state
+	    super.onSaveInstanceState(savedInstanceState);
+	    // Save the user's current game state
+		int radioButtonID = radiog1.getCheckedRadioButtonId();
+		View radioButton = radiog1.findViewById(radioButtonID);
+		int a1 = radiog1.indexOfChild(radioButton);
+		
+		int radioButtonID2 = radiog2.getCheckedRadioButtonId();
+		View radioButton2 = radiog2.findViewById(radioButtonID2);
+		int a2 = radiog2.indexOfChild(radioButton2);
+		
+	    savedInstanceState.putString("name", name.getText().toString());
+	    savedInstanceState.putString("date", date.getText().toString());
+	    savedInstanceState.putString("time", time.getText().toString());
+	    savedInstanceState.putInt("boja", boja);
+	    savedInstanceState.putFloat("size", a1);
+	    savedInstanceState.putFloat("style", a2);	    
+
 	}
 
 }

@@ -42,6 +42,7 @@ public class EpochView extends View {
 	private float yposLong;
 	private GestureDetector gestureDetector;
 	private Event ev;
+	
 	private boolean isEventLongClick = false;
 
 	private View.OnCreateContextMenuListener vC = new View.OnCreateContextMenuListener() {
@@ -126,7 +127,7 @@ public class EpochView extends View {
 			DateTime dt = new DateTime(DateTimeUtils.fromJulianDay(ev.start));
 			String date = dt.toString("dd.MM.yyyy");
 			String time = dt.toString("HH:mm");
-
+			doc.setCurrent(ev);
 			((EpochActivity) context).StartAddEventActivity(ev.name, date,
 					time, ev.colorLine, ev.look, ev.style);
 		} else {
@@ -270,8 +271,7 @@ public class EpochView extends View {
 	}
 
 	public void EditEpoch(String name, DateTime dateTime,int boja,int size, int style) {
-		if (ev != null) {	
-			Event e=doc.find(ev);
+			Event e=doc.getCurrent();
 			if(e!=null){
 			double startDate = DateTimeUtils.toJulianDay(new DateTime(dateTime.getYear(),
 					dateTime.getMonthOfYear(),dateTime.getDayOfMonth(), 
@@ -285,7 +285,7 @@ public class EpochView extends View {
 			invalidate();
 
 			}
-		}
+		
 	}
 
 	public Document getDoc() {

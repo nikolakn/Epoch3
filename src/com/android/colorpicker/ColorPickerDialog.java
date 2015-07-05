@@ -90,7 +90,8 @@ public class ColorPickerDialog extends DialogFragment implements OnColorSelected
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //Log.i("nk","oncreate");
+        setRetainInstance(true);
         if (getArguments() != null) {
             mTitleResId = getArguments().getInt(KEY_TITLE_ID);
             mColumns = getArguments().getInt(KEY_COLUMNS);
@@ -99,14 +100,15 @@ public class ColorPickerDialog extends DialogFragment implements OnColorSelected
 
         if (savedInstanceState != null) {
             mColors = savedInstanceState.getIntArray(KEY_COLORS);
-            mSelectedColor = (Integer) savedInstanceState.getSerializable(KEY_SELECTED_COLOR);
+            mSelectedColor = savedInstanceState.getInt(KEY_SELECTED_COLOR);
         }
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final Activity activity = getActivity();
-
+        setRetainInstance(true);
+        //Log.i("nk","omcreatedialog");
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.color_picker_dialog, null);
         mProgress = (ProgressBar) view.findViewById(android.R.id.progress);
         mPalette = (ColorPickerPalette) view.findViewById(R.id.color_picker);
@@ -141,7 +143,7 @@ public class ColorPickerDialog extends DialogFragment implements OnColorSelected
             // Redraw palette to show checkmark on newly selected color before dismissing.
             mPalette.drawPalette(mColors, mSelectedColor);
         }
-
+           
         dismiss();
     }
 
@@ -200,7 +202,7 @@ public class ColorPickerDialog extends DialogFragment implements OnColorSelected
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putIntArray(KEY_COLORS, mColors);
-        outState.putSerializable(KEY_SELECTED_COLOR, mSelectedColor);
+        outState.putInt(KEY_SELECTED_COLOR, mSelectedColor);
     }
     @Override
     public void onDismiss(final DialogInterface dialog) {
@@ -210,4 +212,6 @@ public class ColorPickerDialog extends DialogFragment implements OnColorSelected
             ((DialogInterface.OnDismissListener) activity).onDismiss(dialog);
         }
     }
+    
+
 }

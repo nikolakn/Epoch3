@@ -129,7 +129,6 @@ public class EpochActivity extends ActionBarActivity {
     	i.putExtra("color", color);
     	i.putExtra("size", size);
     	i.putExtra("style", style);
-    	
     	startActivityForResult(i, 2);
     }
     public void StartAddEventActivity(){
