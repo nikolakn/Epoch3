@@ -3,6 +3,9 @@ package nk.code.epoch;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import nk.code.data.Event;
 
 import org.joda.time.DateTime;
@@ -34,7 +37,7 @@ public class EpochActivity extends ActionBarActivity {
 		
 		epochv.init(skala);
 		skala.init(epochv);
-		
+		/*
 		if (savedInstanceState != null) {
 	        // Restore value of members from saved state
 			skala.setLen(savedInstanceState.getDouble("skala_len"));
@@ -43,10 +46,13 @@ public class EpochActivity extends ActionBarActivity {
 			skala.setPeriod(savedInstanceState.getInt("skala_period"));
 			skala.setScaleFactor(savedInstanceState.getFloat("skala_mScaleFactor"));
 	    } 
-		
+		*/
 		try {
 			FileInputStream fis =  getApplicationContext().openFileInput(fileName);
-		    epochv.getDoc().deSerialize(fis);
+			ObjectInputStream is = new ObjectInputStream(fis);
+		    epochv.getDoc().deSerialize(is);
+		    skala.deSerialize(is);
+		    is.close(); 
 		    fis.close();
 		} catch (Exception e) {
 			Log.e("nk",e.toString());
@@ -58,11 +64,13 @@ public class EpochActivity extends ActionBarActivity {
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
 	    // Save the user's current game state
+		/*
 	    savedInstanceState.putDouble("skala_dy", skala.getDy());
 	    savedInstanceState.putDouble("skala_len", skala.getLen());
 	    savedInstanceState.putInt("skala_zoomlen", skala.getZoomLen());
 	    savedInstanceState.putInt("skala_period", skala.getPeriod());
 	    savedInstanceState.putFloat("skala_mScaleFactor", skala.getScaleFactor());
+	    */
 	    // Always call the superclass so it can save the view hierarchy state
 	    super.onSaveInstanceState(savedInstanceState);
 	}
@@ -84,7 +92,10 @@ public class EpochActivity extends ActionBarActivity {
 	    FileOutputStream fos;
 		try {
 			fos = getApplicationContext().openFileOutput(fileName, Context.MODE_PRIVATE);
-		    epochv.getDoc().serialize(fos);
+			ObjectOutputStream os = new ObjectOutputStream(fos);
+		    epochv.getDoc().serialize(os);
+		    skala.serialize(os);
+		    os.close();
 		    fos.close();
 		} catch (Exception e) {
 			Log.e("nk",e.toString());
@@ -178,6 +189,7 @@ public class EpochActivity extends ActionBarActivity {
 	            //Write your code if there's no result
 	        }
 	    }
-    }    
+    }   
+    
 
 }

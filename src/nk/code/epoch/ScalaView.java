@@ -3,6 +3,11 @@ package nk.code.epoch;
 //import org.joda.time.DateTime;
 //import org.joda.time.DateTimeUtils;
 
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
 
@@ -333,4 +338,19 @@ public class ScalaView extends View {
 		this.scale = scale;
 	}
 
+	public void serialize(ObjectOutputStream os) throws IOException{	
+		os.writeDouble(getDy());
+		os.writeDouble(getLen());
+		os.writeInt(getZoomLen());
+		os.writeInt(getPeriod());
+		os.writeFloat(getScaleFactor());
+	}
+	public void deSerialize(ObjectInputStream is) throws IOException, ClassNotFoundException{
+		setDy(is.readDouble());
+		setLen(is.readDouble());
+		setZoomLen(is.readInt());
+		setPeriod(is.readInt());
+		setScaleFactor(is.readFloat());
+		is.close();      
+	}
 }

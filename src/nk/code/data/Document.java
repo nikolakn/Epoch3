@@ -1,7 +1,6 @@
 package nk.code.data;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -76,16 +75,13 @@ public class Document {
 			list.remove(ev);	
 	}
 	
-	public void serialize(FileOutputStream fos) throws IOException{
-		ObjectOutputStream os = new ObjectOutputStream(fos);
+	public void serialize(ObjectOutputStream os) throws IOException{
 		os.writeInt(list.size());
         for(Event e : list){
         	e.serialize(os);   
         }
-        os.close();
 	}
-	public void deSerialize(FileInputStream fis) throws IOException, ClassNotFoundException{
-		ObjectInputStream is = new ObjectInputStream(fis);
+	public void deSerialize(ObjectInputStream is) throws IOException, ClassNotFoundException{
 		list.clear();
 		int s=is.readInt();
 		for(int i=0; i<s ;i++){
@@ -98,7 +94,6 @@ public class Document {
 				Event  e = (Epoch) is.readObject();
 				list.add(e);
 			}
-		}
-		is.close();      
+		}  
 	}
 }
