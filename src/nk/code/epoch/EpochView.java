@@ -112,10 +112,8 @@ public class EpochView extends View {
 		doc.addEvent(31, 12, 1980, 300, "80");
 		doc.addEpoch(1, 1, 2015, 40, "epoha", 1, 1, 1950);
 		now = now.minusYears(2);
-
 		float rotation = 0.0f;
 		// Remember to call this when finished
-
 		setRotation(rotation);
 		this.setOnCreateContextMenuListener(vC);
 		gestureDetector = new GestureDetector(context, new LongListener());
@@ -130,7 +128,7 @@ public class EpochView extends View {
 			String time = dt.toString("HH:mm");
 
 			((EpochActivity) context).StartAddEventActivity(ev.name, date,
-					time, ev.colorLine, ev.size, ev.style);
+					time, ev.colorLine, ev.look, ev.style);
 		} else {
 			((EpochActivity) context).StartAddEventActivity();
 		}
@@ -149,7 +147,6 @@ public class EpochView extends View {
 				isEventLongClick = true;
 			showContextMenu();
 		}
-
 	}
 
 	public void setRotation(float degrees) {
@@ -175,7 +172,6 @@ public class EpochView extends View {
 			mActivePointerId = MotionEventCompat.getPointerId(ev, 0);
 			break;
 		}
-
 		case MotionEvent.ACTION_MOVE: {
 
 			if (mode == ZOOM) {
@@ -191,9 +187,7 @@ public class EpochView extends View {
 				dx += (x - mLastTouchX);
 				invalidate();
 				mLastTouchX = x;
-
 			}
-
 			break;
 		}
 
@@ -256,10 +250,15 @@ public class EpochView extends View {
 		this.dx = dx;
 	}
 
-	public void addEpoch(String name, DateTime dateTime) {
-		doc.addEvent(dateTime.getDayOfMonth(), dateTime.getMonthOfYear(),
+	public void addEpoch(String name, DateTime dateTime,int boja,int size, int style) {
+		Event e=doc.addEvent(dateTime.getDayOfMonth(), dateTime.getMonthOfYear(),
 				dateTime.getYear(), dateTime.getHourOfDay(),
 				dateTime.getMinuteOfHour(), (int) xposLong, name);
+		if(e!=null){
+			e.colorLine =boja;
+			e.setLook(size);
+			e.style = style;
+		}
 	}
 
 	public float getYposLong() {
@@ -270,12 +269,22 @@ public class EpochView extends View {
 		this.yposLong = yposLong;
 	}
 
-	public void EditEpoch(String name, DateTime dateTime) {
-		if (ev != null) {
-			doc.deleteEpoch(ev);
-			doc.addEvent(dateTime.getDayOfMonth(), dateTime.getMonthOfYear(),
-					dateTime.getYear(), dateTime.getHourOfDay(),
-					dateTime.getMinuteOfHour(), (int) xposLong, name);
+	public void EditEpoch(String name, DateTime dateTime,int boja,int size, int style) {
+		if (ev != null) {	
+			Event e=doc.find(ev);
+			if(e!=null){
+			double startDate = DateTimeUtils.toJulianDay(new DateTime(dateTime.getYear(),
+					dateTime.getMonthOfYear(),dateTime.getDayOfMonth(), 
+					dateTime.getHourOfDay(),dateTime.getMinuteOfHour()).getMillis());
+				
+			e.name = name;
+			e.start = startDate;
+			e.colorLine =boja;
+			e.setLook(size);
+			e.style = style;
+			invalidate();
+
+			}
 		}
 	}
 

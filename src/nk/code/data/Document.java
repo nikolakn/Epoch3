@@ -42,12 +42,20 @@ public class Document {
         }
 	}
 
-	public void addEvent(int dan, int mesec, int godina,int sat, int minut, int x, String name) {
+	public Event addEvent(int dan, int mesec, int godina,int sat, int minut, int x, String name) {
 		double startDate = DateTimeUtils.toJulianDay(new DateTime(godina,mesec,dan,sat,minut).getMillis());
 		Event e = new Event(startDate,x, name);
 		list.add(e);
+		return e;
 	}
 	
+	public Event find(Event e){
+		int i=list.indexOf(e);
+		if(i !=- 1){
+			return list.get(i);
+		}
+		return null;
+	}
 	public Event getEventFromPos(float x, float y, ScalaView skala){
 		Event ret = null;
         for(Event e : list){
@@ -59,9 +67,8 @@ public class Document {
 	}
 
 	public void deleteEpoch(Event ev) {
-		list.remove(ev);
-		
-		
+		if(ev!=null)
+			list.remove(ev);	
 	}
 	
 

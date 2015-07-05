@@ -9,11 +9,11 @@ import android.graphics.Rect;
 
 public class Event {
 	public static int DEFEVENTCOLOR=Boja.zelena;
-	public static int DEFEVENTSIZE=30;
+	public static int DEFEVENTSIZE=1;
 	public static int DEFEVENTSTYLE=2;
 	public double start = 0;
 	public String name = "";
-	public int size = DEFEVENTSIZE;
+	protected int size = 30;
 	public boolean hasimage = false;
 	public int look = 1;
 	public int x = 50;
@@ -66,5 +66,11 @@ public class Event {
 				return true;
 		}
 		return false;
+	}
+
+	public void setLook(int look) {
+		if(look == 1)
+			size = 30;
+		
 	}
 }

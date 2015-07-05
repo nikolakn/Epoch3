@@ -1,12 +1,15 @@
 package nk.code.epoch;
 
 
+import nk.code.data.Event;
+
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -106,12 +109,17 @@ public class EpochActivity extends ActionBarActivity {
 	        	 String name=data.getStringExtra("name");
 	        	 String date=data.getStringExtra("date");
 	        	 String time=data.getStringExtra("time");
-	        	 
+	        	 int boja=data.getIntExtra("boja",Event.DEFEVENTCOLOR);
+	        	 int size=data.getIntExtra("size",Event.DEFEVENTSIZE);
+	        	 int style=data.getIntExtra("style",Event.DEFEVENTSTYLE);
+	        	 Log.i("nk1", Integer.toString(boja));
+	        	 Log.i("nk1", Integer.toString(size));
+	        	 Log.i("nk1", Integer.toString(style));
 	        	 try{
 	        	 String pattern = "dd.MM.yyyy HH:mm";
 	             DateTime dateTime  = DateTime.parse(date+" "+time, DateTimeFormat.forPattern(pattern));
 	             //Log.i("nk", dateTime.toString("dd.MM.yyyy HH:mm"));
-	             epochv.addEpoch(name,dateTime);
+	             epochv.addEpoch(name,dateTime,boja,size,style);
 	        	 } catch(Exception e){
 	        		 
 	        	 }
@@ -128,15 +136,19 @@ public class EpochActivity extends ActionBarActivity {
 	        	 String name=data.getStringExtra("name");
 	        	 String date=data.getStringExtra("date");
 	        	 String time=data.getStringExtra("time");
-	        	 
+	        	 int boja=data.getIntExtra("boja",Event.DEFEVENTCOLOR);
+	        	 int size=data.getIntExtra("size",Event.DEFEVENTSIZE);
+	        	 int style=data.getIntExtra("style",Event.DEFEVENTSTYLE);
+	        	 Log.i("nk2", Integer.toString(boja));
+	        	 Log.i("nk2", Integer.toString(size));
+	        	 Log.i("nk2", Integer.toString(style));
 	        	 try{
 	        	 String pattern = "dd.MM.yyyy HH:mm";
 	             DateTime dateTime  = DateTime.parse(date+" "+time, DateTimeFormat.forPattern(pattern));
-	             epochv.EditEpoch(name,dateTime);
+	             epochv.EditEpoch(name,dateTime,boja,size,style);
 	        	 } catch(Exception e){
 	        		 
-	        	 }
-	        	     	 
+	        	 }	     	 
 	        }
 
 	        if (resultCode == RESULT_CANCELED) {

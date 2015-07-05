@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -32,7 +31,7 @@ public class AddEventActivity extends ActionBarActivity implements
 	ColorPickerDialog colorcalendar;
 	private RadioGroup radiog1;
 	private RadioGroup radiog2;
-
+	private int boja;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,7 +58,7 @@ public class AddEventActivity extends ActionBarActivity implements
 		if(time != null)
 			time.setText(argtime);
 		colorb.setBackgroundColor(argcolor);
-		
+		boja = argcolor;
 		switch(argsize){
 		case 1:
 			radiog1.check(R.id.radio1);
@@ -197,9 +196,21 @@ public class AddEventActivity extends ActionBarActivity implements
 
 				
 				Intent returnIntent = new Intent();
+				
+				int radioButtonID = radiog1.getCheckedRadioButtonId();
+				View radioButton = radiog1.findViewById(radioButtonID);
+				int a1 = radiog1.indexOfChild(radioButton);
+				
+				int radioButtonID2 = radiog2.getCheckedRadioButtonId();
+				View radioButton2 = radiog2.findViewById(radioButtonID2);
+				int a2 = radiog2.indexOfChild(radioButton2);
+				
 				returnIntent.putExtra("name", name.getText().toString());
 				returnIntent.putExtra("date", date.getText().toString());
 				returnIntent.putExtra("time", time.getText().toString());
+				returnIntent.putExtra("boja", boja);
+				returnIntent.putExtra("size", a1);
+				returnIntent.putExtra("style", a2);
 				setResult(RESULT_OK, returnIntent);
 				finish();
 			}
@@ -218,8 +229,7 @@ public class AddEventActivity extends ActionBarActivity implements
 
 		int col = colorcalendar.getSelectedColor();
 		colorb.setBackgroundColor(col);
-		Log.d("nk", Integer.toString(col));
-		Log.d("nk", "dismis");
+		boja = col;
 	}
 
 }
