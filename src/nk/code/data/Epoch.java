@@ -11,7 +11,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 
-
+//time interval, representing time interval in history with start and end date
 public class Epoch extends Event implements Serializable {
 	private static final long serialVersionUID = 1420672609912364061L;
 	public Epoch(double s, int x, String n) {
@@ -88,7 +88,7 @@ public class Epoch extends Event implements Serializable {
 			}
 		}
 	}
-	
+	// is epoch currently drawn on x,y position
 	public boolean isOnPosition(float xx, float yy, ScalaView skala) {
 		float y=skala.getPos(start);
 		float y2=skala.getPos(end);
@@ -103,6 +103,7 @@ public class Epoch extends Event implements Serializable {
 		}
 		return false;
 	}
+	// write epoch to file
 	public void serialize(ObjectOutputStream os) throws IOException {
 		os.writeInt(1);
 		os.writeObject(this);
