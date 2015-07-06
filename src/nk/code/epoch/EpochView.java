@@ -5,7 +5,6 @@ import nk.code.data.Event;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -131,7 +130,12 @@ public class EpochView extends View {
 			((EpochActivity) context).StartAddEventActivity(ev.name, date,
 					time, ev.colorLine, ev.look, ev.style);
 		} else {
-			((EpochActivity) context).StartAddEventActivity();
+			
+			;
+			DateTime dt = new DateTime(DateTimeUtils.fromJulianDay(skala.getDateDouble(yposLong)));
+			String date = dt.toString("dd.MM.yyyy");
+			String time = dt.toString("HH:mm");
+			((EpochActivity) context).StartAddEventActivity(date, time);
 		}
 	}
 

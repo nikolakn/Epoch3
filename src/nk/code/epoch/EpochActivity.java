@@ -131,8 +131,10 @@ public class EpochActivity extends ActionBarActivity {
     	i.putExtra("style", style);
     	startActivityForResult(i, 2);
     }
-    public void StartAddEventActivity(){
+    public void StartAddEventActivity(String date,String time){
     	Intent i = new Intent(this, AddEventActivity.class);
+    	i.putExtra("date", date);
+    	i.putExtra("time", time);
     	startActivityForResult(i, 1);
     }
     @Override
