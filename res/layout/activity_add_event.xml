@@ -125,6 +125,16 @@
                 android:textColor="#00f" />
 
         </RadioGroup>
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/visibility_" />
+        <Spinner
+	        android:id="@+id/Spinner01"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+		/>
     </LinearLayout>
 
     <LinearLayout

@@ -14,6 +14,18 @@ import android.graphics.Rect;
 public class Event implements Serializable {
 	private static final long serialVersionUID = 1420672609912364060L;
 
+	public enum Visibility {ALWAYS("always"), HEREANDPLUS("here and -"),
+		ONLYHERE("only here"), HEREANDMINUS("here and -");
+	
+		private final String fieldDescription;	
+		
+		private Visibility(String value) {
+	        fieldDescription = value;
+	    }	
+	    public String getFieldDescription() {
+	        return fieldDescription;
+	    }
+	};
 	public static int DEFEVENTCOLOR = Boja.zelena;
 	public static int DEFEVENTSIZE = 1;
 	public static int DEFEVENTSTYLE = 2;

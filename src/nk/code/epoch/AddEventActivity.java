@@ -14,9 +14,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
@@ -32,6 +34,8 @@ public class AddEventActivity extends ActionBarActivity implements
 	private RadioGroup radiog1;
 	private RadioGroup radiog2;
 	private int boja;
+	private Spinner s;
+	private String spinerOpcije[];
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,7 +47,14 @@ public class AddEventActivity extends ActionBarActivity implements
 		radiog1 = (RadioGroup) findViewById(R.id.radio_group1);
 		radiog2 = (RadioGroup) findViewById(R.id.radio_group2);
 		
-
+		spinerOpcije=new String[4];
+		spinerOpcije[0]=Event.Visibility.ALWAYS.getFieldDescription();
+		spinerOpcije[2]=Event.Visibility.HEREANDMINUS.getFieldDescription();
+		spinerOpcije[1]=Event.Visibility.ONLYHERE.getFieldDescription();
+		spinerOpcije[3]=Event.Visibility.HEREANDPLUS.getFieldDescription();
+		s = (Spinner) findViewById(R.id.Spinner01);
+		ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this,android.R.layout.simple_spinner_item,spinerOpcije);
+		s.setAdapter(adapter);
 
 		String argname=getIntent().getStringExtra("name");
 		String argdate=getIntent().getStringExtra("date");

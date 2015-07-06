@@ -23,6 +23,7 @@
     <string name="color_swatch_description_selected">Color <xliff:g id="color_index" example="14">%1$d</xliff:g> selected</string> 
     <string name="set_color">Color</string> 
     <string name="style_">Style:</string> 
-    <string name="size_">Size:</string>
+    <string name="size_">Size:</string> 
+    <string name="visibility_">Visibility:</string>
     
 </resources>
