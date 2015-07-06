@@ -3,146 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="nk.code.epoch.AddEventActivity" >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="10dp" >
-
-        <EditText
-            android:id="@+id/editText1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/Name"
-            android:imeOptions="actionDone"
-            android:inputType="text"
-            android:singleLine="true" >
-        </EditText>
-
-        <EditText
-            android:id="@+id/editText2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/dateformat1"
-            android:imeOptions="actionDone"
-            android:inputType="date" />
-
-        <EditText
-            android:id="@+id/editText3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/timeformat"
-            android:imeOptions="actionDone"
-            android:inputType="time" />
-
-        <Button
-            android:id="@+id/colorButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/set_color" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/size_" />
-
-        <RadioGroup
-            android:id="@+id/radio_group1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/radio1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:textColor="#f00" />
-
-            <RadioButton
-                android:id="@+id/radio2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#0f0" />
-
-            <RadioButton
-                android:id="@+id/radio3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#00f" />
-
-            <RadioButton
-                android:id="@+id/radio4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#00f" />
-
-            <RadioButton
-                android:id="@+id/radio5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#00f" />
-        </RadioGroup>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/style_" />
-
-        <RadioGroup
-            android:id="@+id/radio_group2"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/sradio1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:textColor="#f00" />
-
-            <RadioButton
-                android:id="@+id/sradio2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#0f0" />
-
-            <RadioButton
-                android:id="@+id/sradio3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#00f" />
-
-            <RadioButton
-                android:id="@+id/sradio4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#00f" />
-
-        </RadioGroup>
-        
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/visibility_" />
-        <Spinner
-	        android:id="@+id/Spinner01"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-		/>
-    </LinearLayout>
-
     <LinearLayout
         android:id="@+id/footer"
-        
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:gravity="center"
         android:orientation="horizontal" >
 
         <Button
@@ -166,5 +32,145 @@
             android:layout_weight="1"
             android:text="@string/cancel" />
     </LinearLayout>
+    	<ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/footer" >
+        <LinearLayout
+            android:id="@+id/body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp" >
+            
+            <EditText
+                android:id="@+id/editText1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/Name"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:singleLine="true" >
+            </EditText>
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/dateformat1"
+                android:imeOptions="actionDone"
+                android:inputType="date" />
+
+            <EditText
+                android:id="@+id/editText3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/timeformat"
+                android:imeOptions="actionDone"
+                android:inputType="time" />
+
+            <Button
+                android:id="@+id/colorButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/set_color" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/size_" />
+
+            <RadioGroup
+                android:id="@+id/radio_group1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/radio1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:textColor="#f00" />
+
+                <RadioButton
+                    android:id="@+id/radio2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#0f0" />
+
+                <RadioButton
+                    android:id="@+id/radio3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#00f" />
+
+                <RadioButton
+                    android:id="@+id/radio4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#00f" />
+
+                <RadioButton
+                    android:id="@+id/radio5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#00f" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/style_" />
+
+            <RadioGroup
+                android:id="@+id/radio_group2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/sradio1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:textColor="#f00" />
+
+                <RadioButton
+                    android:id="@+id/sradio2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#0f0" />
+
+                <RadioButton
+                    android:id="@+id/sradio3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#00f" />
+
+                <RadioButton
+                    android:id="@+id/sradio4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#00f" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/visibility_" />
+
+            <Spinner
+                android:id="@+id/Spinner01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            
+        </LinearLayout>
+    </ScrollView>
+
+
 
 </RelativeLayout>

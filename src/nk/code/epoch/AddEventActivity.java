@@ -54,6 +54,7 @@ public class AddEventActivity extends ActionBarActivity implements
 		spinerOpcije[3]=Event.Visibility.HEREANDPLUS.getFieldDescription();
 		s = (Spinner) findViewById(R.id.Spinner01);
 		ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this,android.R.layout.simple_spinner_item,spinerOpcije);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		s.setAdapter(adapter);
 
 		String argname=getIntent().getStringExtra("name");
