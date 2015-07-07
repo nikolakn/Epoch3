@@ -38,7 +38,8 @@ public class Event implements Serializable {
 	public int colorLine = DEFEVENTCOLOR; // main color
 	public int colorText = Boja.crna;
 	public int style = DEFEVENTSTYLE;
-
+	public Visibility visibility = Visibility.ALWAYS;
+	public double visibilityZoom;
 	public Event(double s, int x, String n) {
 		name = n;
 		start = s;
@@ -47,6 +48,18 @@ public class Event implements Serializable {
 
 	public void draw(Canvas canvas, ScalaView skala, float dx) {
 		// TODO Auto-generated method stub
+		if(visibility == Visibility.ONLYHERE){
+			if(skala.getLen() != visibilityZoom)
+				return;
+		}
+		if(visibility == Visibility.HEREANDMINUS){
+			if(skala.getLen() > visibilityZoom)
+				return;
+		}
+		if(visibility == Visibility.HEREANDPLUS){
+			if(skala.getLen() < visibilityZoom)
+				return;
+		}		
 		float y = skala.getPos(start);
 		float xx = x + dx;
 		Paint mPaint = new Paint();

@@ -128,7 +128,7 @@ public class EpochView extends View {
 			String time = dt.toString("HH:mm");
 			doc.setCurrent(ev);
 			((EpochActivity) context).StartAddEventActivity(ev.name, date,
-					time, ev.colorLine, ev.look, ev.style);
+					time, ev.colorLine, ev.look, ev.style, ev.visibility.ordinal());
 		} else {
 			
 			;
