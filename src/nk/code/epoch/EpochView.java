@@ -41,7 +41,7 @@ public class EpochView extends View {
 	private float yposLong;
 	private GestureDetector gestureDetector;
 	private Event ev;
-	
+	private boolean ismove = false;
 	private boolean isEventLongClick = false;
 
 	private View.OnCreateContextMenuListener vC = new View.OnCreateContextMenuListener() {
@@ -58,7 +58,9 @@ public class EpochView extends View {
 			} else {
 				arg0.add(0, 0, 0, "edit").setOnMenuItemClickListener(
 						mMenuItemClickListener2);
-				arg0.add(0, 1, 0, "delete").setOnMenuItemClickListener(
+				arg0.add(0, 1, 0, "move").setOnMenuItemClickListener(
+						mMenuItemClickListener2);
+				arg0.add(0, 2, 0, "delete").setOnMenuItemClickListener(
 						mMenuItemClickListener2);
 			}
 		}
@@ -82,6 +84,8 @@ public class EpochView extends View {
 		}
 	};
 	private OnMenuItemClickListener mMenuItemClickListener2 = new OnMenuItemClickListener() {
+		
+
 		@Override
 		public boolean onMenuItemClick(MenuItem item) {
 			switch (item.getItemId()) {
@@ -89,14 +93,15 @@ public class EpochView extends View {
 				addEpoch();
 				return true;
 			case 1:
+				ismove = true;
+				return true;
+			case 2:
 				Log.i("nk", "delete");
 				doc.deleteEpoch(ev);
 				skala.invalidate();
 				invalidate();
 				return true;
-			case 2:
-				Log.i("nk", "people" + Float.toString(xposLong));
-				return true;
+
 			}
 			return false;
 		}
@@ -175,6 +180,15 @@ public class EpochView extends View {
 			final float x = MotionEventCompat.getX(ev, pointerIndex);
 			mLastTouchX = x;
 			mActivePointerId = MotionEventCompat.getPointerId(ev, 0);
+			if(ismove){
+				ismove = false;
+				Event e=doc.getCurrent();
+				if(e!=null){
+					e.x = (int)(x - dx);
+					invalidate();
+				}
+				
+			}
 			break;
 		}
 		case MotionEvent.ACTION_MOVE: {
@@ -258,7 +272,7 @@ public class EpochView extends View {
 	public void addEpoch(String name, DateTime dateTime,int boja,int size, int style, int vis) {
 		Event e=doc.addEvent(dateTime.getDayOfMonth(), dateTime.getMonthOfYear(),
 				dateTime.getYear(), dateTime.getHourOfDay(),
-				dateTime.getMinuteOfHour(), (int) xposLong, name);
+				dateTime.getMinuteOfHour(), (int) (xposLong-dx), name);
 		if(e!=null){
 			e.colorLine =boja;
 			e.setLook(size);
