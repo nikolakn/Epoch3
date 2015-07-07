@@ -65,8 +65,6 @@ public class AddEventActivity extends ActionBarActivity implements
 		int argstyle=getIntent().getIntExtra("style",Event.DEFEVENTSTYLE);
 		
 		int argvisibility=getIntent().getIntExtra("visibility",Event.Visibility.ALWAYS.ordinal());
-
-		
 		
 		if (savedInstanceState != null) {
 	        // Restore value of members from saved state
