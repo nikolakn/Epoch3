@@ -15,7 +15,7 @@ public class Event implements Serializable {
 	private static final long serialVersionUID = 1420672609912364060L;
 
 	public enum Visibility {ALWAYS("always"), HEREANDPLUS("here and -"),
-		ONLYHERE("only here"), HEREANDMINUS("here and -");
+		ONLYHERE("only here"), HEREANDMINUS("here and +");
 	
 		private final String fieldDescription;	
 		
@@ -49,15 +49,15 @@ public class Event implements Serializable {
 	public void draw(Canvas canvas, ScalaView skala, float dx) {
 		// TODO Auto-generated method stub
 		if(visibility == Visibility.ONLYHERE){
-			if(skala.getLen() != visibilityZoom)
+			if(skala.getZoomLvl() != visibilityZoom)
 				return;
 		}
 		if(visibility == Visibility.HEREANDMINUS){
-			if(skala.getLen() > visibilityZoom)
+			if(skala.getZoomLvl() > visibilityZoom)
 				return;
 		}
 		if(visibility == Visibility.HEREANDPLUS){
-			if(skala.getLen() < visibilityZoom)
+			if(skala.getZoomLvl() < visibilityZoom)
 				return;
 		}		
 		float y = skala.getPos(start);

@@ -255,7 +255,7 @@ public class EpochView extends View {
 		this.dx = dx;
 	}
 
-	public void addEpoch(String name, DateTime dateTime,int boja,int size, int style) {
+	public void addEpoch(String name, DateTime dateTime,int boja,int size, int style, int vis) {
 		Event e=doc.addEvent(dateTime.getDayOfMonth(), dateTime.getMonthOfYear(),
 				dateTime.getYear(), dateTime.getHourOfDay(),
 				dateTime.getMinuteOfHour(), (int) xposLong, name);
@@ -263,6 +263,8 @@ public class EpochView extends View {
 			e.colorLine =boja;
 			e.setLook(size);
 			e.style = style;
+			e.visibility = Event.Visibility.values()[vis];
+			e.visibilityZoom = skala.getZoomLvl();
 		}
 	}
 
@@ -274,7 +276,7 @@ public class EpochView extends View {
 		this.yposLong = yposLong;
 	}
 
-	public void EditEpoch(String name, DateTime dateTime,int boja,int size, int style) {
+	public void EditEpoch(String name, DateTime dateTime,int boja,int size, int style, int vis) {
 			Event e=doc.getCurrent();
 			if(e!=null){
 			double startDate = DateTimeUtils.toJulianDay(new DateTime(dateTime.getYear(),
@@ -286,6 +288,8 @@ public class EpochView extends View {
 			e.colorLine =boja;
 			e.setLook(size);
 			e.style = style;
+			e.visibility = Event.Visibility.values()[vis];
+			e.visibilityZoom = skala.getZoomLvl();
 			invalidate();
 
 			}

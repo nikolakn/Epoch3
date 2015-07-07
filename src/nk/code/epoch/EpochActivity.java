@@ -148,14 +148,13 @@ public class EpochActivity extends ActionBarActivity {
 	        	 int boja=data.getIntExtra("boja",Event.DEFEVENTCOLOR);
 	        	 int size=data.getIntExtra("size",Event.DEFEVENTSIZE);
 	        	 int style=data.getIntExtra("style",Event.DEFEVENTSTYLE);
-	        	 Log.i("nk1", Integer.toString(boja));
-	        	 Log.i("nk1", Integer.toString(size));
-	        	 Log.i("nk1", Integer.toString(style));
+	        	 int vis=data.getIntExtra("visibility",Event.Visibility.ALWAYS.ordinal());
+
 	        	 try{
 	        	 String pattern = "dd.MM.yyyy HH:mm";
 	             DateTime dateTime  = DateTime.parse(date+" "+time, DateTimeFormat.forPattern(pattern));
 	             //Log.i("nk", dateTime.toString("dd.MM.yyyy HH:mm"));
-	             epochv.addEpoch(name,dateTime,boja,size,style);
+	             epochv.addEpoch(name,dateTime,boja,size,style,vis);
 	        	 } catch(Exception e){
 	        		 
 	        	 }
@@ -175,13 +174,11 @@ public class EpochActivity extends ActionBarActivity {
 	        	 int boja=data.getIntExtra("boja",Event.DEFEVENTCOLOR);
 	        	 int size=data.getIntExtra("size",Event.DEFEVENTSIZE);
 	        	 int style=data.getIntExtra("style",Event.DEFEVENTSTYLE);
-	        	 Log.i("nk2", Integer.toString(boja));
-	        	 Log.i("nk2", Integer.toString(size));
-	        	 Log.i("nk2", Integer.toString(style));
+	        	 int vis=data.getIntExtra("visibility",Event.Visibility.ALWAYS.ordinal());
 	        	 try{
 	        	 String pattern = "dd.MM.yyyy HH:mm";
 	             DateTime dateTime  = DateTime.parse(date+" "+time, DateTimeFormat.forPattern(pattern));
-	             epochv.EditEpoch(name,dateTime,boja,size,style);
+	             epochv.EditEpoch(name,dateTime,boja,size,style,vis);
 	        	 } catch(Exception e){
 	        		 
 	        	 }	     	 

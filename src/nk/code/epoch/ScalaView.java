@@ -106,6 +106,10 @@ public class ScalaView extends View {
 		mRotation = degrees;
 	}
 
+	public double getZoomLvl(){
+		return skala.getZoomLvl();
+	}
+	
 	@Override
 	protected void onLayout(boolean changed, int left, int top, int right,
 			int bottom) {

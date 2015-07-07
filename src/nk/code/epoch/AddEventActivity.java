@@ -1,5 +1,7 @@
 package nk.code.epoch;
 
+import java.util.ArrayList;
+
 import nk.code.data.Event;
 
 import org.joda.time.DateTime;
@@ -35,7 +37,6 @@ public class AddEventActivity extends ActionBarActivity implements
 	private RadioGroup radiog2;
 	private int boja;
 	private Spinner s;
-	private String spinerOpcije[];
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,16 +47,15 @@ public class AddEventActivity extends ActionBarActivity implements
 		colorb = (Button) findViewById(R.id.colorButton);
 		radiog1 = (RadioGroup) findViewById(R.id.radio_group1);
 		radiog2 = (RadioGroup) findViewById(R.id.radio_group2);
-		
-		spinerOpcije=new String[4];
-		spinerOpcije[0]=Event.Visibility.ALWAYS.getFieldDescription();
-		spinerOpcije[2]=Event.Visibility.HEREANDMINUS.getFieldDescription();
-		spinerOpcije[1]=Event.Visibility.ONLYHERE.getFieldDescription();
-		spinerOpcije[3]=Event.Visibility.HEREANDPLUS.getFieldDescription();
+		ArrayList<String> SourceArray = new ArrayList<String>();
 		s = (Spinner) findViewById(R.id.Spinner01);
-		ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this,android.R.layout.simple_spinner_item,spinerOpcije);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,SourceArray);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		s.setAdapter(adapter);
+		adapter.add(Event.Visibility.ALWAYS.getFieldDescription());
+		adapter.add(Event.Visibility.HEREANDMINUS.getFieldDescription());
+		adapter.add(Event.Visibility.ONLYHERE.getFieldDescription());
+		adapter.add(Event.Visibility.HEREANDPLUS.getFieldDescription());
 
 		String argname=getIntent().getStringExtra("name");
 		String argdate=getIntent().getStringExtra("date");
@@ -66,7 +66,7 @@ public class AddEventActivity extends ActionBarActivity implements
 		
 		int argvisibility=getIntent().getIntExtra("visibility",Event.Visibility.ALWAYS.ordinal());
 
-		s.setSelection(argvisibility);
+		
 		
 		if (savedInstanceState != null) {
 	        // Restore value of members from saved state
@@ -76,8 +76,10 @@ public class AddEventActivity extends ActionBarActivity implements
 			argcolor=savedInstanceState.getInt("boja");
 			argsize=savedInstanceState.getInt("size");
 			argsize=savedInstanceState.getInt("style");
+			argvisibility=savedInstanceState.getInt("visibility");
 	    }
 		
+		s.setSelection(argvisibility);
 		
 		if(name != null)
 			name.setText(argname);
@@ -234,12 +236,16 @@ public class AddEventActivity extends ActionBarActivity implements
 				View radioButton2 = radiog2.findViewById(radioButtonID2);
 				int a2 = radiog2.indexOfChild(radioButton2);
 				
+				int vis = (int)s.getSelectedItemId();
+				if(vis == android.widget.AdapterView.INVALID_ROW_ID)
+					vis = 0;
 				returnIntent.putExtra("name", name.getText().toString());
 				returnIntent.putExtra("date", date.getText().toString());
 				returnIntent.putExtra("time", time.getText().toString());
 				returnIntent.putExtra("boja", boja);
 				returnIntent.putExtra("size", a1);
 				returnIntent.putExtra("style", a2);
+				returnIntent.putExtra("visibility", vis);
 				setResult(RESULT_OK, returnIntent);
 				finish();
 			}
@@ -275,12 +281,17 @@ public class AddEventActivity extends ActionBarActivity implements
 		View radioButton2 = radiog2.findViewById(radioButtonID2);
 		int a2 = radiog2.indexOfChild(radioButton2);
 		
+		int vis = (int)s.getSelectedItemId();
+		if(vis == android.widget.AdapterView.INVALID_ROW_ID)
+			vis = 0;
+		
 	    savedInstanceState.putString("name", name.getText().toString());
 	    savedInstanceState.putString("date", date.getText().toString());
 	    savedInstanceState.putString("time", time.getText().toString());
 	    savedInstanceState.putInt("boja", boja);
 	    savedInstanceState.putFloat("size", a1);
-	    savedInstanceState.putFloat("style", a2);	    
+	    savedInstanceState.putFloat("style", a2);	  
+	    savedInstanceState.putFloat("visibility", vis);
 
 	}
 

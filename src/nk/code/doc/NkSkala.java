@@ -197,6 +197,10 @@ public class NkSkala {
 		setDateOnPos(d, y);
 
 	}
+	
+	public double getZoomLvl(){
+		return len * period;
+	}
 
 	// postavlja datun na poziciji y na skali
 	public void setDateOnPos(double date, float y) {

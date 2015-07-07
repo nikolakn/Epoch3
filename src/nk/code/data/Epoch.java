@@ -4,6 +4,7 @@ package nk.code.data;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+
 import nk.code.doc.NkSkala;
 import nk.code.epoch.ScalaView;
 import android.graphics.Canvas;
@@ -24,15 +25,15 @@ public class Epoch extends Event implements Serializable {
 	public void draw(Canvas canvas, ScalaView skala, float dx) {
 		
 		if(visibility == Visibility.ONLYHERE){
-			if(skala.getLen() != visibilityZoom)
+			if(skala.getZoomLvl() != visibilityZoom)
 				return;
 		}
 		if(visibility == Visibility.HEREANDMINUS){
-			if(skala.getLen() > visibilityZoom)
+			if(skala.getZoomLvl() > visibilityZoom)
 				return;
 		}
 		if(visibility == Visibility.HEREANDPLUS){
-			if(skala.getLen() < visibilityZoom)
+			if(skala.getZoomLvl() < visibilityZoom)
 				return;
 		}
 		
