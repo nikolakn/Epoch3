@@ -1802,14 +1802,16 @@ containing a value of this type.
         public static final int abc_simple_dropdown_hint=0x7f030015;
         public static final int activity_add_event=0x7f030016;
         public static final int activity_epoch=0x7f030017;
-        public static final int activity_main=0x7f030018;
-        public static final int color_picker_dialog=0x7f030019;
-        public static final int color_picker_swatch=0x7f03001a;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001b;
+        public static final int activity_event_description=0x7f030018;
+        public static final int activity_main=0x7f030019;
+        public static final int color_picker_dialog=0x7f03001a;
+        public static final int color_picker_swatch=0x7f03001b;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001c;
     }
     public static final class menu {
         public static final int epoch=0x7f0c0000;
-        public static final int main=0x7f0c0001;
+        public static final int event_description=0x7f0c0001;
+        public static final int main=0x7f0c0002;
     }
     public static final class string {
         public static final int Name=0x7f0a001a;
@@ -1891,6 +1893,7 @@ containing a value of this type.
         public static final int timeformat=0x7f0a0019;
         public static final int title_activity_add_event=0x7f0a0014;
         public static final int title_activity_epoch=0x7f0a0013;
+        public static final int title_activity_event_description=0x7f0a0022;
         public static final int visibility_=0x7f0a0021;
     }
     public static final class style {

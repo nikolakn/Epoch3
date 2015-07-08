@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="nk.code.epoch"
     android:versionCode="1"
-    android:versionName="1.0" xmlns:tools="http://schemas.android.com/tools">
+    android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="11"
-        android:targetSdkVersion="21" tools:ignore="OldTargetApi"/>
+        android:targetSdkVersion="21"
+        tools:ignore="OldTargetApi" />
 
     <application
-        
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -28,9 +29,13 @@
             android:label="@string/title_activity_epoch" >
         </activity>
         <activity
-            android:windowSoftInputMode="stateHidden"
             android:name=".AddEventActivity"
-            android:label="@string/title_activity_add_event" >
+            android:label="@string/title_activity_add_event"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".EventDescriptionActivity"
+            android:label="@string/title_activity_event_description" >
         </activity>
     </application>
 
