@@ -1670,7 +1670,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f09002e;
         public static final int action_mode_bar_stub=0x7f09002d;
         public static final int action_mode_close_button=0x7f090020;
-        public static final int action_settings=0x7f09005b;
+        public static final int action_settings=0x7f09005c;
         public static final int activity_chooser_view_content=0x7f090021;
         public static final int always=0x7f090014;
         public static final int beginning=0x7f09001b;
@@ -1679,9 +1679,9 @@ containing a value of this type.
         public static final int checkbox=0x7f090029;
         public static final int collapseActionView=0x7f090015;
         public static final int colorButton=0x7f090047;
-        public static final int color_picker=0x7f090058;
-        public static final int color_picker_checkmark=0x7f09005a;
-        public static final int color_picker_swatch=0x7f090059;
+        public static final int color_picker=0x7f090059;
+        public static final int color_picker_checkmark=0x7f09005b;
+        public static final int color_picker_swatch=0x7f09005a;
         public static final int decor_content_parent=0x7f09002f;
         public static final int default_activity_button=0x7f090024;
         public static final int deleteButton=0x7f090040;
@@ -1691,10 +1691,11 @@ containing a value of this type.
         public static final int editText1=0x7f090044;
         public static final int editText2=0x7f090045;
         public static final int editText3=0x7f090046;
-        public static final int editTextdec1=0x7f090056;
+        public static final int editTextdec1=0x7f090057;
+        public static final int editTextdesk=0x7f090054;
         public static final int edit_query=0x7f090033;
         public static final int end=0x7f09001c;
-        public static final int epoch=0x7f090055;
+        public static final int epoch=0x7f090056;
         public static final int expand_activities_button=0x7f090022;
         public static final int expanded_menu=0x7f090028;
         public static final int footer=0x7f09003f;
@@ -1734,7 +1735,7 @@ containing a value of this type.
         public static final int showCustom=0x7f090010;
         public static final int showHome=0x7f090011;
         public static final int showTitle=0x7f090012;
-        public static final int skala=0x7f090054;
+        public static final int skala=0x7f090055;
         public static final int split_action_bar=0x7f090004;
         public static final int sradio1=0x7f09004f;
         public static final int sradio2=0x7f090050;
@@ -1743,7 +1744,7 @@ containing a value of this type.
         public static final int submit_area=0x7f09003c;
         public static final int tabMode=0x7f09000c;
         public static final int title=0x7f090027;
-        public static final int tt1=0x7f090057;
+        public static final int tt1=0x7f090058;
         public static final int up=0x7f090001;
         public static final int useLogo=0x7f090013;
         public static final int withText=0x7f090018;
@@ -1802,17 +1803,19 @@ containing a value of this type.
         public static final int abc_search_view=0x7f030014;
         public static final int abc_simple_dropdown_hint=0x7f030015;
         public static final int activity_add_event=0x7f030016;
-        public static final int activity_epoch=0x7f030017;
-        public static final int activity_event_description=0x7f030018;
-        public static final int activity_main=0x7f030019;
-        public static final int color_picker_dialog=0x7f03001a;
-        public static final int color_picker_swatch=0x7f03001b;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001c;
+        public static final int activity_edit_event_desc=0x7f030017;
+        public static final int activity_epoch=0x7f030018;
+        public static final int activity_event_description=0x7f030019;
+        public static final int activity_main=0x7f03001a;
+        public static final int color_picker_dialog=0x7f03001b;
+        public static final int color_picker_swatch=0x7f03001c;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
     }
     public static final class menu {
-        public static final int epoch=0x7f0c0000;
-        public static final int event_description=0x7f0c0001;
-        public static final int main=0x7f0c0002;
+        public static final int edit_event_desc=0x7f0c0000;
+        public static final int epoch=0x7f0c0001;
+        public static final int event_description=0x7f0c0002;
+        public static final int main=0x7f0c0003;
     }
     public static final class string {
         public static final int Name=0x7f0a001a;
@@ -1893,6 +1896,7 @@ containing a value of this type.
         public static final int style_=0x7f0a001f;
         public static final int timeformat=0x7f0a0019;
         public static final int title_activity_add_event=0x7f0a0014;
+        public static final int title_activity_edit_event_desc=0x7f0a0023;
         public static final int title_activity_epoch=0x7f0a0013;
         public static final int title_activity_event_description=0x7f0a0022;
         public static final int visibility_=0x7f0a0021;

@@ -25,5 +25,6 @@
     <string name="size_">Size:</string>
     <string name="visibility_">Visibility:</string>
     <string name="title_activity_event_description">EventDescriptionActivity</string>
+    <string name="title_activity_edit_event_desc">EditEventDescActivity</string>
 
 </resources>
