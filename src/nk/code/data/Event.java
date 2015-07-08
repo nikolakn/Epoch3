@@ -40,6 +40,7 @@ public class Event implements Serializable {
 	public int style = DEFEVENTSTYLE;
 	public Visibility visibility = Visibility.ALWAYS;
 	public double visibilityZoom;
+	public String description;
 	public Event(double s, int x, String n) {
 		name = n;
 		start = s;

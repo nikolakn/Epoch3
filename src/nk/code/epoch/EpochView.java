@@ -43,7 +43,7 @@ public class EpochView extends View {
 	private Event ev;
 	private boolean ismove = false;
 	private boolean isEventLongClick = false;
-
+	private boolean click = false;
 	private View.OnCreateContextMenuListener vC = new View.OnCreateContextMenuListener() {
 		@Override
 		public void onCreateContextMenu(ContextMenu arg0, View arg1,
@@ -123,6 +123,7 @@ public class EpochView extends View {
 		this.setOnCreateContextMenuListener(vC);
 		gestureDetector = new GestureDetector(context, new LongListener());
 
+
 	}
 
 	protected void addEpoch() {
@@ -147,6 +148,7 @@ public class EpochView extends View {
 	private class LongListener extends GestureDetector.SimpleOnGestureListener {
 		@Override
 		public void onLongPress(MotionEvent e) {
+			click = false;
 			final int pointerIndex = MotionEventCompat.getActionIndex(e);
 			xposLong = MotionEventCompat.getX(e, pointerIndex);
 			setYposLong(MotionEventCompat.getY(e, pointerIndex));
@@ -171,15 +173,16 @@ public class EpochView extends View {
 
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
-	public boolean onTouchEvent(MotionEvent ev) {
-		gestureDetector.onTouchEvent(ev);
-		final int action = MotionEventCompat.getActionMasked(ev);
+	public boolean onTouchEvent(MotionEvent mev) {
+		gestureDetector.onTouchEvent(mev);
+		final int action = MotionEventCompat.getActionMasked(mev);
 		switch (action) {
 		case MotionEvent.ACTION_DOWN: {
-			final int pointerIndex = MotionEventCompat.getActionIndex(ev);
-			final float x = MotionEventCompat.getX(ev, pointerIndex);
+			click = true;
+			final int pointerIndex = MotionEventCompat.getActionIndex(mev);
+			final float x = MotionEventCompat.getX(mev, pointerIndex);
 			mLastTouchX = x;
-			mActivePointerId = MotionEventCompat.getPointerId(ev, 0);
+			mActivePointerId = MotionEventCompat.getPointerId(mev, 0);
 			if(ismove){
 				ismove = false;
 				Event e=doc.getCurrent();
@@ -197,10 +200,10 @@ public class EpochView extends View {
 
 			} else {
 				// Find the index of the active pointer and fetch its position
-				int pointerIndex = MotionEventCompat.findPointerIndex(ev,
+				int pointerIndex = MotionEventCompat.findPointerIndex(mev,
 						mActivePointerId);
 				// final float x = MotionEventCompat.getX(ev, pointerIndex);
-				float x = MotionEventCompat.getX(ev, pointerIndex);
+				float x = MotionEventCompat.getX(mev, pointerIndex);
 				// Calculate the distance moved
 				// final float dx = x - mLastTouchX;
 				dx += (x - mLastTouchX);
@@ -211,6 +214,17 @@ public class EpochView extends View {
 		}
 
 		case MotionEvent.ACTION_UP: {
+			if(click){
+				Log.i("nk","click");
+				click = false;
+				final int pointerIndex = MotionEventCompat.getActionIndex(mev);
+				xposLong = MotionEventCompat.getX(mev, pointerIndex);
+				setYposLong(MotionEventCompat.getY(mev, pointerIndex));
+				ev = doc.getEventFromPos(xposLong - dx, yposLong, skala);
+				if (ev != null){
+					((EpochActivity) context).StartEventDesActivity(ev.description);	
+				}
+			}
 			mActivePointerId = -1;
 			break;
 		}
@@ -222,8 +236,8 @@ public class EpochView extends View {
 
 		case MotionEvent.ACTION_POINTER_UP: {
 			mode = NONE;
-			final int pointerIndex = MotionEventCompat.getActionIndex(ev);
-			final int pointerId = MotionEventCompat.getPointerId(ev,
+			final int pointerIndex = MotionEventCompat.getActionIndex(mev);
+			final int pointerId = MotionEventCompat.getPointerId(mev,
 					pointerIndex);
 
 			if (pointerId == mActivePointerId) {
@@ -231,8 +245,8 @@ public class EpochView extends View {
 				// active pointer and adjust accordingly.
 				final int newPointerIndex = pointerIndex == 0 ? 1 : 0;
 				// mLastTouchX = MotionEventCompat.getX(ev, newPointerIndex);
-				mLastTouchX = MotionEventCompat.getY(ev, newPointerIndex);
-				mActivePointerId = MotionEventCompat.getPointerId(ev,
+				mLastTouchX = MotionEventCompat.getY(mev, newPointerIndex);
+				mActivePointerId = MotionEventCompat.getPointerId(mev,
 						newPointerIndex);
 			}
 			break;

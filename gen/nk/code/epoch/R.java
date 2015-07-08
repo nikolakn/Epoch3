@@ -1670,7 +1670,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f09002e;
         public static final int action_mode_bar_stub=0x7f09002d;
         public static final int action_mode_close_button=0x7f090020;
-        public static final int action_settings=0x7f09005a;
+        public static final int action_settings=0x7f09005b;
         public static final int activity_chooser_view_content=0x7f090021;
         public static final int always=0x7f090014;
         public static final int beginning=0x7f09001b;
@@ -1679,9 +1679,9 @@ containing a value of this type.
         public static final int checkbox=0x7f090029;
         public static final int collapseActionView=0x7f090015;
         public static final int colorButton=0x7f090047;
-        public static final int color_picker=0x7f090057;
-        public static final int color_picker_checkmark=0x7f090059;
-        public static final int color_picker_swatch=0x7f090058;
+        public static final int color_picker=0x7f090058;
+        public static final int color_picker_checkmark=0x7f09005a;
+        public static final int color_picker_swatch=0x7f090059;
         public static final int decor_content_parent=0x7f09002f;
         public static final int default_activity_button=0x7f090024;
         public static final int deleteButton=0x7f090040;
@@ -1691,6 +1691,7 @@ containing a value of this type.
         public static final int editText1=0x7f090044;
         public static final int editText2=0x7f090045;
         public static final int editText3=0x7f090046;
+        public static final int editTextdec1=0x7f090056;
         public static final int edit_query=0x7f090033;
         public static final int end=0x7f09001c;
         public static final int epoch=0x7f090055;
@@ -1742,7 +1743,7 @@ containing a value of this type.
         public static final int submit_area=0x7f09003c;
         public static final int tabMode=0x7f09000c;
         public static final int title=0x7f090027;
-        public static final int tt1=0x7f090056;
+        public static final int tt1=0x7f090057;
         public static final int up=0x7f090001;
         public static final int useLogo=0x7f090013;
         public static final int withText=0x7f090018;

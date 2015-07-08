@@ -188,7 +188,13 @@ public class EpochActivity extends ActionBarActivity {
 	            //Write your code if there's no result
 	        }
 	    }
-    }   
+    }
+
+	public void StartEventDesActivity(String description) {
+    	Intent i = new Intent(this, EventDescriptionActivity.class);
+    	i.putExtra("des", description);
+    	startActivityForResult(i, 1);
+	}   
     
 
 }

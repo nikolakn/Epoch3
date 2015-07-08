@@ -1,16 +1,21 @@
 package nk.code.epoch;
 
 import android.support.v7.app.ActionBarActivity;
+import android.text.Html;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class EventDescriptionActivity extends ActionBarActivity {
 
+	private TextView text;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_description);
+		text = (TextView) findViewById(R.id.editTextdec1);
+		text.setText(Html.fromHtml("<font size=\"40\" face=\"arial\" color=\"red\">ggg</font><br><br>"));
 	}
 
 	@Override
