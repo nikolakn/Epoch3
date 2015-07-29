@@ -59,4 +59,22 @@ public class EventDescriptionActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	 @Override
+	    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		    if (requestCode == 1) {
+		        if(resultCode == RESULT_OK){
+		        	 String mtext=data.getStringExtra("des");
+		        	 des = mtext;
+		        	 text.setText(Html.fromHtml(des));
+		        	     	 
+		        }
+
+		        if (resultCode == RESULT_CANCELED) {
+		            //Write your code if there's no result
+		        }
+		    }
+		    
+
+	    }
 }
