@@ -10,7 +10,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.GestureDetector;
@@ -74,7 +73,7 @@ public class EpochView extends View {
 				addEpoch();
 				return true;
 			case 1:
-				Log.i("nk", "epoch" + Float.toString(xposLong));
+				//Log.i("nk", "epoch" + Float.toString(xposLong));
 				return true;
 			//case 2:
 			//	Log.i("nk", "people" + Float.toString(xposLong));
@@ -94,7 +93,7 @@ public class EpochView extends View {
 				ismove = true;
 				return true;
 			case 2:
-				Log.i("nk", "delete");
+				//Log.i("nk", "delete");
 				doc.deleteEpoch(ev);
 				skala.invalidate();
 				invalidate();
@@ -216,7 +215,7 @@ public class EpochView extends View {
 
 		case MotionEvent.ACTION_UP: {
 			if(click){
-				Log.i("nk","click");
+				//Log.i("nk","click");
 				click = false;
 				final int pointerIndex = MotionEventCompat.getActionIndex(mev);
 				xposLong = MotionEventCompat.getX(mev, pointerIndex);
