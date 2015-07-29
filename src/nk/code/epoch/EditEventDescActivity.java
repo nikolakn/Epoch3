@@ -21,7 +21,7 @@ public class EditEventDescActivity extends ActionBarActivity {
 		if (des == null)
 			des = "Description";
 		text.setText(des);
-			
+		text.setSelection(text.getText().length());	
 		Button done = (Button) findViewById(R.id.descDoneButton);
 		done.setOnClickListener(new View.OnClickListener() {
 			@Override

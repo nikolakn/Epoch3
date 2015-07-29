@@ -3,6 +3,7 @@ package nk.code.epoch;
 
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
+import android.text.method.ScrollingMovementMethod;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +27,7 @@ public class EventDescriptionActivity extends ActionBarActivity {
 		if (des == null)
 			des = "Description";
 		text.setText(Html.fromHtml(des));
-
+		text.setMovementMethod(new ScrollingMovementMethod());
 		//edit button
 		Button edit = (Button) findViewById(R.id.descEditButton);
 		edit.setOnClickListener(new View.OnClickListener() {
