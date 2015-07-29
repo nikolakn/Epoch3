@@ -53,8 +53,8 @@ public class EpochView extends View {
 						mMenuItemClickListener);
 				arg0.add(0, 1, 0, "add epoch").setOnMenuItemClickListener(
 						mMenuItemClickListener);
-				arg0.add(0, 2, 0, "add people").setOnMenuItemClickListener(
-						mMenuItemClickListener);
+				//arg0.add(0, 2, 0, "add people").setOnMenuItemClickListener(
+				//		mMenuItemClickListener);
 			} else {
 				arg0.add(0, 0, 0, "edit").setOnMenuItemClickListener(
 						mMenuItemClickListener2);
@@ -76,16 +76,14 @@ public class EpochView extends View {
 			case 1:
 				Log.i("nk", "epoch" + Float.toString(xposLong));
 				return true;
-			case 2:
-				Log.i("nk", "people" + Float.toString(xposLong));
-				return true;
+			//case 2:
+			//	Log.i("nk", "people" + Float.toString(xposLong));
+			//	return true;
 			}
 			return false;
 		}
 	};
 	private OnMenuItemClickListener mMenuItemClickListener2 = new OnMenuItemClickListener() {
-		
-
 		@Override
 		public boolean onMenuItemClick(MenuItem item) {
 			switch (item.getItemId()) {
@@ -152,11 +150,15 @@ public class EpochView extends View {
 			final int pointerIndex = MotionEventCompat.getActionIndex(e);
 			xposLong = MotionEventCompat.getX(e, pointerIndex);
 			setYposLong(MotionEventCompat.getY(e, pointerIndex));
-			ev = doc.getEventFromPos(xposLong - dx, yposLong, skala);
+			ev = doc.getEventFromPos(xposLong - dx, MotionEventCompat.getY(e, pointerIndex), skala);
+			
 			if (ev == null)
 				isEventLongClick = false;
-			else
+			else{
+				doc.setCurrent(ev);
+				//Log.d("nk","nasao " + ev.name);
 				isEventLongClick = true;
+			}
 			showContextMenu();
 		}
 	}
@@ -184,6 +186,7 @@ public class EpochView extends View {
 			mLastTouchX = x;
 			mActivePointerId = MotionEventCompat.getPointerId(mev, 0);
 			if(ismove){
+				click = false; 
 				ismove = false;
 				Event e=doc.getCurrent();
 				if(e!=null){
