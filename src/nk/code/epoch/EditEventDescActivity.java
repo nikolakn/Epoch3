@@ -18,6 +18,8 @@ public class EditEventDescActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_edit_event_desc);
 		text = (EditText) findViewById(R.id.editTextdesk);
 		String des=getIntent().getStringExtra("des");
+		if (des == null)
+			des = "Description";
 		text.setText(des);
 		
 		

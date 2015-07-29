@@ -1,6 +1,5 @@
 package nk.code.epoch;
 
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -20,60 +19,62 @@ import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View; 
-
+import android.view.View;
 
 public class EpochActivity extends ActionBarActivity {
 	private ScalaView skala;
 	private EpochView epochv;
 	public static String fileName = "nktemp.ser";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_epoch);
-		
+
 		skala = (ScalaView) findViewById(R.id.skala);
 		epochv = (EpochView) findViewById(R.id.epoch);
-		
+
 		epochv.init(skala);
 		skala.init(epochv);
 		/*
-		if (savedInstanceState != null) {
-	        // Restore value of members from saved state
-			skala.setLen(savedInstanceState.getDouble("skala_len"));
-			skala.setDy(savedInstanceState.getDouble("skala_dy"));
-			skala.setZoomLen(savedInstanceState.getInt("skala_zoomlen"));
-			skala.setPeriod(savedInstanceState.getInt("skala_period"));
-			skala.setScaleFactor(savedInstanceState.getFloat("skala_mScaleFactor"));
-	    } 
-		*/
+		 * if (savedInstanceState != null) { // Restore value of members from
+		 * saved state skala.setLen(savedInstanceState.getDouble("skala_len"));
+		 * skala.setDy(savedInstanceState.getDouble("skala_dy"));
+		 * skala.setZoomLen(savedInstanceState.getInt("skala_zoomlen"));
+		 * skala.setPeriod(savedInstanceState.getInt("skala_period"));
+		 * skala.setScaleFactor
+		 * (savedInstanceState.getFloat("skala_mScaleFactor")); }
+		 */
 		try {
-			FileInputStream fis =  getApplicationContext().openFileInput(fileName);
+			FileInputStream fis = getApplicationContext().openFileInput(
+					fileName);
 			ObjectInputStream is = new ObjectInputStream(fis);
-		    epochv.getDoc().deSerialize(is);
-		    skala.deSerialize(is);
-		    is.close(); 
-		    fis.close();
+			epochv.getDoc().deSerialize(is);
+			skala.deSerialize(is);
+			is.close();
+			fis.close();
 		} catch (Exception e) {
-			Log.e("nk",e.toString());
+			Log.e("nk", e.toString());
 		}
 		skala.invalidate();
 
 	}
-	
+
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
-	    // Save the user's current game state
+		// Save the user's current game state
 		/*
-	    savedInstanceState.putDouble("skala_dy", skala.getDy());
-	    savedInstanceState.putDouble("skala_len", skala.getLen());
-	    savedInstanceState.putInt("skala_zoomlen", skala.getZoomLen());
-	    savedInstanceState.putInt("skala_period", skala.getPeriod());
-	    savedInstanceState.putFloat("skala_mScaleFactor", skala.getScaleFactor());
-	    */
-	    // Always call the superclass so it can save the view hierarchy state
-	    super.onSaveInstanceState(savedInstanceState);
+		 * savedInstanceState.putDouble("skala_dy", skala.getDy());
+		 * savedInstanceState.putDouble("skala_len", skala.getLen());
+		 * savedInstanceState.putInt("skala_zoomlen", skala.getZoomLen());
+		 * savedInstanceState.putInt("skala_period", skala.getPeriod());
+		 * savedInstanceState.putFloat("skala_mScaleFactor",
+		 * skala.getScaleFactor());
+		 */
+		// Always call the superclass so it can save the view hierarchy state
+		super.onSaveInstanceState(savedInstanceState);
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -83,24 +84,26 @@ public class EpochActivity extends ActionBarActivity {
 
 	@Override
 	protected void onPause() {
-        super.onPause();   
+		super.onPause();
 
-    }
+	}
+
 	@Override
 	protected void onStop() {
-	    super.onStop();  // Always call the superclass method first
-	    FileOutputStream fos;
+		super.onStop(); // Always call the superclass method first
+		FileOutputStream fos;
 		try {
-			fos = getApplicationContext().openFileOutput(fileName, Context.MODE_PRIVATE);
+			fos = getApplicationContext().openFileOutput(fileName,
+					Context.MODE_PRIVATE);
 			ObjectOutputStream os = new ObjectOutputStream(fos);
-		    epochv.getDoc().serialize(os);
-		    skala.serialize(os);
-		    os.close();
-		    fos.close();
+			epochv.getDoc().serialize(os);
+			skala.serialize(os);
+			os.close();
+			fos.close();
 		} catch (Exception e) {
-			Log.e("nk",e.toString());
-		}   
-	}	
+			Log.e("nk", e.toString());
+		}
+	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -113,88 +116,107 @@ public class EpochActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
-	super.onCreateContextMenu(menu, v, menuInfo);
+
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
 		menu.setHeaderTitle("Context Menu");
 		menu.add(0, v.getId(), 0, "Action 1");
 		menu.add(0, v.getId(), 0, "Action 2");
 	}
-    public void StartAddEventActivity(String name,String date,String time,int color,int size,int style,int visibility ){
-    	Intent i = new Intent(this, AddEventActivity.class);
-    	i.putExtra("name", name);
-    	i.putExtra("date", date);
-    	i.putExtra("time", time);
-    	i.putExtra("color", color);
-    	i.putExtra("size", size);
-    	i.putExtra("style", style);
-    	i.putExtra("visibility", visibility);
-    	startActivityForResult(i, 2);
-    }
-    public void StartAddEventActivity(String date,String time){
-    	Intent i = new Intent(this, AddEventActivity.class);
-    	i.putExtra("date", date);
-    	i.putExtra("time", time);
-    	startActivityForResult(i, 1);
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	    if (requestCode == 1) {
-	        if(resultCode == RESULT_OK){
-	        	 String name=data.getStringExtra("name");
-	        	 String date=data.getStringExtra("date");
-	        	 String time=data.getStringExtra("time");
-	        	 int boja=data.getIntExtra("boja",Event.DEFEVENTCOLOR);
-	        	 int size=data.getIntExtra("size",Event.DEFEVENTSIZE);
-	        	 int style=data.getIntExtra("style",Event.DEFEVENTSTYLE);
-	        	 int vis=data.getIntExtra("visibility",Event.Visibility.ALWAYS.ordinal());
 
-	        	 try{
-	        	 String pattern = "dd.MM.yyyy HH:mm";
-	             DateTime dateTime  = DateTime.parse(date+" "+time, DateTimeFormat.forPattern(pattern));
-	             //Log.i("nk", dateTime.toString("dd.MM.yyyy HH:mm"));
-	             epochv.addEpoch(name,dateTime,boja,size,style,vis);
-	        	 } catch(Exception e){
-	        		 
-	        	 }
-	        	     	 
-	        }
+	public void StartAddEventActivity(String name, String date, String time,
+			int color, int size, int style, int visibility) {
+		Intent i = new Intent(this, AddEventActivity.class);
+		i.putExtra("name", name);
+		i.putExtra("date", date);
+		i.putExtra("time", time);
+		i.putExtra("color", color);
+		i.putExtra("size", size);
+		i.putExtra("style", style);
+		i.putExtra("visibility", visibility);
+		startActivityForResult(i, 2);
+	}
 
-	        if (resultCode == RESULT_CANCELED) {
-	            //Write your code if there's no result
-	        }
-	    }
-	    
-	    if (requestCode == 2) {
-	        if(resultCode == RESULT_OK){
-	        	 String name=data.getStringExtra("name");
-	        	 String date=data.getStringExtra("date");
-	        	 String time=data.getStringExtra("time");
-	        	 int boja=data.getIntExtra("boja",Event.DEFEVENTCOLOR);
-	        	 int size=data.getIntExtra("size",Event.DEFEVENTSIZE);
-	        	 int style=data.getIntExtra("style",Event.DEFEVENTSTYLE);
-	        	 int vis=data.getIntExtra("visibility",Event.Visibility.ALWAYS.ordinal());
-	        	 try{
-	        	 String pattern = "dd.MM.yyyy HH:mm";
-	             DateTime dateTime  = DateTime.parse(date+" "+time, DateTimeFormat.forPattern(pattern));
-	             epochv.EditEpoch(name,dateTime,boja,size,style,vis);
-	        	 } catch(Exception e){
-	        		 
-	        	 }	     	 
-	        }
+	public void StartAddEventActivity(String date, String time) {
+		Intent i = new Intent(this, AddEventActivity.class);
+		i.putExtra("date", date);
+		i.putExtra("time", time);
+		startActivityForResult(i, 1);
+	}
 
-	        if (resultCode == RESULT_CANCELED) {
-	            //Write your code if there's no result
-	        }
-	    }
-    }
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == 1) {
+			if (resultCode == RESULT_OK) {
+				String name = data.getStringExtra("name");
+				String date = data.getStringExtra("date");
+				String time = data.getStringExtra("time");
+				int boja = data.getIntExtra("boja", Event.DEFEVENTCOLOR);
+				int size = data.getIntExtra("size", Event.DEFEVENTSIZE);
+				int style = data.getIntExtra("style", Event.DEFEVENTSTYLE);
+				int vis = data.getIntExtra("visibility",
+						Event.Visibility.ALWAYS.ordinal());
+
+				try {
+					String pattern = "dd.MM.yyyy HH:mm";
+					DateTime dateTime = DateTime.parse(date + " " + time,
+							DateTimeFormat.forPattern(pattern));
+					// Log.i("nk", dateTime.toString("dd.MM.yyyy HH:mm"));
+					epochv.addEpoch(name, dateTime, boja, size, style, vis);
+				} catch (Exception e) {
+
+				}
+
+			}
+
+			if (resultCode == RESULT_CANCELED) {
+				// Write your code if there's no result
+			}
+		}
+
+		if (requestCode == 2) {
+			if (resultCode == RESULT_OK) {
+				String name = data.getStringExtra("name");
+				String date = data.getStringExtra("date");
+				String time = data.getStringExtra("time");
+				int boja = data.getIntExtra("boja", Event.DEFEVENTCOLOR);
+				int size = data.getIntExtra("size", Event.DEFEVENTSIZE);
+				int style = data.getIntExtra("style", Event.DEFEVENTSTYLE);
+				int vis = data.getIntExtra("visibility",
+						Event.Visibility.ALWAYS.ordinal());
+				try {
+					String pattern = "dd.MM.yyyy HH:mm";
+					DateTime dateTime = DateTime.parse(date + " " + time,
+							DateTimeFormat.forPattern(pattern));
+					epochv.EditEpoch(name, dateTime, boja, size, style, vis);
+				} catch (Exception e) {
+
+				}
+			}
+		}
+
+		if (requestCode == 3) {
+			if (resultCode == RESULT_OK) {
+
+				String des = data.getStringExtra("des");
+				//Log.d("nk", des);
+				epochv.EditEpochDesc(des);
+
+			}
+		}
+
+		if (resultCode == RESULT_CANCELED) {
+			// Write your code if there's no result
+		}
+
+	}
 
 	public void StartEventDesActivity(String description) {
-    	Intent i = new Intent(this, EventDescriptionActivity.class);
-    	i.putExtra("des", description);
-    	startActivityForResult(i, 1);
-	}   
-    
+		Intent i = new Intent(this, EventDescriptionActivity.class);
+		i.putExtra("des", description);
+		startActivityForResult(i, 3);
+	}
 
 }

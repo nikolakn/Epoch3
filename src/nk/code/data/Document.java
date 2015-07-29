@@ -49,6 +49,7 @@ public class Document {
 	public Event addEvent(int dan, int mesec, int godina,int sat, int minut, int x, String name) {
 		double startDate = DateTimeUtils.toJulianDay(new DateTime(godina,mesec,dan,sat,minut).getMillis());
 		Event e = new Event(startDate,x, name);
+		e.description = "<h1>"+name+"</h1></br>";
 		list.add(e);
 		return e;
 	}

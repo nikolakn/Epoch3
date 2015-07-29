@@ -134,8 +134,6 @@ public class EpochView extends View {
 			((EpochActivity) context).StartAddEventActivity(ev.name, date,
 					time, ev.colorLine, ev.look, ev.style, ev.visibility.ordinal());
 		} else {
-			
-			;
 			DateTime dt = new DateTime(DateTimeUtils.fromJulianDay(skala.getDateDouble(yposLong)));
 			String date = dt.toString("dd.MM.yyyy");
 			String time = dt.toString("HH:mm");
@@ -225,6 +223,7 @@ public class EpochView extends View {
 				setYposLong(MotionEventCompat.getY(mev, pointerIndex));
 				ev = doc.getEventFromPos(xposLong - dx, yposLong, skala);
 				if (ev != null){
+					doc.setCurrent(ev);
 					((EpochActivity) context).StartEventDesActivity(ev.description);	
 				}
 			}
@@ -330,6 +329,14 @@ public class EpochView extends View {
 	public Document getDoc() {
 		return doc;
 		
+	}
+
+	public void EditEpochDesc(String des) {
+		Event e=doc.getCurrent();
+		if(e!=null){
+			e.description = des;
+			invalidate();
+		}
 	}
 
 }

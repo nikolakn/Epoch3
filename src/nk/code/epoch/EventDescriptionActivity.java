@@ -3,6 +3,7 @@ package nk.code.epoch;
 
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,6 +22,9 @@ public class EventDescriptionActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_event_description);
 		text = (TextView) findViewById(R.id.editTextdec1);
 		des = "<font size=\"40\" face=\"arial\" color=\"red\">ggg</font><br><br>";
+		des=getIntent().getStringExtra("des");
+		if (des == null)
+			des = "Description";
 		text.setText(Html.fromHtml(des));
 
 		//edit button
@@ -32,7 +36,19 @@ public class EventDescriptionActivity extends ActionBarActivity {
 				startEdit();
 			}
 		});
-	
+		//save button
+		Button save = (Button) findViewById(R.id.descSaveButton1);
+		save.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				//name input validation
+				Intent returnIntent = new Intent();	
+				returnIntent.putExtra("des", des);
+				setResult(RESULT_OK, returnIntent);
+				
+				finish();
+			}
+		});
 
 	}
 
