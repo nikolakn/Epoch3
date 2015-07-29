@@ -26,5 +26,8 @@
     <string name="visibility_">Visibility:</string>
     <string name="title_activity_event_description">EventDescriptionActivity</string>
     <string name="title_activity_edit_event_desc">EditEventDescActivity</string>
+    <string name="close">Close</string>
+    <string name="edit">Edit</string>
+    <string name="done">Done</string>
 
 </resources>

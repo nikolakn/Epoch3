@@ -7,10 +7,28 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="nk.code.epoch.EventDescriptionActivity" >
+    <LinearLayout
+        android:id="@+id/footerdesc"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal" >
 
+        <Button
+            android:id="@+id/descEditButton"
+            android:layout_width= "0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/edit"
+            tools:ignore="ButtonStyle" />
+
+    </LinearLayout>
+    
     <TextView
         android:id="@+id/editTextdec1"
+        android:layout_above="@id/footerdesc"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>

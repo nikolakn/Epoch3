@@ -8,10 +8,32 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="nk.code.epoch.EditEventDescActivity" >
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/footerEditdesc"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/descDoneButton"
+            android:layout_width= "0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/done"
+            tools:ignore="ButtonStyle" />
+
+    </LinearLayout>
+    
+    <EditText
         android:id="@+id/editTextdesk"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_world" />
+        android:layout_above="@id/footerEditdesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollHorizontally="false"
+        android:scrollbars="vertical"
+        android:text="@string/hello_world" 
+        android:inputType="textMultiLine|textNoSuggestions"/>
 
 </RelativeLayout>
