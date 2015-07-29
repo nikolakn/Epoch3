@@ -34,6 +34,11 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
+            android:name=".AddEpochActivity"
+            android:label="@string/add_epoch"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
             android:name=".EventDescriptionActivity"
             android:label="@string/title_activity_event_description" >
         </activity>

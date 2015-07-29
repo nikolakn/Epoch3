@@ -14,8 +14,9 @@ import android.graphics.Paint.Align;
 //time interval, representing time interval in history with start and end date
 public class Epoch extends Event implements Serializable {
 	private static final long serialVersionUID = 1420672609912364061L;
-	public Epoch(double s, int x, String n) {
+	public Epoch(double s,double e, int x, String n) {
 		super(s, x, n);
+		this.end = e;
 		// TODO Auto-generated constructor stub
 	}
 

@@ -1,0 +1,205 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="nk.code.epoch.AddEpochActivity" >
+    <LinearLayout
+        android:id="@+id/footer2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/deleteButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/delete"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/saveButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/save"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/cancelButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            tools:ignore="ButtonStyle" />
+
+    </LinearLayout>
+    	<ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/footer2" >
+        <LinearLayout
+            android:id="@+id/body2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp" >
+            
+            <EditText
+                android:id="@+id/editText12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/Name"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:singleLine="true" >
+            </EditText>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start" />
+            <EditText
+                android:id="@+id/editText22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/dateformat1"
+                android:imeOptions="actionDone"
+                android:inputType="date" />
+
+            <EditText
+                android:id="@+id/editText32"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/timeformat"
+                android:imeOptions="actionDone"
+                android:inputType="time" />
+
+            <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/end_" />          
+            <EditText
+                android:id="@+id/editTextEndDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/dateformat1"
+                android:imeOptions="actionDone"
+                android:inputType="date" />
+
+            <EditText
+                android:id="@+id/editTextEndTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/timeformat"
+                android:imeOptions="actionDone"
+                android:inputType="time" />
+            
+            <Button
+                android:id="@+id/colorButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/set_color" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/size_" />
+
+            <RadioGroup
+                android:id="@+id/radio_group12"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/radio12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:textColor="#f00" />
+
+                <RadioButton
+                    android:id="@+id/radio22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#0f0" />
+
+                <RadioButton
+                    android:id="@+id/radio32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#00f" />
+
+                <RadioButton
+                    android:id="@+id/radio42"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#00f" />
+
+                <RadioButton
+                    android:id="@+id/radio52"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#00f" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/style_" />
+
+            <RadioGroup
+                android:id="@+id/radio_group22"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/sradio12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:textColor="#f00" />
+
+                <RadioButton
+                    android:id="@+id/sradio22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#0f0" />
+
+                <RadioButton
+                    android:id="@+id/sradio32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#00f" />
+
+                <RadioButton
+                    android:id="@+id/sradio42"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#00f" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/visibility_" />
+
+            <Spinner
+                android:id="@+id/Spinner012"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</RelativeLayout>

@@ -1,6 +1,7 @@
 package nk.code.epoch;
 
 import nk.code.data.Document;
+import nk.code.data.Epoch;
 import nk.code.data.Event;
 
 import org.joda.time.DateTime;
@@ -70,9 +71,10 @@ public class EpochView extends View {
 		public boolean onMenuItemClick(MenuItem item) {
 			switch (item.getItemId()) {
 			case 0:
-				addEpoch();
+				addEvent();
 				return true;
 			case 1:
+				addEpoch();
 				//Log.i("nk", "epoch" + Float.toString(xposLong));
 				return true;
 			//case 2:
@@ -87,7 +89,7 @@ public class EpochView extends View {
 		public boolean onMenuItemClick(MenuItem item) {
 			switch (item.getItemId()) {
 			case 0:
-				addEpoch();
+				EditEvent();
 				return true;
 			case 1:
 				ismove = true;
@@ -123,23 +125,62 @@ public class EpochView extends View {
 
 	}
 
-	protected void addEpoch() {
+	protected void addEvent() {
 		// TODO Auto-generated method stub
-		if (ev != null) {
-			DateTime dt = new DateTime(DateTimeUtils.fromJulianDay(ev.start));
-			String date = dt.toString("dd.MM.yyyy");
-			String time = dt.toString("HH:mm");
-			doc.setCurrent(ev);
-			((EpochActivity) context).StartAddEventActivity(ev.name, date,
-					time, ev.colorLine, ev.look, ev.style, ev.visibility.ordinal());
-		} else {
+		if (ev == null) {
 			DateTime dt = new DateTime(DateTimeUtils.fromJulianDay(skala.getDateDouble(yposLong)));
 			String date = dt.toString("dd.MM.yyyy");
-			String time = dt.toString("HH:mm");
+			String time = "0:0";
 			((EpochActivity) context).StartAddEventActivity(date, time);
 		}
 	}
+	protected void addEpoch() {
+		// TODO Auto-generated method stub
+		if (ev == null) {
+			DateTime dt = new DateTime(DateTimeUtils.fromJulianDay(skala.getDateDouble(yposLong)));
+			String date = dt.toString("dd.MM.yyyy");
+			String time = "0:0";
+			int len = skala.getPeriod();
+			dt = dt.minusYears(len);
+			String enddate = dt.toString("dd.MM.yyyy");
+			String endtime = "0:0";
+			((EpochActivity) context).StartAddEpochActivity(enddate, endtime,date , time);
+		}
+	}
 
+	protected void EditEvent() {
+		// TODO Auto-generated method stub
+		if (ev != null) {
+
+			if (ev instanceof Epoch) {
+				Epoch e = (Epoch)ev;
+				DateTime dt = new DateTime(
+						DateTimeUtils.fromJulianDay(ev.start));
+				String date = dt.toString("dd.MM.yyyy");
+				String time = dt.toString("HH:mm");
+				
+				
+				DateTime dt2 = new DateTime(DateTimeUtils.fromJulianDay(e.end));
+				String date2 = dt2.toString("dd.MM.yyyy");
+				String time2 = dt2.toString("HH:mm");
+				doc.setCurrent(ev);
+				((EpochActivity) context).StartAddEpochActivity(ev.name,date2, time2, date,
+						time, ev.colorLine, ev.look, ev.style,ev.visibility.ordinal());
+			
+			} else {
+
+				DateTime dt = new DateTime(
+						DateTimeUtils.fromJulianDay(ev.start));
+				String date = dt.toString("dd.MM.yyyy");
+				String time = dt.toString("HH:mm");
+				doc.setCurrent(ev);
+				((EpochActivity) context).StartAddEventActivity(ev.name, date,
+						time, ev.colorLine, ev.look, ev.style,
+						ev.visibility.ordinal());
+
+			}
+		}
+	}
 	private class LongListener extends GestureDetector.SimpleOnGestureListener {
 		@Override
 		public void onLongPress(MotionEvent e) {
@@ -284,10 +325,24 @@ public class EpochView extends View {
 		this.dx = dx;
 	}
 
-	public void addEpoch(String name, DateTime dateTime,int boja,int size, int style, int vis) {
+	public void addDocEvent(String name, DateTime dateTime,int boja,int size, int style, int vis) {
 		Event e=doc.addEvent(dateTime.getDayOfMonth(), dateTime.getMonthOfYear(),
 				dateTime.getYear(), dateTime.getHourOfDay(),
 				dateTime.getMinuteOfHour(), (int) (xposLong-dx), name);
+		if(e!=null){
+			e.colorLine =boja;
+			e.setLook(size);
+			e.style = style;
+			e.visibility = Event.Visibility.values()[vis];
+			e.visibilityZoom = skala.getZoomLvl();
+		}
+	}
+	
+	public void addDocEpoch(String name, DateTime dateTime,DateTime dateTime2,int boja,int size, int style, int vis) {
+		Event e=doc.addEpoch(dateTime.getDayOfMonth(), dateTime.getMonthOfYear(),
+				dateTime.getYear(), dateTime.getHourOfDay(),dateTime.getMinuteOfHour(),
+				dateTime2.getDayOfMonth(), dateTime2.getMonthOfYear(),dateTime2.getYear(),
+				dateTime2.getHourOfDay(),dateTime2.getMinuteOfHour(), (int) (xposLong-dx), name);
 		if(e!=null){
 			e.colorLine =boja;
 			e.setLook(size);
@@ -305,7 +360,7 @@ public class EpochView extends View {
 		this.yposLong = yposLong;
 	}
 
-	public void EditEpoch(String name, DateTime dateTime,int boja,int size, int style, int vis) {
+	public void EditDocEvent(String name, DateTime dateTime,int boja,int size, int style, int vis) {
 			Event e=doc.getCurrent();
 			if(e!=null){
 			double startDate = DateTimeUtils.toJulianDay(new DateTime(dateTime.getYear(),
@@ -322,9 +377,31 @@ public class EpochView extends View {
 			invalidate();
 
 			}
-		
 	}
+	
+	public void EditDocEpoch(String name, DateTime dateTime,DateTime dateTime2,int boja,int size, int style, int vis) {
+		Event e=doc.getCurrent();
+		if(e!=null && (e instanceof Epoch)){
+		Epoch ep = (Epoch)e;	
+		double startDate = DateTimeUtils.toJulianDay(new DateTime(dateTime.getYear(),
+				dateTime.getMonthOfYear(),dateTime.getDayOfMonth(), 
+				dateTime.getHourOfDay(),dateTime.getMinuteOfHour()).getMillis());
+		
+		double endDate = DateTimeUtils.toJulianDay(new DateTime(dateTime2.getYear(),
+				dateTime2.getMonthOfYear(),dateTime2.getDayOfMonth(), 
+				dateTime2.getHourOfDay(),dateTime2.getMinuteOfHour()).getMillis());	
+		ep.name = name;
+		ep.start = startDate;
+		ep.end = endDate;
+		ep.colorLine =boja;
+		ep.setLook(size);
+		ep.style = style;
+		ep.visibility = Event.Visibility.values()[vis];
+		ep.visibilityZoom = skala.getZoomLvl();
+		invalidate();
 
+		}
+}
 	public Document getDoc() {
 		return doc;
 		

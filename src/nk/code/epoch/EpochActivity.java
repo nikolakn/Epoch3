@@ -138,14 +138,35 @@ public class EpochActivity extends ActionBarActivity {
 		i.putExtra("visibility", visibility);
 		startActivityForResult(i, 2);
 	}
-
+	
+	public void StartAddEpochActivity(String name, String date, String time,
+			String endDate,String endTime,int color, int size, int style, int visibility) {
+		Intent i = new Intent(this, AddEpochActivity.class);
+		i.putExtra("name", name);
+		i.putExtra("date", date);
+		i.putExtra("time", time);
+		i.putExtra("dateend", endDate);
+		i.putExtra("timeend", endTime);		
+		i.putExtra("color", color);
+		i.putExtra("size", size);
+		i.putExtra("style", style);
+		i.putExtra("visibility", visibility);
+		startActivityForResult(i, 5);
+	}
 	public void StartAddEventActivity(String date, String time) {
 		Intent i = new Intent(this, AddEventActivity.class);
 		i.putExtra("date", date);
 		i.putExtra("time", time);
 		startActivityForResult(i, 1);
 	}
-
+	public void StartAddEpochActivity(String date, String time, String endDate, String endTime) {
+		Intent i = new Intent(this, AddEpochActivity.class);
+		i.putExtra("date", date);
+		i.putExtra("time", time);
+		i.putExtra("dateend", endDate);
+		i.putExtra("timeend", endTime);
+		startActivityForResult(i, 4);
+	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 1) {
@@ -164,16 +185,13 @@ public class EpochActivity extends ActionBarActivity {
 					DateTime dateTime = DateTime.parse(date + " " + time,
 							DateTimeFormat.forPattern(pattern));
 					// Log.i("nk", dateTime.toString("dd.MM.yyyy HH:mm"));
-					epochv.addEpoch(name, dateTime, boja, size, style, vis);
+					epochv.addDocEvent(name, dateTime, boja, size, style, vis);
 				} catch (Exception e) {
 
 				}
 
 			}
 
-			if (resultCode == RESULT_CANCELED) {
-				// Write your code if there's no result
-			}
 		}
 
 		if (requestCode == 2) {
@@ -190,13 +208,13 @@ public class EpochActivity extends ActionBarActivity {
 					String pattern = "dd.MM.yyyy HH:mm";
 					DateTime dateTime = DateTime.parse(date + " " + time,
 							DateTimeFormat.forPattern(pattern));
-					epochv.EditEpoch(name, dateTime, boja, size, style, vis);
+					epochv.EditDocEvent(name, dateTime, boja, size, style, vis);
 				} catch (Exception e) {
 
 				}
 			}
 		}
-
+		//edit description
 		if (requestCode == 3) {
 			if (resultCode == RESULT_OK) {
 
@@ -207,6 +225,62 @@ public class EpochActivity extends ActionBarActivity {
 			}
 		}
 
+		//add epoch
+		if (requestCode == 4) {
+			if (resultCode == RESULT_OK) {
+				String name = data.getStringExtra("name");
+				String date = data.getStringExtra("date");
+				String time = data.getStringExtra("time");
+				String dateend = data.getStringExtra("dateend");
+				String timeend = data.getStringExtra("timeend");
+				int boja = data.getIntExtra("boja", Event.DEFEVENTCOLOR);
+				int size = data.getIntExtra("size", Event.DEFEVENTSIZE);
+				int style = data.getIntExtra("style", Event.DEFEVENTSTYLE);
+				int vis = data.getIntExtra("visibility",
+						Event.Visibility.ALWAYS.ordinal());
+
+				try {
+					String pattern = "dd.MM.yyyy HH:mm";
+					DateTime dateTime2 = DateTime.parse(date + " " + time,
+							DateTimeFormat.forPattern(pattern));
+					// Log.i("nk", dateTime.toString("dd.MM.yyyy HH:mm"));
+					DateTime dateTime = DateTime.parse(dateend + " " + timeend,
+							DateTimeFormat.forPattern(pattern));
+							
+					epochv.addDocEpoch(name, dateTime, dateTime2, boja, size, style, vis);
+				} catch (Exception e) {
+
+				}
+
+			}
+
+		}
+		
+		if (requestCode == 5) {
+			if (resultCode == RESULT_OK) {
+				String name = data.getStringExtra("name");
+				String date = data.getStringExtra("date");
+				String time = data.getStringExtra("time");
+				String dateend = data.getStringExtra("dateend");
+				String timeend = data.getStringExtra("timeend");
+				int boja = data.getIntExtra("boja", Event.DEFEVENTCOLOR);
+				int size = data.getIntExtra("size", Event.DEFEVENTSIZE);
+				int style = data.getIntExtra("style", Event.DEFEVENTSTYLE);
+				int vis = data.getIntExtra("visibility",
+						Event.Visibility.ALWAYS.ordinal());
+				try {
+					String pattern = "dd.MM.yyyy HH:mm";
+					DateTime dateTime2 = DateTime.parse(date + " " + time,
+							DateTimeFormat.forPattern(pattern));
+					DateTime dateTime = DateTime.parse(dateend + " " + timeend,
+							DateTimeFormat.forPattern(pattern));
+					epochv.EditDocEpoch(name, dateTime, dateTime2 , boja, size, style, vis);
+				} catch (Exception e) {
+
+				}
+			}
+		}
+		
 		if (resultCode == RESULT_CANCELED) {
 			// Write your code if there's no result
 		}

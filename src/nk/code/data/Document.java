@@ -35,7 +35,7 @@ public class Document {
 	public void addEpoch(int sdan,int smesec, int sgodina,int x, String name,int edan,int emesec, int egodina){
 		double startDate = DateTimeUtils.toJulianDay(new DateTime(sgodina,smesec,sdan,0,0).getMillis());
 		double endDate = DateTimeUtils.toJulianDay(new DateTime(egodina,emesec,edan,0,0).getMillis());
-		Epoch e = new Epoch(startDate,x, name);
+		Epoch e = new Epoch(startDate,endDate,x, name);
 		e.end = endDate;
 		list.add(e);		
 	}
@@ -49,6 +49,15 @@ public class Document {
 	public Event addEvent(int dan, int mesec, int godina,int sat, int minut, int x, String name) {
 		double startDate = DateTimeUtils.toJulianDay(new DateTime(godina,mesec,dan,sat,minut).getMillis());
 		Event e = new Event(startDate,x, name);
+		e.description = "<h1>"+name+"</h1></br>";
+		list.add(e);
+		return e;
+	}
+	
+	public Event addEpoch(int dan, int mesec, int godina,int sat, int minut,int dan2, int mesec2, int godina2,int sat2, int minut2, int x, String name) {
+		double startDate = DateTimeUtils.toJulianDay(new DateTime(godina,mesec,dan,sat,minut).getMillis());
+		double endDate = DateTimeUtils.toJulianDay(new DateTime(godina2,mesec2,dan2,sat2,minut2).getMillis());	
+		Epoch e = new Epoch(startDate, endDate,x, name);
 		e.description = "<h1>"+name+"</h1></br>";
 		list.add(e);
 		return e;

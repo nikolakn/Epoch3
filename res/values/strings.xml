@@ -29,5 +29,9 @@
     <string name="close">Close</string>
     <string name="edit">Edit</string>
     <string name="done">Done</string>
+    <string name="end_">End:</string>
+    <string name="start_">Start:</string>
+    <string name="start">Start</string>
+    <string name="add_epoch">add epoch</string>
 
 </resources>
