@@ -1,6 +1,5 @@
 package nk.code.epoch;
 
-
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
@@ -17,36 +16,44 @@ public class EventDescriptionActivity extends ActionBarActivity {
 
 	private TextView text;
 	private String des;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_description);
 		text = (TextView) findViewById(R.id.editTextdec1);
 		des = "<font size=\"40\" face=\"arial\" color=\"red\">ggg</font><br><br>";
-		des=getIntent().getStringExtra("des");
+		des = getIntent().getStringExtra("des");
 		if (des == null)
 			des = "Description";
+
+		if (savedInstanceState != null) {
+			// Restore value of members from saved state
+			des = savedInstanceState.getString("des");
+
+		}
+
 		text.setText(Html.fromHtml(des));
 		text.setMovementMethod(new ScrollingMovementMethod());
-		//edit button
+		// edit button
 		Button edit = (Button) findViewById(R.id.descEditButton);
 		edit.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//name input validation
+				// name input validation
 				startEdit();
 			}
 		});
-		//save button
+		// save button
 		Button save = (Button) findViewById(R.id.descSaveButton1);
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//name input validation
-				Intent returnIntent = new Intent();	
+				// name input validation
+				Intent returnIntent = new Intent();
 				returnIntent.putExtra("des", des);
 				setResult(RESULT_OK, returnIntent);
-				
+
 				finish();
 			}
 		});
@@ -54,10 +61,11 @@ public class EventDescriptionActivity extends ActionBarActivity {
 	}
 
 	void startEdit() {
-    	Intent i = new Intent(this, EditEventDescActivity.class);
-    	i.putExtra("des", des);
-    	startActivityForResult(i, 1);		
+		Intent i = new Intent(this, EditEventDescActivity.class);
+		i.putExtra("des", des);
+		startActivityForResult(i, 1);
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -76,22 +84,28 @@ public class EventDescriptionActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	 @Override
-	    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		    if (requestCode == 1) {
-		        if(resultCode == RESULT_OK){
-		        	 String mtext=data.getStringExtra("des");
-		        	 des = mtext;
-		        	 text.setText(Html.fromHtml(des));
-		        	     	 
-		        }
 
-		        if (resultCode == RESULT_CANCELED) {
-		            //Write your code if there's no result
-		        }
-		    }
-		    
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == 1) {
+			if (resultCode == RESULT_OK) {
+				String mtext = data.getStringExtra("des");
+				des = mtext;
+				text.setText(Html.fromHtml(des));
+			}
 
-	    }
+			if (resultCode == RESULT_CANCELED) {
+				// Write your code if there's no result
+			}
+		}
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		// Always call the superclass so it can save the view hierarchy state
+		super.onSaveInstanceState(savedInstanceState);
+		// Save the user's current game state
+		savedInstanceState.putString("des", des);
+
+	}
 }
