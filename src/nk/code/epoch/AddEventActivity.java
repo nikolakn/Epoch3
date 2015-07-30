@@ -76,10 +76,10 @@ public class AddEventActivity extends ActionBarActivity implements
 			argtime = savedInstanceState.getString("time");
 			argcolor = savedInstanceState.getInt("boja");
 			argsize = savedInstanceState.getInt("size");
-			argsize = savedInstanceState.getInt("style");
+			argstyle = savedInstanceState.getInt("style");
 			argvisibility = savedInstanceState.getInt("visibility");
 		}
-
+		
 		s.setSelection(argvisibility);
 
 		if (name != null)

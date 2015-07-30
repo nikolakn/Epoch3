@@ -86,10 +86,10 @@ public class AddEpochActivity extends ActionBarActivity implements
 			argtimeend = savedInstanceState.getString("timeend");
 			argcolor = savedInstanceState.getInt("boja");
 			argsize = savedInstanceState.getInt("size");
-			argsize = savedInstanceState.getInt("style");
+			argstyle = savedInstanceState.getInt("style");
 			argvisibility = savedInstanceState.getInt("visibility");
 		}
-
+		
 		s.setSelection(argvisibility);
 
 		if (name != null)

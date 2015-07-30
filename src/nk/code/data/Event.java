@@ -94,8 +94,17 @@ public class Event implements Serializable {
 	}
 	// relative to absolute size
 	public void setLook(int look) {
+		this.look = look;
+		if (look == 0)
+			size = 20;
 		if (look == 1)
 			size = 30;
+		if (look == 2)
+			size = 40;
+		if (look == 3)
+			size = 50;
+		if (look == 4)
+			size = 60;
 
 	}
 	// write event to file
