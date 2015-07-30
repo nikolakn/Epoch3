@@ -66,12 +66,29 @@ public class Event implements Serializable {
 		Paint mPaint = new Paint();
 		mPaint.setAntiAlias(true);
 		mPaint.setTextSize(16);
+		if (look == 0)
+			mPaint.setTextSize(12);
+		if (look == 1)
+			mPaint.setTextSize(14);
+		if (look == 2)
+			mPaint.setTextSize(16);
+		if (look == 3)
+			mPaint.setTextSize(18);
+		if (look == 4)
+			mPaint.setTextSize(20);
+		
 		mPaint.setColor(colorLine);
 		if (y >= 0) {
 			mPaint.setColor(colorLine);
-			if (style == 1)
+			if (style == 0)
 				canvas.drawRect(xx - size / 2, y - size / 2, xx + 
 						size / 2, y + size / 2, mPaint);
+			else if (style == 1)
+				canvas.drawCircle(xx, y, size / 2, mPaint);
+			
+			else if (style == 2)
+				canvas.drawCircle(xx, y, size / 2, mPaint);
+			
 			else
 				canvas.drawCircle(xx, y, size / 2, mPaint);
 			mPaint.setColor(colorText);
