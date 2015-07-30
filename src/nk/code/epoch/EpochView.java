@@ -339,6 +339,12 @@ public class EpochView extends View {
 	}
 	
 	public void addDocEpoch(String name, DateTime dateTime,DateTime dateTime2,int boja,int size, int style, int vis) {
+		if(dateTime.getMillis() < dateTime2.getMillis()){
+			DateTime temp;
+			temp = dateTime;
+			dateTime = dateTime2;
+			dateTime2 = temp;
+		}
 		Event e=doc.addEpoch(dateTime.getDayOfMonth(), dateTime.getMonthOfYear(),
 				dateTime.getYear(), dateTime.getHourOfDay(),dateTime.getMinuteOfHour(),
 				dateTime2.getDayOfMonth(), dateTime2.getMonthOfYear(),dateTime2.getYear(),
@@ -391,6 +397,11 @@ public class EpochView extends View {
 				dateTime2.getMonthOfYear(),dateTime2.getDayOfMonth(), 
 				dateTime2.getHourOfDay(),dateTime2.getMinuteOfHour()).getMillis());	
 		ep.name = name;
+		if(startDate < endDate){
+			double temp = startDate;
+			startDate = endDate;
+			endDate = temp;
+		}
 		ep.start = startDate;
 		ep.end = endDate;
 		ep.colorLine =boja;
