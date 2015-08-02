@@ -1,6 +1,6 @@
 package nk.code.epoch;
 
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 
@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class EventDescriptionActivity extends ActionBarActivity {
+public class EventDescriptionActivity extends AppCompatActivity {
 
 	private TextView text;
 	private String des;

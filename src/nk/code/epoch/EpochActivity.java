@@ -10,10 +10,10 @@ import nk.code.data.Event;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
-import android.support.v7.app.ActionBarActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -21,7 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class EpochActivity extends ActionBarActivity {
+public class EpochActivity extends AppCompatActivity {
 	private ScalaView skala;
 	private EpochView epochv;
 	public static String fileName = "nktemp.ser";

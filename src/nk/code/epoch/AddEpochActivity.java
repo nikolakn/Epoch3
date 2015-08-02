@@ -12,7 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -25,7 +25,7 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 //Activity for Event data input,edit and validation
-public class AddEpochActivity extends ActionBarActivity implements
+public class AddEpochActivity extends AppCompatActivity implements
 		DialogInterface.OnDismissListener {
 
 	private EditText name;
