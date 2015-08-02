@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-
+//prelazak na appcompatactivity
 public class MainActivity extends AppCompatActivity {
 	
 	//private SharedPreferences mPrefs;
