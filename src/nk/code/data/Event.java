@@ -4,8 +4,12 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import nk.code.epoch.R;
 import nk.code.epoch.ScalaView;
 import nk.code.helper.Boja;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -16,12 +20,12 @@ public class Event implements Serializable {
 
 	public enum Visibility {ALWAYS("always"), HEREANDPLUS("here and -"),
 		ONLYHERE("only here"), HEREANDMINUS("here and +");
-	
-		private final String fieldDescription;	
-		
+
+		private final String fieldDescription;
+
 		private Visibility(String value) {
 	        fieldDescription = value;
-	    }	
+	    }
 	    public String getFieldDescription() {
 	        return fieldDescription;
 	    }
@@ -41,6 +45,7 @@ public class Event implements Serializable {
 	public Visibility visibility = Visibility.ALWAYS;
 	public double visibilityZoom;
 	public String description;
+
 	public Event(double s, int x, String n) {
 		name = n;
 		start = s;
@@ -49,6 +54,9 @@ public class Event implements Serializable {
 
 	public void draw(Canvas canvas, ScalaView skala, float dx) {
 		// TODO Auto-generated method stub
+		Resources res = skala.getResources();
+		Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.explosion32);
+
 		if(visibility == Visibility.ONLYHERE){
 			if(skala.getZoomLvl() != visibilityZoom)
 				return;
@@ -60,7 +68,7 @@ public class Event implements Serializable {
 		if(visibility == Visibility.HEREANDPLUS){
 			if(skala.getZoomLvl() < visibilityZoom)
 				return;
-		}		
+		}
 		float y = skala.getPos(start);
 		float xx = x + dx;
 		Paint mPaint = new Paint();
@@ -76,19 +84,22 @@ public class Event implements Serializable {
 			mPaint.setTextSize(18);
 		if (look == 4)
 			mPaint.setTextSize(20);
-		
+
 		mPaint.setColor(colorLine);
 		if (y >= 0) {
 			mPaint.setColor(colorLine);
 			if (style == 0)
-				canvas.drawRect(xx - size / 2, y - size / 2, xx + 
+				canvas.drawRect(xx - size / 2, y - size / 2, xx +
 						size / 2, y + size / 2, mPaint);
 			else if (style == 1)
 				canvas.drawCircle(xx, y, size / 2, mPaint);
-			
+
 			else if (style == 2)
 				canvas.drawCircle(xx, y, size / 2, mPaint);
-			
+
+			else if (style == 3)
+				canvas.drawBitmap(bitmap,xx - size , y - size , mPaint);
+
 			else
 				canvas.drawCircle(xx, y, size / 2, mPaint);
 			mPaint.setColor(colorText);
