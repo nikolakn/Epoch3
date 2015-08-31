@@ -101,7 +101,7 @@ public class Event implements Serializable {
 				canvas.drawCircle(xx, y, size / 2, mPaint);
 
 			else if (style == 2)
-				canvas.drawBitmap(bitmap2,xx - size , y - size , mPaint);
+				canvas.drawBitmap(bitmap2,xx - size , y - size+5 , mPaint);
 
 			else if (style == 3)
 				canvas.drawBitmap(bitmap,xx - size , y - size , mPaint);
