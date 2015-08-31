@@ -45,20 +45,24 @@ public class Event implements Serializable {
 	public Visibility visibility = Visibility.ALWAYS;
 	public double visibilityZoom;
 	public String description;
-
+	private transient Bitmap bitmap2;
+	private transient Bitmap bitmap;
 	public Event(double s, int x, String n) {
 		name = n;
 		start = s;
 		this.x = x;
+		bitmap2 = null;
+		bitmap = null;
+
 	}
 
 	public void draw(Canvas canvas, ScalaView skala, float dx) {
 		// TODO Auto-generated method stub
-		Resources res = skala.getResources();
-		Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.explosion32);
-		Bitmap bitmap2 = BitmapFactory.decodeResource(res, R.drawable.flag4x);
-
-
+		if (bitmap==null || bitmap2==null ){
+			Resources res = skala.getResources();
+			bitmap = BitmapFactory.decodeResource(res, R.drawable.explosion32);
+			bitmap2 = BitmapFactory.decodeResource(res, R.drawable.flag4x);
+		}
 		if(visibility == Visibility.ONLYHERE){
 			if(skala.getZoomLvl() != visibilityZoom)
 				return;

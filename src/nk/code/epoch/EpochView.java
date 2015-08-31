@@ -158,15 +158,15 @@ public class EpochView extends View {
 						DateTimeUtils.fromJulianDay(ev.start));
 				String date = dt.toString("dd.MM.yyyy");
 				String time = dt.toString("HH:mm");
-				
-				
+
+
 				DateTime dt2 = new DateTime(DateTimeUtils.fromJulianDay(e.end));
 				String date2 = dt2.toString("dd.MM.yyyy");
 				String time2 = dt2.toString("HH:mm");
 				doc.setCurrent(ev);
 				((EpochActivity) context).StartAddEpochActivity(ev.name,date2, time2, date,
 						time, ev.colorLine, ev.look, ev.style,ev.visibility.ordinal());
-			
+
 			} else {
 
 				DateTime dt = new DateTime(
@@ -189,7 +189,7 @@ public class EpochView extends View {
 			xposLong = MotionEventCompat.getX(e, pointerIndex);
 			setYposLong(MotionEventCompat.getY(e, pointerIndex));
 			ev = doc.getEventFromPos(xposLong - dx, MotionEventCompat.getY(e, pointerIndex), skala);
-			
+
 			if (ev == null)
 				isEventLongClick = false;
 			else{
@@ -224,14 +224,14 @@ public class EpochView extends View {
 			mLastTouchX = x;
 			mActivePointerId = MotionEventCompat.getPointerId(mev, 0);
 			if(ismove){
-				click = false; 
+				click = false;
 				ismove = false;
 				Event e=doc.getCurrent();
 				if(e!=null){
 					e.x = (int)(x - dx);
 					invalidate();
 				}
-				
+
 			}
 			break;
 		}
@@ -264,7 +264,7 @@ public class EpochView extends View {
 				ev = doc.getEventFromPos(xposLong - dx, yposLong, skala);
 				if (ev != null){
 					doc.setCurrent(ev);
-					((EpochActivity) context).StartEventDesActivity(ev.description);	
+					((EpochActivity) context).StartEventDesActivity(ev.description);
 				}
 			}
 			mActivePointerId = -1;
@@ -337,7 +337,7 @@ public class EpochView extends View {
 			e.visibilityZoom = skala.getZoomLvl();
 		}
 	}
-	
+
 	public void addDocEpoch(String name, DateTime dateTime,DateTime dateTime2,int boja,int size, int style, int vis) {
 		if(dateTime.getMillis() < dateTime2.getMillis()){
 			DateTime temp;
@@ -370,9 +370,9 @@ public class EpochView extends View {
 			Event e=doc.getCurrent();
 			if(e!=null){
 			double startDate = DateTimeUtils.toJulianDay(new DateTime(dateTime.getYear(),
-					dateTime.getMonthOfYear(),dateTime.getDayOfMonth(), 
+					dateTime.getMonthOfYear(),dateTime.getDayOfMonth(),
 					dateTime.getHourOfDay(),dateTime.getMinuteOfHour()).getMillis());
-				
+
 			e.name = name;
 			e.start = startDate;
 			e.colorLine =boja;
@@ -384,18 +384,18 @@ public class EpochView extends View {
 
 			}
 	}
-	
+
 	public void EditDocEpoch(String name, DateTime dateTime,DateTime dateTime2,int boja,int size, int style, int vis) {
 		Event e=doc.getCurrent();
 		if(e!=null && (e instanceof Epoch)){
-		Epoch ep = (Epoch)e;	
+		Epoch ep = (Epoch)e;
 		double startDate = DateTimeUtils.toJulianDay(new DateTime(dateTime.getYear(),
-				dateTime.getMonthOfYear(),dateTime.getDayOfMonth(), 
+				dateTime.getMonthOfYear(),dateTime.getDayOfMonth(),
 				dateTime.getHourOfDay(),dateTime.getMinuteOfHour()).getMillis());
-		
+
 		double endDate = DateTimeUtils.toJulianDay(new DateTime(dateTime2.getYear(),
-				dateTime2.getMonthOfYear(),dateTime2.getDayOfMonth(), 
-				dateTime2.getHourOfDay(),dateTime2.getMinuteOfHour()).getMillis());	
+				dateTime2.getMonthOfYear(),dateTime2.getDayOfMonth(),
+				dateTime2.getHourOfDay(),dateTime2.getMinuteOfHour()).getMillis());
 		ep.name = name;
 		if(startDate < endDate){
 			double temp = startDate;
@@ -415,7 +415,7 @@ public class EpochView extends View {
 }
 	public Document getDoc() {
 		return doc;
-		
+
 	}
 
 	public void EditEpochDesc(String des) {
