@@ -56,6 +56,8 @@ public class Event implements Serializable {
 		// TODO Auto-generated method stub
 		Resources res = skala.getResources();
 		Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.explosion32);
+		Bitmap bitmap2 = BitmapFactory.decodeResource(res, R.drawable.flag4x);
+
 
 		if(visibility == Visibility.ONLYHERE){
 			if(skala.getZoomLvl() != visibilityZoom)
@@ -95,7 +97,7 @@ public class Event implements Serializable {
 				canvas.drawCircle(xx, y, size / 2, mPaint);
 
 			else if (style == 2)
-				canvas.drawCircle(xx, y, size / 2, mPaint);
+				canvas.drawBitmap(bitmap2,xx - size , y - size , mPaint);
 
 			else if (style == 3)
 				canvas.drawBitmap(bitmap,xx - size , y - size , mPaint);
