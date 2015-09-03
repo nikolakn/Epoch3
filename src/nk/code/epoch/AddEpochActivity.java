@@ -47,10 +47,10 @@ public class AddEpochActivity extends AppCompatActivity implements
 		name = (EditText) findViewById(R.id.editText12);
 		date = (EditText) findViewById(R.id.editText22);
 		time = (EditText) findViewById(R.id.editText32);
-		
+
 		enddate = (EditText) findViewById(R.id.editTextEndDate);
 		endtime = (EditText) findViewById(R.id.editTextEndTime);
-		
+
 		colorb = (Button) findViewById(R.id.colorButton2);
 		radiog1 = (RadioGroup) findViewById(R.id.radio_group12);
 		radiog2 = (RadioGroup) findViewById(R.id.radio_group22);
@@ -89,7 +89,7 @@ public class AddEpochActivity extends AppCompatActivity implements
 			argstyle = savedInstanceState.getInt("style");
 			argvisibility = savedInstanceState.getInt("visibility");
 		}
-		
+
 		s.setSelection(argvisibility);
 
 		if (name != null)
@@ -98,7 +98,7 @@ public class AddEpochActivity extends AppCompatActivity implements
 			date.setText(argdate);
 		if (time != null)
 			time.setText(argtime);
-		
+
 		if (enddate != null)
 			enddate.setText(argdateend);
 		if (endtime != null)
@@ -138,9 +138,9 @@ public class AddEpochActivity extends AppCompatActivity implements
 
 		}
 
-		String color_array[] = { "#33b5e5", "#aa66cc", "#99cc00", "#ffbb33",
-				"#ff4444", "#0099cc", "#9933cc", "#669900", "#ff8800",
-				"#cc0000", "#ffffff", "#eeeeee", "#cccccc", "#888888" };
+		String color_array[] = { "#ff8000", "#fcb314", "#067ab4", "#00ff00",
+				"#f2ff00", "#19e3d9", "#52a74f", "#fedf83", "#9c2902",
+				"#cc0000", "#800080", "#696969", "#95a484", "#00ffff" };
 		int[] mColor = new int[color_array.length];
 		for (int i = 0; i < color_array.length; i++) {
 			mColor[i] = Color.parseColor(color_array[i]);
@@ -209,7 +209,7 @@ public class AddEpochActivity extends AppCompatActivity implements
 				return false;
 			}
 		});
-		
+
 		// validate input for date
 		enddate.setOnEditorActionListener(new OnEditorActionListener() {
 			@Override
@@ -230,7 +230,7 @@ public class AddEpochActivity extends AppCompatActivity implements
 				return false;
 			}
 		});
-		
+
 		// validate input for time
 		endtime.setOnEditorActionListener(new OnEditorActionListener() {
 			@Override
