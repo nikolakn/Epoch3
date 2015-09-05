@@ -33,5 +33,7 @@
     <string name="start_">Start:</string>
     <string name="start">Start</string>
     <string name="add_epoch">add epoch</string>
-
+ 	<string name="load">Load</string>
+ 	<string name="title_">"Title: "</string>
+ 	<string name="new_">New</string>
 </resources>

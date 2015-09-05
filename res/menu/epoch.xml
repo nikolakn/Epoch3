@@ -8,5 +8,11 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never"/>
+	<item android:id="@+id/epoch_menu_new"
+          android:title="@string/new_" />
+    <item android:id="@+id/epoch_menu_open"
+          android:title="@string/load" />
+    <item android:id="@+id/epoch_menu_save"
+          android:title="@string/save" />
 
 </menu>
