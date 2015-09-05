@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import nk.code.data.EpochDatabase;
 import nk.code.data.Event;
 
 import org.joda.time.DateTime;
@@ -14,6 +15,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -335,6 +337,9 @@ public class EpochActivity extends AppCompatActivity {
 
 	protected void save() {
 		Log.d("nk","save");
+		EpochDatabase helper=new EpochDatabase(this);
+		SQLiteDatabase database=helper.getWritableDatabase();
+		epochv.saveToDatabase(database);
 
 	}
 	protected void newEpoch(String dialogRez) {

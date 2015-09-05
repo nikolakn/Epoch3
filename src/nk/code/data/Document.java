@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import nk.code.epoch.ScalaView;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
+
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Canvas;
 
 //Collection of Events that represent epoch
@@ -15,8 +18,10 @@ public class Document {
 
 	private ArrayList<Event> list = new ArrayList<Event>();
 	private int index=-1;
-	public Document(){
+	private String title="";
 
+	public Document(String t){
+		title = t;
 	}
 
 	public void addEvent(Event e){
@@ -89,6 +94,7 @@ public class Document {
 	}
 	// write document to file
 	public void serialize(ObjectOutputStream os) throws IOException{
+		os.writeUTF(title);
 		os.writeInt(index);
 		os.writeInt(list.size());
         for(Event e : list){
@@ -98,6 +104,7 @@ public class Document {
 	// load document from file
 	public void deSerialize(ObjectInputStream is) throws IOException, ClassNotFoundException{
 		list.clear();
+		title = is.readUTF();
 		index = is.readInt();
 		int s=is.readInt();
 		for(int i=0; i<s ;i++){
@@ -129,5 +136,43 @@ public class Document {
 		if(index>list.size())
 			return null;
 		return list.get(index);
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void saveToDatabase(SQLiteDatabase database){
+
+		for(Event e : list){
+			ContentValues values=new ContentValues();
+			values.put(EpochDatabase.U_EPOCH, title);
+			values.put(EpochDatabase.U_NAME, e.name);
+			values.put(EpochDatabase.U_START, e.start);
+			values.put(EpochDatabase.U_DESCRIPTION, e.description);
+			values.put(EpochDatabase.U_SIZE, e.size);
+			values.put(EpochDatabase.U_STYLE, e.style);
+			values.put(EpochDatabase.U_COLOR, e.colorLine);
+
+			values.put(EpochDatabase.U_VISIBILITY, e.visibilityZoom);
+			values.put(EpochDatabase.U_Y, e.x);
+			values.put(EpochDatabase.U_LOOK, e.look);
+			if(e instanceof Event){
+				values.put(EpochDatabase.U_TYPE, 0);
+			}
+			if(e instanceof Epoch){
+				Epoch a=(Epoch)e;
+				values.put(EpochDatabase.U_TYPE, 0);
+				values.put(EpochDatabase.U_END, a.end);
+
+			}
+			database.insert(EpochDatabase.U_TABLE,null,values);
+        }
+
+
 	}
 }

@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Canvas;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
@@ -110,7 +111,7 @@ public class EpochView extends View {
 	public EpochView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.context = context;
-		doc = new Document();
+		doc = new Document("wwII");
 		doc.addEvent(19, 10, 1982, 100, "Nikola");
 		doc.addEvent(1, 1, 1990, 200, "90");
 		doc.addEvent(31, 12, 1980, 300, "80");
@@ -426,4 +427,7 @@ public class EpochView extends View {
 		}
 	}
 
+	public void saveToDatabase(SQLiteDatabase database){
+		doc.saveToDatabase(database);
+	}
 }
