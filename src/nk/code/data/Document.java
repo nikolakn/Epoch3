@@ -10,8 +10,10 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Canvas;
+import android.util.Log;
 
 //Collection of Events that represent epoch
 public class Document {
@@ -173,6 +175,20 @@ public class Document {
 			database.insert(EpochDatabase.U_TABLE,null,values);
         }
 
+
+	}
+	public void openFromDatabase(SQLiteDatabase database){
+		String[] allColumns = { EpochDatabase.U_NAME };
+		Cursor cursor = database.query(EpochDatabase.U_TABLE,
+				allColumns, EpochDatabase.U_EPOCH + " = '" + title+"'", null,
+		        null, null, null);
+		cursor.moveToFirst();
+		  while (!cursor.isAfterLast()) {
+			  Log.d("nk",cursor.getString(0));
+			  cursor.moveToNext();
+		    }
+	    // make sure to close the cursor
+	    cursor.close();
 
 	}
 }

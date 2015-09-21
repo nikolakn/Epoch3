@@ -32,7 +32,8 @@ public class EpochActivity extends AppCompatActivity {
 	private EpochView epochv;
 	public static String fileName = "nktemp.ser";
 	private String dialogRez;
-
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -340,6 +341,7 @@ public class EpochActivity extends AppCompatActivity {
 		EpochDatabase helper=new EpochDatabase(this);
 		SQLiteDatabase database=helper.getWritableDatabase();
 		epochv.saveToDatabase(database);
+		skala.saveToDatabase(database, epochv.getDoc().getTitle());
 
 	}
 	protected void newEpoch(String dialogRez) {
@@ -348,5 +350,8 @@ public class EpochActivity extends AppCompatActivity {
 	}
 	protected void openEpoch() {
 		Log.d("nk","Open");
+		EpochDatabase helper=new EpochDatabase(this);
+		SQLiteDatabase database=helper.getWritableDatabase();
+		epochv.getDoc().openFromDatabase(database);
 	}
 }
