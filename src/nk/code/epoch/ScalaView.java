@@ -11,9 +11,13 @@ import java.io.ObjectOutputStream;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
 
+import nk.code.data.EpochDatabase;
+
 import nk.code.doc.NkSkala;
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
@@ -356,5 +360,18 @@ public class ScalaView extends View {
 		setPeriod(is.readInt());
 		setScaleFactor(is.readFloat());
 		is.close();      
+	}
+	
+	public void saveToDatabase(SQLiteDatabase database,String title){
+		ContentValues values=new ContentValues();
+		values.put(EpochDatabase.S_EPOCH, title);
+		values.put(EpochDatabase.S_DY, getDy());
+		values.put(EpochDatabase.S_LEN, getLen());
+		values.put(EpochDatabase.S_ZOOM,getZoomLen());
+		values.put(EpochDatabase.S_PERIOD,getPeriod());
+		values.put(EpochDatabase.S_SCALE, getScaleFactor());
+
+		database.insert(EpochDatabase.S_TABLE,null,values);
+
 	}
 }

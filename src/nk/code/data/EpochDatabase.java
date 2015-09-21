@@ -23,6 +23,19 @@ public class EpochDatabase extends SQLiteAssetHelper {
 		public static final String U_LOOK= "look";
 		public static final String U_EXTRA1= "extra1";
 		
+		public static final String S_TABLE = "skala";
+		public static final String S_ID = "id";
+		public static final String S_EPOCH = "epoch";
+		public static final String S_DY = "dy";
+		public static final String S_LEN= "len";
+		public static final String S_ZOOM = "zoomlen";
+		public static final String S_PERIOD = "period";
+		public static final String S_SCALE= "scale";
+		
+		public static final String N_TABLE = "nazivi";
+		public static final String N_ID = "id";
+		public static final String N_IME = "ime";
+		
 	    public EpochDatabase(Context context) {
 	        super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	    }
