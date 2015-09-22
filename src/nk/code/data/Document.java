@@ -13,7 +13,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Canvas;
-import android.util.Log;
 
 //Collection of Events that represent epoch
 public class Document {
@@ -149,7 +148,11 @@ public class Document {
 	}
 
 	public void saveToDatabase(SQLiteDatabase database){
-
+		// Define 'where' part of query.
+		String selection = EpochDatabase.U_EPOCH +"='"+title+"'";
+		// Specify arguments in placeholder order.
+		// Issue SQL statement.
+		database.delete(EpochDatabase.U_TABLE, selection,null);
 		for(Event e : list){
 			ContentValues values=new ContentValues();
 			values.put(EpochDatabase.U_EPOCH, title);
@@ -168,7 +171,7 @@ public class Document {
 			}
 			if(e instanceof Epoch){
 				Epoch a=(Epoch)e;
-				values.put(EpochDatabase.U_TYPE, 0);
+				values.put(EpochDatabase.U_TYPE, 1);
 				values.put(EpochDatabase.U_END, a.end);
 
 			}
@@ -178,13 +181,36 @@ public class Document {
 
 	}
 	public void openFromDatabase(SQLiteDatabase database){
-		String[] allColumns = { EpochDatabase.U_NAME };
+		String[] allColumns = { EpochDatabase.U_NAME,EpochDatabase.U_START,EpochDatabase.U_DESCRIPTION,
+				EpochDatabase.U_SIZE,EpochDatabase.U_STYLE,EpochDatabase.U_COLOR,
+				EpochDatabase.U_VISIBILITY,EpochDatabase.U_Y,EpochDatabase.U_LOOK,EpochDatabase.U_TYPE,EpochDatabase.U_END};
 		Cursor cursor = database.query(EpochDatabase.U_TABLE,
 				allColumns, EpochDatabase.U_EPOCH + " = '" + title+"'", null,
 		        null, null, null);
 		cursor.moveToFirst();
+		list.clear();
 		  while (!cursor.isAfterLast()) {
-			  Log.d("nk",cursor.getString(0));
+			  if(cursor.getInt(9)==0){
+					Event e = new Event(cursor.getDouble(1),cursor.getInt(7), cursor.getString(0));
+					e.description = cursor.getString(2);
+					e.size = cursor.getInt(3);
+					e.style =cursor.getInt(4);
+					e.colorLine = cursor.getInt(5);
+					e.visibilityZoom = cursor.getInt(6);
+					e.look= cursor.getInt(8);
+					list.add(e);			  
+				  
+			  }
+			  if(cursor.getInt(9)==1){	  
+					Epoch e = new Epoch(cursor.getDouble(1),cursor.getDouble(10),cursor.getInt(7), cursor.getString(0));
+					e.description = cursor.getString(2);
+					e.size = cursor.getInt(3);
+					e.style =cursor.getInt(4);
+					e.colorLine = cursor.getInt(5);
+					e.visibilityZoom = cursor.getInt(6);
+					e.look= cursor.getInt(8);
+					list.add(e);			  
+			  }
 			  cursor.moveToNext();
 		    }
 	    // make sure to close the cursor
