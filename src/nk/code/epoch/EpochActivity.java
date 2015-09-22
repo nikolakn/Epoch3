@@ -11,9 +11,7 @@ import nk.code.data.Event;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import android.annotation.SuppressLint;
-//import android.app.AlertDialog;
 import android.content.Context;
-//import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -33,7 +31,6 @@ public class EpochActivity extends AppCompatActivity {
 	public static String fileName = "nktemp.ser";
 	//private String dialogRez;
 	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,27 +46,30 @@ public class EpochActivity extends AppCompatActivity {
 			epochv.newDoc(name);
 			skala.init(epochv);
 			openEpoch();
-		}
-		else if (newname != null){
+			getIntent().removeExtra(MainActivity.EXTRA_MESSAGE); 
 			
+		}
+		else if (newname != null){	
 			epochv.init(skala);
 			epochv.newDoc(newname);
 			skala.init(epochv);		
+			getIntent().removeExtra(MainActivity.EXTRA_MESSAGE_NEW); 
 		}
 		else {
 			epochv.init(skala);
-			skala.init(epochv);
-
+			skala.init(epochv);	
 			try {
 				FileInputStream fis = getApplicationContext().openFileInput(fileName);
 				ObjectInputStream is = new ObjectInputStream(fis);
 				epochv.getDoc().deSerialize(is);
-				skala.deSerialize(is);
+				//skala.deSerialize(is);
 				is.close();
 				fis.close();
 			} catch (Exception e) {
 				Log.e("nk", e.toString());
 			}
+			
+			openEpoch();
 		}
 		skala.invalidate();
 
@@ -97,6 +97,7 @@ public class EpochActivity extends AppCompatActivity {
 	@Override
 	protected void onStop() {
 		super.onStop(); // Always call the superclass method first
+		
 		FileOutputStream fos;
 		try {
 			fos = getApplicationContext().openFileOutput(fileName, Context.MODE_PRIVATE);
@@ -108,6 +109,8 @@ public class EpochActivity extends AppCompatActivity {
 		} catch (Exception e) {
 			Log.e("nk", e.toString());
 		}
+		
+		save();
 	}
 
 	@SuppressLint("InflateParams")
@@ -338,7 +341,7 @@ public class EpochActivity extends AppCompatActivity {
 	}
 
 	protected void save() {
-		Log.d("nk","save");
+		
 		EpochDatabase helper=new EpochDatabase(this);
 		SQLiteDatabase database=helper.getWritableDatabase();
 		epochv.saveToDatabase(database);
@@ -350,7 +353,7 @@ public class EpochActivity extends AppCompatActivity {
 
 	}
 	protected void openEpoch() {
-		Log.d("nk","Open");
+		//Log.d("nk","Open");
 		EpochDatabase helper=new EpochDatabase(this);
 		SQLiteDatabase database=helper.getWritableDatabase();
 		epochv.getDoc().openFromDatabase(database);

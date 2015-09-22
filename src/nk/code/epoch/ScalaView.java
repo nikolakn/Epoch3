@@ -45,7 +45,7 @@ public class ScalaView extends View {
 	private NkSkala skala;
 	private Paint gradPaint;
 	private final int g1 = Color.rgb(60, 60, 230);
-	private final int g2 = Color.rgb(50, 230, 50);;
+	private final int g2 = Color.rgb(50, 230, 50);
 	float mRotation = 0f;
 	float[] mPoints = { 0.5f, 0f, 0.5f, 1f, 0f, 0.5f, 1f, 0.5f };
 	private float mLastTouchY;
@@ -53,6 +53,7 @@ public class ScalaView extends View {
 	// private float mPosY;
 	private int mActivePointerId = INVALID_POINTER_ID;
 	private float scale = 50;
+	private float dx;
 	// private static final String TAG = "Touch";
 
 	// These matrices will be used to move and zoom image
@@ -348,6 +349,7 @@ public class ScalaView extends View {
 
 	public void serialize(ObjectOutputStream os) throws IOException{	
 		os.writeDouble(getDy());
+		os.writeDouble(getDx());
 		os.writeDouble(getLen());
 		os.writeInt(getZoomLen());
 		os.writeInt(getPeriod());
@@ -355,6 +357,7 @@ public class ScalaView extends View {
 	}
 	public void deSerialize(ObjectInputStream is) throws IOException, ClassNotFoundException{
 		setDy(is.readDouble());
+		setDx((float)is.readDouble());
 		setLen(is.readDouble());
 		setZoomLen(is.readInt());
 		setPeriod(is.readInt());
@@ -372,6 +375,7 @@ public class ScalaView extends View {
 		ContentValues values=new ContentValues();
 		values.put(EpochDatabase.S_EPOCH, title);
 		values.put(EpochDatabase.S_DY, getDy());
+		values.put(EpochDatabase.S_DX, getDx());
 		values.put(EpochDatabase.S_LEN, getLen());
 		values.put(EpochDatabase.S_ZOOM,getZoomLen());
 		values.put(EpochDatabase.S_PERIOD,getPeriod());
@@ -384,7 +388,7 @@ public class ScalaView extends View {
 	}
 
 	public void LoadFromDatabase(SQLiteDatabase database,String title){
-		String[] allColumns = { EpochDatabase.S_DY,EpochDatabase.S_LEN,EpochDatabase.S_ZOOM,
+		String[] allColumns = { EpochDatabase.S_DY,EpochDatabase.S_DX,EpochDatabase.S_LEN,EpochDatabase.S_ZOOM,
 				EpochDatabase.S_PERIOD,EpochDatabase.S_SCALE};
 		Cursor cursor = database.query(EpochDatabase.S_TABLE,
 				allColumns, EpochDatabase.S_EPOCH + " = '" + title+"'", null,
@@ -392,14 +396,21 @@ public class ScalaView extends View {
 		cursor.moveToFirst();
 		  while (!cursor.isAfterLast()) {
 				setDy(cursor.getDouble(0));
-				setLen(cursor.getDouble(1));
-				setZoomLen( cursor.getInt(2));
-				setPeriod( cursor.getInt(3));
-				setScaleFactor(cursor.getFloat(4));			  
+				setDx((float)cursor.getDouble(1));
+				setLen(cursor.getDouble(2));
+				setZoomLen( cursor.getInt(3));
+				setPeriod( cursor.getInt(4));
+				setScaleFactor(cursor.getFloat(5));			  
 
 				cursor.moveToNext();
 		    }
 	    // make sure to close the cursor
 	    cursor.close();
+	}
+	public float getDx() {
+		return dx;
+	}
+	public void setDx(float dx) {
+		this.dx = dx;
 	}
 }

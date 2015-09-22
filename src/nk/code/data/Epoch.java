@@ -23,7 +23,7 @@ public class Epoch extends Event implements Serializable {
 	public double end;
 
 	@Override
-	public void draw(Canvas canvas, ScalaView skala, float dx) {
+	public void draw(Canvas canvas, ScalaView skala) {
 
 		if(visibility == Visibility.ONLYHERE){
 			if(skala.getZoomLvl() != visibilityZoom)
@@ -40,7 +40,7 @@ public class Epoch extends Event implements Serializable {
 
 		float y = skala.getPos(start);
 		float y2 = skala.getPos(end);
-		float xx = x + dx;
+		float xx = x + skala.getDx();
 		Paint mPaint = new Paint();
 		mPaint.setAntiAlias(true);
 		mPaint.setTextSize(16);

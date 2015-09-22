@@ -13,6 +13,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Canvas;
+import android.util.Log;
 
 //Collection of Events that represent epoch
 public class Document {
@@ -46,9 +47,9 @@ public class Document {
 		list.add(e);
 	}
 
-	public void draw(Canvas canvas, ScalaView skala, float dx){
+	public void draw(Canvas canvas, ScalaView skala){
         for(Event e : list){
-        	e.draw(canvas, skala, dx);
+        	e.draw(canvas, skala);
         }
 	}
 
@@ -96,16 +97,19 @@ public class Document {
 	// write document to file
 	public void serialize(ObjectOutputStream os) throws IOException{
 		os.writeUTF(title);
+		/*
 		os.writeInt(index);
 		os.writeInt(list.size());
         for(Event e : list){
         	e.serialize(os);
         }
+        */
 	}
 	// load document from file
 	public void deSerialize(ObjectInputStream is) throws IOException, ClassNotFoundException{
 		list.clear();
 		title = is.readUTF();
+		/*
 		index = is.readInt();
 		int s=is.readInt();
 		for(int i=0; i<s ;i++){
@@ -119,6 +123,7 @@ public class Document {
 				list.add(e);
 			}
 		}
+		*/
 	}
 
 	public int getIndex(Event ev) {

@@ -56,7 +56,7 @@ public class Event implements Serializable {
 
 	}
 
-	public void draw(Canvas canvas, ScalaView skala, float dx) {
+	public void draw(Canvas canvas, ScalaView skala) {
 		// TODO Auto-generated method stub
 		if (bitmap==null || bitmap2==null ){
 			Resources res = skala.getResources();
@@ -76,7 +76,7 @@ public class Event implements Serializable {
 				return;
 		}
 		float y = skala.getPos(start);
-		float xx = x + dx;
+		float xx = x + skala.getDx();
 		Paint mPaint = new Paint();
 		mPaint.setAntiAlias(true);
 		mPaint.setTextSize(16);

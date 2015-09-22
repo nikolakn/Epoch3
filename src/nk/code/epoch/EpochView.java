@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Canvas;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.GestureDetector;
@@ -37,7 +38,7 @@ public class EpochView extends View {
 	float[] mPoints = { 0.5f, 0f, 0.5f, 1f, 0f, 0.5f, 1f, 0.5f };
 	DateTime now = new DateTime();
 	private float mLastTouchX;
-	private float dx;
+	
 	private float xposLong;
 	private float yposLong;
 	private GestureDetector gestureDetector;
@@ -76,11 +77,7 @@ public class EpochView extends View {
 				return true;
 			case 1:
 				addEpoch();
-				//Log.i("nk", "epoch" + Float.toString(xposLong));
 				return true;
-			//case 2:
-			//	Log.i("nk", "people" + Float.toString(xposLong));
-			//	return true;
 			}
 			return false;
 		}
@@ -111,10 +108,7 @@ public class EpochView extends View {
 	public EpochView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.context = context;
-		doc = new Document("wwII");
-		doc.addEvent(19, 10, 1982, 100, "Nikola");
-		doc.addEvent(1, 1, 1990, 200, "90");
-		doc.addEvent(31, 12, 1980, 300, "80");
+		doc = new Document("epochroot");;
 		doc.addEpoch(1, 1, 2015, 40, "epoha", 1, 1, 1950);
 		now = now.minusYears(2);
 		float rotation = 0.0f;
@@ -189,13 +183,12 @@ public class EpochView extends View {
 			final int pointerIndex = MotionEventCompat.getActionIndex(e);
 			xposLong = MotionEventCompat.getX(e, pointerIndex);
 			setYposLong(MotionEventCompat.getY(e, pointerIndex));
-			ev = doc.getEventFromPos(xposLong - dx, MotionEventCompat.getY(e, pointerIndex), skala);
+			ev = doc.getEventFromPos(xposLong - skala.getDx(), MotionEventCompat.getY(e, pointerIndex), skala);
 
 			if (ev == null)
 				isEventLongClick = false;
 			else{
 				doc.setCurrent(ev);
-				//Log.d("nk","nasao " + ev.name);
 				isEventLongClick = true;
 			}
 			showContextMenu();
@@ -229,7 +222,7 @@ public class EpochView extends View {
 				ismove = false;
 				Event e=doc.getCurrent();
 				if(e!=null){
-					e.x = (int)(x - dx);
+					e.x = (int)(x - skala.getDx());
 					invalidate();
 				}
 
@@ -248,7 +241,9 @@ public class EpochView extends View {
 				float x = MotionEventCompat.getX(mev, pointerIndex);
 				// Calculate the distance moved
 				// final float dx = x - mLastTouchX;
+				float dx = skala.getDx();
 				dx += (x - mLastTouchX);
+				skala.setDx(dx);
 				invalidate();
 				mLastTouchX = x;
 			}
@@ -262,7 +257,7 @@ public class EpochView extends View {
 				final int pointerIndex = MotionEventCompat.getActionIndex(mev);
 				xposLong = MotionEventCompat.getX(mev, pointerIndex);
 				setYposLong(MotionEventCompat.getY(mev, pointerIndex));
-				ev = doc.getEventFromPos(xposLong - dx, yposLong, skala);
+				ev = doc.getEventFromPos(xposLong - skala.getDx(), yposLong, skala);
 				if (ev != null){
 					doc.setCurrent(ev);
 					((EpochActivity) context).StartEventDesActivity(ev.description);
@@ -309,7 +304,7 @@ public class EpochView extends View {
 		// canvas.rotate(mRotation, 0.5f, 0.5f);
 		// canvas.drawLines(mPoints, mPaint);
 		if (skala != null) {
-			doc.draw(canvas, skala, dx);
+			doc.draw(canvas, skala);
 		}
 		canvas.restore();
 	}
@@ -319,17 +314,17 @@ public class EpochView extends View {
 	}
 
 	public float getDx() {
-		return dx;
+		return skala.getDx();
 	}
 
 	public void setDx(float dx) {
-		this.dx = dx;
+		skala.setDx(dx);
 	}
 
 	public void addDocEvent(String name, DateTime dateTime,int boja,int size, int style, int vis) {
 		Event e=doc.addEvent(dateTime.getDayOfMonth(), dateTime.getMonthOfYear(),
 				dateTime.getYear(), dateTime.getHourOfDay(),
-				dateTime.getMinuteOfHour(), (int) (xposLong-dx), name);
+				dateTime.getMinuteOfHour(), (int) (xposLong-skala.getDx()), name);
 		if(e!=null){
 			e.colorLine =boja;
 			e.setLook(size);
@@ -349,7 +344,7 @@ public class EpochView extends View {
 		Event e=doc.addEpoch(dateTime.getDayOfMonth(), dateTime.getMonthOfYear(),
 				dateTime.getYear(), dateTime.getHourOfDay(),dateTime.getMinuteOfHour(),
 				dateTime2.getDayOfMonth(), dateTime2.getMonthOfYear(),dateTime2.getYear(),
-				dateTime2.getHourOfDay(),dateTime2.getMinuteOfHour(), (int) (xposLong-dx), name);
+				dateTime2.getHourOfDay(),dateTime2.getMinuteOfHour(), (int) (xposLong-skala.getDx()), name);
 		if(e!=null){
 			e.colorLine =boja;
 			e.setLook(size);

@@ -31,6 +31,7 @@ public class EpochDatabase extends SQLiteAssetHelper {
 		public static final String S_ZOOM = "zoomlen";
 		public static final String S_PERIOD = "period";
 		public static final String S_SCALE= "scale";
+		public static final String S_DX= "dx";
 		
 		public static final String N_TABLE = "nazivi";
 		public static final String N_ID = "id";
