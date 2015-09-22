@@ -11,9 +11,9 @@ import nk.code.data.Event;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
+//import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
+//import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -21,17 +21,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.LayoutInflater;
+//import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
+//import android.widget.EditText;
 
 public class EpochActivity extends AppCompatActivity {
 	private ScalaView skala;
 	private EpochView epochv;
 	public static String fileName = "nktemp.ser";
-	private String dialogRez;
+	//private String dialogRez;
 	
 	
 	@Override
@@ -120,6 +120,7 @@ public class EpochActivity extends AppCompatActivity {
 		if (id == R.id.action_settings) {
 			return true;
 		}
+		/*
 		if (id == R.id.epoch_menu_new) {
 
 			LayoutInflater li = LayoutInflater.from(this);
@@ -162,6 +163,7 @@ public class EpochActivity extends AppCompatActivity {
 			save();
 			return true;
 		}
+		*/
 
 		return super.onOptionsItemSelected(item);
 	}
