@@ -43,11 +43,18 @@ public class EpochActivity extends AppCompatActivity {
 		epochv = (EpochView) findViewById(R.id.epoch);
 
 		String name = getIntent().getStringExtra(MainActivity.EXTRA_MESSAGE);
+		String newname = getIntent().getStringExtra(MainActivity.EXTRA_MESSAGE_NEW);
 		if(name != null){
 			epochv.init(skala);
 			epochv.newDoc(name);
 			skala.init(epochv);
 			openEpoch();
+		}
+		else if (newname != null){
+			
+			epochv.init(skala);
+			epochv.newDoc(newname);
+			skala.init(epochv);		
 		}
 		else {
 			epochv.init(skala);
@@ -71,15 +78,6 @@ public class EpochActivity extends AppCompatActivity {
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
 		// Save the user's current game state
-		/*
-		 * savedInstanceState.putDouble("skala_dy", skala.getDy());
-		 * savedInstanceState.putDouble("skala_len", skala.getLen());
-		 * savedInstanceState.putInt("skala_zoomlen", skala.getZoomLen());
-		 * savedInstanceState.putInt("skala_period", skala.getPeriod());
-		 * savedInstanceState.putFloat("skala_mScaleFactor",
-		 * skala.getScaleFactor());
-		 */
-		// Always call the superclass so it can save the view hierarchy state
 		super.onSaveInstanceState(savedInstanceState);
 	}
 
