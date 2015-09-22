@@ -177,6 +177,15 @@ public class Document {
 			}
 			database.insert(EpochDatabase.U_TABLE,null,values);
         }
+		
+
+		String naslov = EpochDatabase.N_IME +"='"+title+"'";
+		database.delete(EpochDatabase.N_TABLE, naslov,null);
+		
+		ContentValues values2=new ContentValues();
+		values2.put(EpochDatabase.N_IME, title);
+		
+		database.insert(EpochDatabase.N_TABLE,null,values2);
 
 
 	}

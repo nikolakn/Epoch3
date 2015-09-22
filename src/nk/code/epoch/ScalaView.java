@@ -378,7 +378,7 @@ public class ScalaView extends View {
 		values.put(EpochDatabase.S_SCALE, getScaleFactor());
 
 		database.insert(EpochDatabase.S_TABLE,null,values);
-
+		
 	}
 
 	public void LoadFromDatabase(SQLiteDatabase database,String title){
