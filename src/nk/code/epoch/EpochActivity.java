@@ -353,5 +353,6 @@ public class EpochActivity extends AppCompatActivity {
 		EpochDatabase helper=new EpochDatabase(this);
 		SQLiteDatabase database=helper.getWritableDatabase();
 		epochv.getDoc().openFromDatabase(database);
+		skala.LoadFromDatabase(database, epochv.getDoc().getTitle());
 	}
 }

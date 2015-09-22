@@ -10,13 +10,13 @@ import java.io.ObjectOutputStream;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
-
 import nk.code.data.EpochDatabase;
 
 import nk.code.doc.NkSkala;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -363,6 +363,12 @@ public class ScalaView extends View {
 	}
 	
 	public void saveToDatabase(SQLiteDatabase database,String title){
+		
+		String selection = EpochDatabase.S_EPOCH +"='"+title+"'";
+		// Specify arguments in placeholder order.
+		// Issue SQL statement.
+		database.delete(EpochDatabase.S_TABLE, selection,null);
+		
 		ContentValues values=new ContentValues();
 		values.put(EpochDatabase.S_EPOCH, title);
 		values.put(EpochDatabase.S_DY, getDy());
@@ -373,5 +379,25 @@ public class ScalaView extends View {
 
 		database.insert(EpochDatabase.S_TABLE,null,values);
 
+	}
+
+	public void LoadFromDatabase(SQLiteDatabase database,String title){
+		String[] allColumns = { EpochDatabase.S_DY,EpochDatabase.S_LEN,EpochDatabase.S_ZOOM,
+				EpochDatabase.S_PERIOD,EpochDatabase.S_SCALE};
+		Cursor cursor = database.query(EpochDatabase.S_TABLE,
+				allColumns, EpochDatabase.S_EPOCH + " = '" + title+"'", null,
+		        null, null, null);
+		cursor.moveToFirst();
+		  while (!cursor.isAfterLast()) {
+				setDy(cursor.getDouble(0));
+				setLen(cursor.getDouble(1));
+				setZoomLen( cursor.getInt(2));
+				setPeriod( cursor.getInt(3));
+				setScaleFactor(cursor.getFloat(4));			  
+
+				cursor.moveToNext();
+		    }
+	    // make sure to close the cursor
+	    cursor.close();
 	}
 }
