@@ -42,26 +42,27 @@ public class EpochActivity extends AppCompatActivity {
 		skala = (ScalaView) findViewById(R.id.skala);
 		epochv = (EpochView) findViewById(R.id.epoch);
 
-		epochv.init(skala);
-		skala.init(epochv);
-		/*
-		 * if (savedInstanceState != null) { // Restore value of members from
-		 * saved state skala.setLen(savedInstanceState.getDouble("skala_len"));
-		 * skala.setDy(savedInstanceState.getDouble("skala_dy"));
-		 * skala.setZoomLen(savedInstanceState.getInt("skala_zoomlen"));
-		 * skala.setPeriod(savedInstanceState.getInt("skala_period"));
-		 * skala.setScaleFactor
-		 * (savedInstanceState.getFloat("skala_mScaleFactor")); }
-		 */
-		try {
-			FileInputStream fis = getApplicationContext().openFileInput(fileName);
-			ObjectInputStream is = new ObjectInputStream(fis);
-			epochv.getDoc().deSerialize(is);
-			skala.deSerialize(is);
-			is.close();
-			fis.close();
-		} catch (Exception e) {
-			Log.e("nk", e.toString());
+		String name = getIntent().getStringExtra(MainActivity.EXTRA_MESSAGE);
+		if(name != null){
+			epochv.init(skala);
+			epochv.newDoc(name);
+			skala.init(epochv);
+			openEpoch();
+		}
+		else {
+			epochv.init(skala);
+			skala.init(epochv);
+
+			try {
+				FileInputStream fis = getApplicationContext().openFileInput(fileName);
+				ObjectInputStream is = new ObjectInputStream(fis);
+				epochv.getDoc().deSerialize(is);
+				skala.deSerialize(is);
+				is.close();
+				fis.close();
+			} catch (Exception e) {
+				Log.e("nk", e.toString());
+			}
 		}
 		skala.invalidate();
 

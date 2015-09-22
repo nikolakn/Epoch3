@@ -430,4 +430,8 @@ public class EpochView extends View {
 	public void saveToDatabase(SQLiteDatabase database){
 		doc.saveToDatabase(database);
 	}
+
+	public void newDoc(String name) {
+		doc = new Document(name);
+	}
 }
