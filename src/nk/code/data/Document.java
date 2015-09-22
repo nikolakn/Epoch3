@@ -13,7 +13,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Canvas;
-import android.util.Log;
 
 //Collection of Events that represent epoch
 public class Document {
@@ -196,11 +195,12 @@ public class Document {
 	}
 	public void openFromDatabase(SQLiteDatabase database){
 		String[] allColumns = { EpochDatabase.U_NAME,EpochDatabase.U_START,EpochDatabase.U_DESCRIPTION,
-				EpochDatabase.U_SIZE,EpochDatabase.U_STYLE,EpochDatabase.U_COLOR,
-				EpochDatabase.U_VISIBILITY,EpochDatabase.U_Y,EpochDatabase.U_LOOK,EpochDatabase.U_TYPE,EpochDatabase.U_END};
-		Cursor cursor = database.query(EpochDatabase.U_TABLE,
-				allColumns, EpochDatabase.U_EPOCH + " = '" + title+"'", null,
-		        null, null, null);
+								EpochDatabase.U_SIZE,EpochDatabase.U_STYLE,EpochDatabase.U_COLOR,
+								EpochDatabase.U_VISIBILITY,EpochDatabase.U_Y,EpochDatabase.U_LOOK,
+								EpochDatabase.U_TYPE,EpochDatabase.U_END};
+		
+		Cursor cursor = database.query(EpochDatabase.U_TABLE, allColumns, 
+				EpochDatabase.U_EPOCH + " = '" + title+"'", null,null, null, null);
 		cursor.moveToFirst();
 		list.clear();
 		  while (!cursor.isAfterLast()) {
@@ -212,8 +212,7 @@ public class Document {
 					e.colorLine = cursor.getInt(5);
 					e.visibilityZoom = cursor.getInt(6);
 					e.look= cursor.getInt(8);
-					list.add(e);			  
-				  
+					list.add(e);			  		  
 			  }
 			  if(cursor.getInt(9)==1){	  
 					Epoch e = new Epoch(cursor.getDouble(1),cursor.getDouble(10),cursor.getInt(7), cursor.getString(0));
@@ -227,8 +226,7 @@ public class Document {
 			  }
 			  cursor.moveToNext();
 		    }
-	    // make sure to close the cursor
+	    // close the cursor
 	    cursor.close();
-
 	}
 }

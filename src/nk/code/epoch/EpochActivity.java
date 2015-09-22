@@ -91,7 +91,6 @@ public class EpochActivity extends AppCompatActivity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-
 	}
 
 	@Override
@@ -109,7 +108,6 @@ public class EpochActivity extends AppCompatActivity {
 		} catch (Exception e) {
 			Log.e("nk", e.toString());
 		}
-		
 		save();
 	}
 
