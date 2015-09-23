@@ -259,6 +259,7 @@ public class EpochActivity extends AppCompatActivity {
 				int style = data.getIntExtra("style", Event.DEFEVENTSTYLE);
 				int vis = data.getIntExtra("visibility", Event.Visibility.ALWAYS.ordinal());
 				boolean vischange=false;
+				//Log.d("nk",Integer.toString(vis));
 				if(vis<0)
 					vischange = true;
 				try {

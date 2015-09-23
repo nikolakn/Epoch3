@@ -8,17 +8,17 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
 import com.android.colorpicker.ColorPickerDialog;
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,11 +41,13 @@ public class AddEventActivity extends AppCompatActivity implements
 	private int boja;
 	private Spinner s;
 	private boolean spinerchange=false;
+	//private boolean prvapromena=true;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_event);
 		spinerchange = false;
+		//prvapromena=true;
 		name = (EditText) findViewById(R.id.editText1);
 		date = (EditText) findViewById(R.id.editText2);
 		time = (EditText) findViewById(R.id.editText3);
@@ -55,18 +57,18 @@ public class AddEventActivity extends AppCompatActivity implements
 		ArrayList<String> SourceArray = new ArrayList<String>();
 		s = (Spinner) findViewById(R.id.Spinner01);
 		
-		s.setOnItemSelectedListener(new OnItemSelectedListener() {
+		s.setOnTouchListener(new OnTouchListener() {
+
+			@SuppressLint("ClickableViewAccessibility")
 			@Override
-			public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
-				// TODO Auto-generated method stub
-				spinerchange = !spinerchange;
-				Log.d("nk","promena");
+			public boolean onTouch(View v, MotionEvent event) {
+				//if(!prvapromena)
+				spinerchange = true;
+				//Log.d("nk","promena");
+				//prvapromena = false;
+				return false;
 			}
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
-				
-			}
+			
 		});
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -263,12 +265,12 @@ public class AddEventActivity extends AppCompatActivity implements
 				returnIntent.putExtra("boja", boja);
 				returnIntent.putExtra("size", a1);
 				returnIntent.putExtra("style", a2);
-				if(!spinerchange){
+				if(spinerchange){
 					returnIntent.putExtra("visibility", vis);
-					Log.d("nk","gore");
+					//Log.d("nk","gore");
 				}
 				else{
-					Log.d("nk","dole");
+					//Log.d("nk","dole");
 					returnIntent.putExtra("visibility", -1);
 				}
 					setResult(RESULT_OK, returnIntent);

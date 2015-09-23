@@ -6,7 +6,6 @@ import java.io.Serializable;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
-import org.joda.time.format.DateTimeFormat;
 
 import nk.code.epoch.R;
 import nk.code.epoch.ScalaView;
