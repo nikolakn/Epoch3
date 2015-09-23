@@ -124,6 +124,22 @@ public class Event implements Serializable {
 
 	// is event currently drawn on x,y position
 	public boolean isOnPosition(float xx, float yy, ScalaView skala) {
+		if(visibility == Visibility.ONLYHERE){
+			Log.d("nk",Double.toString(skala.getZoomLvl()));
+			if(skala.getZoomLvl() != visibilityZoom)
+				return false;
+		}
+		
+		if(visibility == Visibility.HEREANDMINUS){
+			Log.d("nk",Double.toString(skala.getZoomLvl()));
+			if(skala.getZoomLvl() > visibilityZoom)
+				return false;
+		}
+		if(visibility == Visibility.HEREANDPLUS){
+			Log.d("nk",Double.toString(skala.getZoomLvl()));
+			if(skala.getZoomLvl() < visibilityZoom)
+				return false;
+		}
 		float y = skala.getPos(start);
 		float ss = (size + 15) / 2;
 		if (xx >= x - ss && xx <= x + ss) {
