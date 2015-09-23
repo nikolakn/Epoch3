@@ -268,7 +268,7 @@ public class EpochView extends View {
 					ev = doc.getEventFromPos(xposLong - skala.getDx(), yposLong, skala);
 					if (ev != null){
 						doc.setCurrent(ev);
-						((EpochActivity) context).StartEventDesActivity(ev.description);
+						((EpochActivity) context).StartEventDesActivity(ev.description,ev.getDateString());
 					}
 				}
 			}

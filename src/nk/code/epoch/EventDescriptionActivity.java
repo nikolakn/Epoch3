@@ -15,26 +15,34 @@ import android.widget.TextView;
 public class EventDescriptionActivity extends AppCompatActivity {
 
 	private TextView text;
+	private TextView datum;
 	private String des;
-
+	private String date;
+//textViewdate
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_description);
 		text = (TextView) findViewById(R.id.editTextdec1);
+		datum = (TextView) findViewById(R.id.textViewdate);
 		des = "<font size=\"40\" face=\"arial\" color=\"red\">ggg</font><br><br>";
 		des = getIntent().getStringExtra("des");
 		if (des == null)
 			des = "Description";
-
+		
+		date = getIntent().getStringExtra("date");
+		if (date == null)
+			date = "Description";
+		
 		if (savedInstanceState != null) {
 			// Restore value of members from saved state
 			des = savedInstanceState.getString("des");
-
+			date = savedInstanceState.getString("date");
 		}
 
 		text.setText(Html.fromHtml(des));
 		text.setMovementMethod(new ScrollingMovementMethod());
+		datum.setText(date);
 		// edit button
 		Button edit = (Button) findViewById(R.id.descEditButton);
 		edit.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +114,7 @@ public class EventDescriptionActivity extends AppCompatActivity {
 		super.onSaveInstanceState(savedInstanceState);
 		// Save the user's current game state
 		savedInstanceState.putString("des", des);
+		savedInstanceState.putString("date", date);
 
 	}
 }

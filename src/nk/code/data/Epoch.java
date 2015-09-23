@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeUtils;
+
 import nk.code.doc.NkSkala;
 import nk.code.epoch.ScalaView;
 import android.graphics.Canvas;
@@ -122,6 +125,14 @@ public class Epoch extends Event implements Serializable {
 	public void serialize(ObjectOutputStream os) throws IOException {
 		os.writeInt(1);
 		os.writeObject(this);
+	}
+	
+
+	@Override
+	public String getDateString(){
+		DateTime dateTime =new DateTime(DateTimeUtils.fromJulianDay(start));
+		DateTime dateTime2 =new DateTime(DateTimeUtils.fromJulianDay(end));
+		return dateTime2.toString("dd.MM.yyyy")+" - "+dateTime.toString("dd.MM.yyyy");
 	}
 
 }

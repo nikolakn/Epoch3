@@ -345,9 +345,10 @@ public class EpochActivity extends AppCompatActivity {
 
 	}
 
-	public void StartEventDesActivity(String description) {
+	public void StartEventDesActivity(String description,String date) {
 		Intent i = new Intent(this, EventDescriptionActivity.class);
 		i.putExtra("des", description);
+		i.putExtra("date", date);
 		startActivityForResult(i, 3);
 	}
 

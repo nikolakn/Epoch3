@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeUtils;
+import org.joda.time.format.DateTimeFormat;
+
 import nk.code.epoch.R;
 import nk.code.epoch.ScalaView;
 import nk.code.helper.Boja;
@@ -160,5 +164,10 @@ public class Event implements Serializable {
 	public void serialize(ObjectOutputStream os) throws IOException {
 		os.writeInt(0);
 		os.writeObject(this);
+	}
+	
+	public String getDateString(){
+		DateTime dateTime =new DateTime(DateTimeUtils.fromJulianDay(start));
+		return dateTime.toString("dd.MM.yyyy");
 	}
 }

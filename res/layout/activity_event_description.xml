@@ -30,12 +30,24 @@
             android:text="@string/save"
             tools:ignore="ButtonStyle" />
     </LinearLayout>
-    
+        <TextView
+        android:id="@+id/textViewdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/datum"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+        
     <TextView
         android:id="@+id/editTextdec1"
         android:layout_above="@id/footerdesc"
         android:layout_width="match_parent"
         android:scrollbars="vertical"
+        android:layout_below="@id/textViewdate"
         android:layout_height="fill_parent"/>
+
+
 
 </RelativeLayout>
