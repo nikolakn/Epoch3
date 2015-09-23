@@ -108,6 +108,19 @@ public class Epoch extends Event implements Serializable {
 	}
 	// is epoch currently drawn on x,y position
 	public boolean isOnPosition(float xx, float yy, ScalaView skala) {
+		if(visibility == Visibility.ONLYHERE){
+			if(skala.getZoomLvl() != visibilityZoom)
+				return false;
+		}
+		
+		if(visibility == Visibility.HEREANDMINUS){
+			if(skala.getZoomLvl() > visibilityZoom)
+				return false;
+		}
+		if(visibility == Visibility.HEREANDPLUS){
+			if(skala.getZoomLvl() < visibilityZoom)
+				return false;
+		}
 		float y=skala.getPos(start);
 		float y2=skala.getPos(end);
 		if(y2 == NkSkala.ABOVE)

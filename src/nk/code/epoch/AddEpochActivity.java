@@ -8,13 +8,17 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
 import com.android.colorpicker.ColorPickerDialog;
+
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -39,11 +43,12 @@ public class AddEpochActivity extends AppCompatActivity implements
 	private RadioGroup radiog2;
 	private int boja;
 	private Spinner s;
-
+	private boolean spinerchange=false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_epoch);
+		spinerchange = false;
 		name = (EditText) findViewById(R.id.editText12);
 		date = (EditText) findViewById(R.id.editText22);
 		time = (EditText) findViewById(R.id.editText32);
@@ -56,6 +61,19 @@ public class AddEpochActivity extends AppCompatActivity implements
 		radiog2 = (RadioGroup) findViewById(R.id.radio_group22);
 		ArrayList<String> SourceArray = new ArrayList<String>();
 		s = (Spinner) findViewById(R.id.Spinner012);
+		s.setOnTouchListener(new OnTouchListener() {
+
+			@SuppressLint("ClickableViewAccessibility")
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				//if(!prvapromena)
+				spinerchange = true;
+				//Log.d("nk","promena");
+				//prvapromena = false;
+				return false;
+			}
+			
+		});
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, SourceArray);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -303,7 +321,14 @@ public class AddEpochActivity extends AppCompatActivity implements
 				returnIntent.putExtra("boja", boja);
 				returnIntent.putExtra("size", a1);
 				returnIntent.putExtra("style", a2);
-				returnIntent.putExtra("visibility", vis);
+				if(spinerchange){
+					returnIntent.putExtra("visibility", vis);
+					//Log.d("nk","gore");
+				}
+				else{
+					//Log.d("nk","dole");
+					returnIntent.putExtra("visibility", -1);
+				}
 				setResult(RESULT_OK, returnIntent);
 				finish();
 			}
