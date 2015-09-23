@@ -199,7 +199,7 @@ public class NkSkala {
 	}
 	
 	public double getZoomLvl(){
-		return len * period;
+		return len/period;
 	}
 
 	// postavlja datun na poziciji y na skali

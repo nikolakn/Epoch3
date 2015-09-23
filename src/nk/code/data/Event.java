@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 
 //one Event in time, representing one date in history with start date
 public class Event implements Serializable {
@@ -63,15 +64,20 @@ public class Event implements Serializable {
 			bitmap = BitmapFactory.decodeResource(res, R.drawable.explosion32);
 			bitmap2 = BitmapFactory.decodeResource(res, R.drawable.flag4x);
 		}
+		
 		if(visibility == Visibility.ONLYHERE){
+			Log.d("nk",Double.toString(skala.getZoomLvl()));
 			if(skala.getZoomLvl() != visibilityZoom)
 				return;
 		}
+		
 		if(visibility == Visibility.HEREANDMINUS){
+			Log.d("nk",Double.toString(skala.getZoomLvl()));
 			if(skala.getZoomLvl() > visibilityZoom)
 				return;
 		}
 		if(visibility == Visibility.HEREANDPLUS){
+			Log.d("nk",Double.toString(skala.getZoomLvl()));
 			if(skala.getZoomLvl() < visibilityZoom)
 				return;
 		}
