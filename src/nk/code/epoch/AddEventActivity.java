@@ -13,9 +13,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,11 +40,12 @@ public class AddEventActivity extends AppCompatActivity implements
 	private RadioGroup radiog2;
 	private int boja;
 	private Spinner s;
-
+	private boolean spinerchange=false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_event);
+		spinerchange = false;
 		name = (EditText) findViewById(R.id.editText1);
 		date = (EditText) findViewById(R.id.editText2);
 		time = (EditText) findViewById(R.id.editText3);
@@ -50,6 +54,21 @@ public class AddEventActivity extends AppCompatActivity implements
 		radiog2 = (RadioGroup) findViewById(R.id.radio_group2);
 		ArrayList<String> SourceArray = new ArrayList<String>();
 		s = (Spinner) findViewById(R.id.Spinner01);
+		
+		s.setOnItemSelectedListener(new OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				spinerchange = !spinerchange;
+				Log.d("nk","promena");
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, SourceArray);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -244,8 +263,15 @@ public class AddEventActivity extends AppCompatActivity implements
 				returnIntent.putExtra("boja", boja);
 				returnIntent.putExtra("size", a1);
 				returnIntent.putExtra("style", a2);
-				returnIntent.putExtra("visibility", vis);
-				setResult(RESULT_OK, returnIntent);
+				if(!spinerchange){
+					returnIntent.putExtra("visibility", vis);
+					Log.d("nk","gore");
+				}
+				else{
+					Log.d("nk","dole");
+					returnIntent.putExtra("visibility", -1);
+				}
+					setResult(RESULT_OK, returnIntent);
 				finish();
 			}
 		});
@@ -257,6 +283,7 @@ public class AddEventActivity extends AppCompatActivity implements
 				colorcalendar.show(getFragmentManager(), "cal");
 			}
 		});
+
 	}
 
 	// called when colour picker dialog is dismissed

@@ -233,12 +233,14 @@ public class EpochActivity extends AppCompatActivity {
 				int size = data.getIntExtra("size", Event.DEFEVENTSIZE);
 				int style = data.getIntExtra("style", Event.DEFEVENTSTYLE);
 				int vis = data.getIntExtra("visibility", Event.Visibility.ALWAYS.ordinal());
-
+				boolean vischange=false;
+				if(vis<0)
+					vischange = true;
 				try {
 					String pattern = "dd.MM.yyyy HH:mm";
 					DateTime dateTime = DateTime.parse(date + " " + time, DateTimeFormat.forPattern(pattern));
 					// Log.i("nk", dateTime.toString("dd.MM.yyyy HH:mm"));
-					epochv.addDocEvent(name, dateTime, boja, size, style, vis);
+					epochv.addDocEvent(name, dateTime, boja, size, style, vis,vischange);
 				} catch (Exception e) {
 
 				}
@@ -256,10 +258,13 @@ public class EpochActivity extends AppCompatActivity {
 				int size = data.getIntExtra("size", Event.DEFEVENTSIZE);
 				int style = data.getIntExtra("style", Event.DEFEVENTSTYLE);
 				int vis = data.getIntExtra("visibility", Event.Visibility.ALWAYS.ordinal());
+				boolean vischange=false;
+				if(vis<0)
+					vischange = true;
 				try {
 					String pattern = "dd.MM.yyyy HH:mm";
 					DateTime dateTime = DateTime.parse(date + " " + time, DateTimeFormat.forPattern(pattern));
-					epochv.EditDocEvent(name, dateTime, boja, size, style, vis);
+					epochv.EditDocEvent(name, dateTime, boja, size, style, vis,vischange);
 				} catch (Exception e) {
 
 				}
@@ -287,7 +292,11 @@ public class EpochActivity extends AppCompatActivity {
 				int boja = data.getIntExtra("boja", Event.DEFEVENTCOLOR);
 				int size = data.getIntExtra("size", Event.DEFEVENTSIZE);
 				int style = data.getIntExtra("style", Event.DEFEVENTSTYLE);
+				
 				int vis = data.getIntExtra("visibility", Event.Visibility.ALWAYS.ordinal());
+				boolean vischange=false;
+				if(vis<0)
+					vischange = true;
 
 				try {
 					String pattern = "dd.MM.yyyy HH:mm";
@@ -295,7 +304,7 @@ public class EpochActivity extends AppCompatActivity {
 					// Log.i("nk", dateTime.toString("dd.MM.yyyy HH:mm"));
 					DateTime dateTime = DateTime.parse(dateend + " " + timeend, DateTimeFormat.forPattern(pattern));
 
-					epochv.addDocEpoch(name, dateTime, dateTime2, boja, size, style, vis);
+					epochv.addDocEpoch(name, dateTime, dateTime2, boja, size, style, vis,vischange);
 				} catch (Exception e) {
 
 				}
@@ -315,11 +324,15 @@ public class EpochActivity extends AppCompatActivity {
 				int size = data.getIntExtra("size", Event.DEFEVENTSIZE);
 				int style = data.getIntExtra("style", Event.DEFEVENTSTYLE);
 				int vis = data.getIntExtra("visibility", Event.Visibility.ALWAYS.ordinal());
+				boolean vischange=false;
+				if(vis<0)
+					vischange = true;
+				
 				try {
 					String pattern = "dd.MM.yyyy HH:mm";
 					DateTime dateTime2 = DateTime.parse(date + " " + time, DateTimeFormat.forPattern(pattern));
 					DateTime dateTime = DateTime.parse(dateend + " " + timeend, DateTimeFormat.forPattern(pattern));
-					epochv.EditDocEpoch(name, dateTime, dateTime2, boja, size, style, vis);
+					epochv.EditDocEpoch(name, dateTime, dateTime2, boja, size, style, vis,vischange);
 				} catch (Exception e) {
 
 				}

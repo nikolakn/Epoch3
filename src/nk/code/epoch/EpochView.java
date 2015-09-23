@@ -332,7 +332,7 @@ public class EpochView extends View {
 		skala.setDx(dx);
 	}
 
-	public void addDocEvent(String name, DateTime dateTime,int boja,int size, int style, int vis) {
+	public void addDocEvent(String name, DateTime dateTime,int boja,int size, int style, int vis,boolean vischange) {
 		Event e=doc.addEvent(dateTime.getDayOfMonth(), dateTime.getMonthOfYear(),
 				dateTime.getYear(), dateTime.getHourOfDay(),
 				dateTime.getMinuteOfHour(), (int) (xposLong-skala.getDx()), name);
@@ -340,12 +340,14 @@ public class EpochView extends View {
 			e.colorLine =boja;
 			e.setLook(size);
 			e.style = style;
-			e.visibility = Event.Visibility.values()[vis];
-			e.visibilityZoom = skala.getZoomLvl();
+			if(!vischange){
+				e.visibility = Event.Visibility.values()[vis];
+				e.visibilityZoom = skala.getZoomLvl();
+			}
 		}
 	}
 
-	public void addDocEpoch(String name, DateTime dateTime,DateTime dateTime2,int boja,int size, int style, int vis) {
+	public void addDocEpoch(String name, DateTime dateTime,DateTime dateTime2,int boja,int size, int style, int vis,boolean vischange) {
 		if(dateTime.getMillis() < dateTime2.getMillis()){
 			DateTime temp;
 			temp = dateTime;
@@ -360,8 +362,10 @@ public class EpochView extends View {
 			e.colorLine =boja;
 			e.setLook(size);
 			e.style = style;
-			e.visibility = Event.Visibility.values()[vis];
-			e.visibilityZoom = skala.getZoomLvl();
+			if(!vischange){
+				e.visibility = Event.Visibility.values()[vis];
+				e.visibilityZoom = skala.getZoomLvl();
+			}
 		}
 	}
 
@@ -373,7 +377,7 @@ public class EpochView extends View {
 		this.yposLong = yposLong;
 	}
 
-	public void EditDocEvent(String name, DateTime dateTime,int boja,int size, int style, int vis) {
+	public void EditDocEvent(String name, DateTime dateTime,int boja,int size, int style, int vis,boolean vischange) {
 			Event e=doc.getCurrent();
 			if(e!=null){
 			double startDate = DateTimeUtils.toJulianDay(new DateTime(dateTime.getYear(),
@@ -385,14 +389,16 @@ public class EpochView extends View {
 			e.colorLine =boja;
 			e.setLook(size);
 			e.style = style;
-			e.visibility = Event.Visibility.values()[vis];
-			e.visibilityZoom = skala.getZoomLvl();
+			if(!vischange){
+				e.visibility = Event.Visibility.values()[vis];
+				e.visibilityZoom = skala.getZoomLvl();
+			}
 			invalidate();
 
 			}
 	}
 
-	public void EditDocEpoch(String name, DateTime dateTime,DateTime dateTime2,int boja,int size, int style, int vis) {
+	public void EditDocEpoch(String name, DateTime dateTime,DateTime dateTime2,int boja,int size, int style, int vis,boolean vischange) {
 		Event e=doc.getCurrent();
 		if(e!=null && (e instanceof Epoch)){
 		Epoch ep = (Epoch)e;
@@ -414,8 +420,10 @@ public class EpochView extends View {
 		ep.colorLine =boja;
 		ep.setLook(size);
 		ep.style = style;
-		ep.visibility = Event.Visibility.values()[vis];
-		ep.visibilityZoom = skala.getZoomLvl();
+		if(!vischange){
+			ep.visibility = Event.Visibility.values()[vis];
+			ep.visibilityZoom = skala.getZoomLvl();
+		}
 		invalidate();
 
 		}
