@@ -13,7 +13,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.util.Log;
 
 //one Event in time, representing one date in history with start date
 public class Event implements Serializable {
@@ -66,18 +65,15 @@ public class Event implements Serializable {
 		}
 		
 		if(visibility == Visibility.ONLYHERE){
-			Log.d("nk",Double.toString(skala.getZoomLvl()));
 			if(skala.getZoomLvl() != visibilityZoom)
 				return;
 		}
 		
 		if(visibility == Visibility.HEREANDMINUS){
-			Log.d("nk",Double.toString(skala.getZoomLvl()));
 			if(skala.getZoomLvl() > visibilityZoom)
 				return;
 		}
 		if(visibility == Visibility.HEREANDPLUS){
-			Log.d("nk",Double.toString(skala.getZoomLvl()));
 			if(skala.getZoomLvl() < visibilityZoom)
 				return;
 		}
@@ -125,18 +121,15 @@ public class Event implements Serializable {
 	// is event currently drawn on x,y position
 	public boolean isOnPosition(float xx, float yy, ScalaView skala) {
 		if(visibility == Visibility.ONLYHERE){
-			Log.d("nk",Double.toString(skala.getZoomLvl()));
 			if(skala.getZoomLvl() != visibilityZoom)
 				return false;
 		}
 		
 		if(visibility == Visibility.HEREANDMINUS){
-			Log.d("nk",Double.toString(skala.getZoomLvl()));
 			if(skala.getZoomLvl() > visibilityZoom)
 				return false;
 		}
 		if(visibility == Visibility.HEREANDPLUS){
-			Log.d("nk",Double.toString(skala.getZoomLvl()));
 			if(skala.getZoomLvl() < visibilityZoom)
 				return false;
 		}

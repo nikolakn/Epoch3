@@ -45,6 +45,7 @@ public class EpochView extends View {
 	private boolean ismove = false;
 	private boolean isEventLongClick = false;
 	private boolean click = false;
+	private float movestart = 0;
 	private View.OnCreateContextMenuListener vC = new View.OnCreateContextMenuListener() {
 		@Override
 		public void onCreateContextMenu(ContextMenu arg0, View arg1,
@@ -211,11 +212,13 @@ public class EpochView extends View {
 		final int action = MotionEventCompat.getActionMasked(mev);
 		switch (action) {
 		case MotionEvent.ACTION_DOWN: {
+			//Log.d("nk","down");
 			click = true;
 			final int pointerIndex = MotionEventCompat.getActionIndex(mev);
 			final float x = MotionEventCompat.getX(mev, pointerIndex);
 			mLastTouchX = x;
 			mActivePointerId = MotionEventCompat.getPointerId(mev, 0);
+			movestart = x;
 			if(ismove){
 				click = false;
 				ismove = false;
@@ -229,7 +232,7 @@ public class EpochView extends View {
 			break;
 		}
 		case MotionEvent.ACTION_MOVE: {
-
+			//Log.d("nk","move");
 			if (mode == ZOOM) {
 
 			} else {
@@ -245,21 +248,28 @@ public class EpochView extends View {
 				skala.setDx(dx);
 				invalidate();
 				mLastTouchX = x;
+				//dali je pomeranje ili je cklik
+				if((x - mLastTouchX)!=0)
+					click = false;
 			}
 			break;
 		}
 
 		case MotionEvent.ACTION_UP: {
+			//Log.d("nk","up");
 			if(click){
-				//Log.i("nk","click");
+				
 				click = false;
 				final int pointerIndex = MotionEventCompat.getActionIndex(mev);
 				xposLong = MotionEventCompat.getX(mev, pointerIndex);
 				setYposLong(MotionEventCompat.getY(mev, pointerIndex));
-				ev = doc.getEventFromPos(xposLong - skala.getDx(), yposLong, skala);
-				if (ev != null){
-					doc.setCurrent(ev);
-					((EpochActivity) context).StartEventDesActivity(ev.description);
+				
+				if((movestart-xposLong)==0){
+					ev = doc.getEventFromPos(xposLong - skala.getDx(), yposLong, skala);
+					if (ev != null){
+						doc.setCurrent(ev);
+						((EpochActivity) context).StartEventDesActivity(ev.description);
+					}
 				}
 			}
 			mActivePointerId = -1;
@@ -273,6 +283,7 @@ public class EpochView extends View {
 
 		case MotionEvent.ACTION_POINTER_UP: {
 			mode = NONE;
+			//Log.d("nk","pointer up");
 			final int pointerIndex = MotionEventCompat.getActionIndex(mev);
 			final int pointerId = MotionEventCompat.getPointerId(mev,
 					pointerIndex);
@@ -289,6 +300,7 @@ public class EpochView extends View {
 			break;
 		}
 		case MotionEvent.ACTION_POINTER_DOWN:
+			//Log.d("nk","pointer down");
 			break;
 		}
 
