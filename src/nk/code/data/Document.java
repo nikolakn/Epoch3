@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
+import nk.code.data.Event.Visibility;
 import nk.code.epoch.ScalaView;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
@@ -170,6 +172,8 @@ public class Document {
 			values.put(EpochDatabase.U_VISIBILITY, e.visibilityZoom);
 			values.put(EpochDatabase.U_Y, e.x);
 			values.put(EpochDatabase.U_LOOK, e.look);
+			values.put(EpochDatabase.U_VISIBILITYEN, e.visibility.ordinal());
+			
 			if(e instanceof Event){
 				values.put(EpochDatabase.U_TYPE, 0);
 			}
@@ -197,7 +201,7 @@ public class Document {
 		String[] allColumns = { EpochDatabase.U_NAME,EpochDatabase.U_START,EpochDatabase.U_DESCRIPTION,
 								EpochDatabase.U_SIZE,EpochDatabase.U_STYLE,EpochDatabase.U_COLOR,
 								EpochDatabase.U_VISIBILITY,EpochDatabase.U_Y,EpochDatabase.U_LOOK,
-								EpochDatabase.U_TYPE,EpochDatabase.U_END};
+								EpochDatabase.U_TYPE,EpochDatabase.U_END,EpochDatabase.U_VISIBILITYEN};
 		
 		Cursor cursor = database.query(EpochDatabase.U_TABLE, allColumns, 
 				EpochDatabase.U_EPOCH + " = '" + title+"'", null,null, null, null);
@@ -212,6 +216,8 @@ public class Document {
 					e.colorLine = cursor.getInt(5);
 					e.visibilityZoom = cursor.getInt(6);
 					e.look= cursor.getInt(8);
+					int v =  cursor.getInt(11);
+					e.visibility = Visibility.values()[v];
 					list.add(e);			  		  
 			  }
 			  if(cursor.getInt(9)==1){	  
@@ -222,6 +228,8 @@ public class Document {
 					e.colorLine = cursor.getInt(5);
 					e.visibilityZoom = cursor.getInt(6);
 					e.look= cursor.getInt(8);
+					int v =  cursor.getInt(11);
+					e.visibility = Visibility.values()[v];
 					list.add(e);			  
 			  }
 			  cursor.moveToNext();

@@ -22,6 +22,7 @@ public class EpochDatabase extends SQLiteAssetHelper {
 		public static final String U_Y= "y";
 		public static final String U_LOOK= "look";
 		public static final String U_EXTRA1= "extra1";
+		public static final String U_VISIBILITYEN= "Field13";
 		
 		public static final String S_TABLE = "skala";
 		public static final String S_ID = "id";
