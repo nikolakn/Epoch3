@@ -225,6 +225,7 @@ public class EpochView extends View {
 				Event e=doc.getCurrent();
 				if(e!=null){
 					e.x = (int)(x - skala.getDx());
+					e = null;
 					invalidate();
 				}
 
